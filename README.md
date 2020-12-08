@@ -12,8 +12,8 @@ Link da documentação do Laravel https://laravel.com/docs
 
 **composer global require laravel/installer**
 
-Edite a variável Path do Windows, o caminho padrão é esse C:\Users\josim\AppData\Roaming\Composer\vendor\bin
-Substitua "josim" pelo usuário da sua máquina.
+Edite a variável Path do Windows, o caminho padrão é esse C:\Users\waism\AppData\Roaming\Composer\vendor\bin
+Substitua "waism" pelo usuário da sua máquina.
 
 4. Crie um novo arquivo na raiz do projeto com o nome ".env" copie o conteúdo do arquivo ".env.example" e cole no arquivo criado.
 
@@ -36,7 +36,8 @@ Antes do próximo comando crie um banco de dados no Mysql - foi o que utilizamos
 **php artisan migrate --seed**
 Vai criar o banco de dados para você e o usuário padrão, se esquecer de digitar o "-seed" rode o comando : **php artisan db:seed**
 
-O usuário padrão pode ser consultado em: TCC-JOSIMAR-JOSUE > database > seeds
+O usuário padrão pode ser consultado em: tcc-luan-waisman > database > seeds
+
 
 **php artisan serve**
 Vai criar um servidor, exemplo: http://127.0.0.1:8000 e você já poderá visualizar o projeto. Se você estiver utilizando o Xampp ou outro precisará acessar a pasta public. Exemplo: http://localhost/tcc-luan-josue/public
