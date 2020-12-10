@@ -1,4 +1,4 @@
-# NUTRIFMG: SISTEMA PARA OTIMIZAR A AVALIAÇÃO ANTROPOMÉTRICA DOS ESTUDANTES DOS CURSOS TÉCNICOS INTEGRADOS DO IFMG - CAMPUS SÃO JOÃO EVANGELISTA
+# NUTRIFMG: SISTEMA PARA OTIMIZAR A AVALIAÇÃO ANTROPOMÉTRICA E DO CONSUMO ALIMENTAR DOS ESTUDANTES DOS CURSOS TÉCNICOS INTEGRADOS DO IFMG - CAMPUS SÃO JOÃO EVANGELISTA
 
 -----
 ## Configurando o projeto na sua máquina
@@ -40,5 +40,5 @@ O usuário padrão pode ser consultado em: tcc-luan-waisman > database > seeds
 
 
 **php artisan serve**
-Vai criar um servidor, exemplo: http://127.0.0.1:8000 e você já poderá visualizar o projeto. Se você estiver utilizando o Xampp ou outro precisará acessar a pasta public. Exemplo: http://localhost/tcc-luan-josue/public
+Vai criar um servidor, exemplo: http://127.0.0.1:8000 e você já poderá visualizar o projeto. Se você estiver utilizando o Xampp ou outro precisará acessar a pasta public. 
 
