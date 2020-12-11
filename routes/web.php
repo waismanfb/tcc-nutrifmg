@@ -14,6 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Alimentos
+Route::get('/cadastrar-alimento','AlimentosController@cadastrarAlimento' )->name('alimento.cadastrar')->middleware('auth');
+Route::post('/inserir-alimento', 'AlimentosController@insert')->name('alimento.insert')->middleware('auth');
+
+
+//------
 Route::get('/graficos', 'GraficosController@index');
 
 Auth::routes();
