@@ -133,7 +133,6 @@
             </div>
           </div>
           <!-- Pessoas em casa-->
-
           <div class="form-group">
             <label class="input-group mb-3" >Pessoas em casa</label>
             <div class="input-group mb-3">
