@@ -61,7 +61,7 @@
           <h5 class="card-title" align="center">Cadastro de Alimentos</h5><br>
           <p class="card-text">Incluir novos alimentos no banco de dados, alterar ou excluir alimentos já existentes</p>
           <br>
-          <a href="{{Route('graficos')}}" class="btn btn-secondary btn-lg " id="b" >Cadastrar
+          <a href="{{Route('alimento.cadastrar')}}" class="btn btn-secondary btn-lg " id="b" >Cadastrar
             <i class="material-icons">assignment_ind</i>
           </a>
         </div>
