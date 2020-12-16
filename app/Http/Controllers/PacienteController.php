@@ -103,9 +103,10 @@ class PacienteController extends Controller
 
 
     $registros = Paciente::all();
+    $tipo = 'cafeDaManha';
 
 
-    return view('pacientes_individual', compact('registros','mem'));
+    return view('pacientes_individual', compact('registros','mem', 'tipo'));
   }
 
   public function exibir($id)
@@ -2076,15 +2077,15 @@ class PacienteController extends Controller
   public function exportar(){
     // Definimos o nome do arquivo que será exportado
     $arquivo = 'dados.xls';
-    
+
     // Criamos uma tabela HTML com o formato da planilha
     $html = '';
     $html .= '<table border="1">';
     $html .= '<tr>';
     $html .= '<td colspan="5">Planilha Avaliações antropométricas</tr>';
     $html .= '</tr>';
-    
-    
+
+
     $html .= '<tr>';
     $html .= '<td><b>id_paciente</b></td>';
     $html .= '<td><b>Nome</b></td>';
@@ -2099,8 +2100,8 @@ class PacienteController extends Controller
     $html .= '<td><b>C. estatura idade</b></td>';
     $html .= '<td><b>Score estatura idade</b></td>';
     $html .= '</tr>';
-    
-    //Selecionar todos os itens da tabela 
+
+    //Selecionar todos os itens da tabela
     $result_msg_contatos = "SELECT * FROM av_antropometricas";
     // $resultado_msg_contatos = mysqli_query($result_msg_contatos);
     $dados = DB::table('pacientes')
@@ -2128,8 +2129,8 @@ class PacienteController extends Controller
       ;
     }
     // while(mysqli_fetch_assoc($result_msg_contatos)){
-      
-    
+
+
     // Configurações header para forçar o download
     header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");

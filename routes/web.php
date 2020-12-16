@@ -63,3 +63,8 @@ Route::get('/classificacoes/imcIdadeFeminino/agro', 'GraficosController@ImcIdade
 
 Route::get('/classificacoes/imcIdadeMasculino/info', 'GraficosController@ImcIdadeInfoMas')->name('ImcIdadeInfoMas')->middleware('auth');
 Route::get('/classificacoes/imcIdadeFeminino/info', 'GraficosController@ImcIdadeInfoFem')->name('ImcIdadeInfoFem')->middleware('auth');
+
+//Dietas
+Route::get('/dieta/{tipo}/{id}', 'DietaController@inserirDieta')->name('dieta.inserirDieta')->middleware('auth');
+Route::get('/atualizadieta/{tipo}/{id}', 'DietaController@atualizarDieta')->name('dieta.atualizarDieta')->middleware('auth');
+Route::post('/dieta/inserir', 'DietaController@inserir')->name('dieta.inserir')->middleware('auth');

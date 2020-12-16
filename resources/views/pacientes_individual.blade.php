@@ -13,7 +13,7 @@
 			</div>
 			<div class="col col-md-2">
 				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>
-        <a class="btn btn-success" href="{{Route('paciente.exportar')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
+                <a class="btn btn-success" href="{{Route('paciente.exportar')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
 			</div>
 		</div>
 	</form>
@@ -31,6 +31,7 @@
 				<th>Avaliação Individual</th>
 				<th>Inserir Medidas</th>
 				<th>Editar info. Paciente</th>
+				<th>Cadastro de Dietas</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -57,6 +58,9 @@
 				</td>
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('paciente.editar', $registros->id)}}" role="button" style="background-color: #ed7f64">&nbspEditar&nbsp</a>
+				</td>
+                <td align="center">
+					<a class="btn btn-sm" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" style="background-color: #ffc107">&nbspInserir Dieta&nbsp</a>
 				</td>
 			</tr>
 			@endforeach
