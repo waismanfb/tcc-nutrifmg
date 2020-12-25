@@ -34,6 +34,8 @@ class DietaController extends Controller
 
     public function atualizarDieta($tipo, $id)
     {
+        $paciente = Paciente::find($id);
+
         if ($tipo == 'cafeDaManha')
         {
             $tipoId = 2;
@@ -66,23 +68,33 @@ class DietaController extends Controller
         }
         else
         {
-            echo "<script>alert('Cadastro de Dietas Concluido!!')</script>";
-            return view('home');
+            $selecionados = DB::table('alimentos')
+                           ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                           ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                           ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                           ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
+                            'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
+                           ->where('dietas_pacientes.id_paciente', '=', $id)
+                           ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
+                           ->get();
+
+            $dataColeta = Carbon::today()->toDateString();
+            $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
+
+            $titulo = 'Lista de Alimentos Selecionados';
+
+            return view('lista_dieta', [
+                'dataColeta' => $dataColeta,
+                'titulo' => $titulo,
+                'paciente' => $paciente,
+                'selecionados' => $selecionados
+            ]);
         }
 
-        $paciente = Paciente::find($id);
         $alimentos = Alimento::all();
         $tipoDieta = $tipo;
 
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' , 'dietas_pacientes.*', 'pacientes.id', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->where('dietas_pacientes.id_dieta', '=', $tipoId)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->get();
+        $selecionados = $this->retornaSelecionados($id, $tipoId);
 
         return view('dieta', [
             'alimentos' => $alimentos,
@@ -141,23 +153,17 @@ class DietaController extends Controller
         $paciente = Paciente::find($dados['id_paciente']);
         $id = $dados['id_paciente'];
 
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' , 'dietas_pacientes.*', 'pacientes.id', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->where('dietas_pacientes.id_dieta', '=', $tipoId)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->get();
+        return $this->inserirDieta($tipoDieta, $id);
+    }
 
-        return view('dieta', [
-            'alimentos' => $alimentos,
-            'paciente' => $paciente,
-            'selecionados' => $selecionados,
-            'tipo' => $tipoDieta,
-            'titulo' => $titulo
-        ]);
+    //Funcão para excluir um Alimento já Selecionado
+    public function excluirAlimentoSelecionado()
+    {
+        $dietas_pacientes_id = $_POST['dietas_pacientes_id'];
+        $paciente_id = $_POST['paciente_id'];
+        $tipo_dieta = $_POST['tipo_dieta'];
+        DB::table('dietas_pacientes')->where('id', '=', $dietas_pacientes_id)->delete();
+        return $this->inserirDieta($tipo_dieta, $paciente_id);
     }
 
     public function inserirDieta($tipo, $id)
@@ -202,15 +208,7 @@ class DietaController extends Controller
         $alimentos = Alimento::all();
         $tipoDieta = $tipo;
 
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' , 'dietas_pacientes.*', 'pacientes.id', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->where('dietas_pacientes.id_dieta', '=', $tipoId)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->get();
+        $selecionados = $this->retornaSelecionados($id, $tipoId);
 
         return view('dieta', [
             'alimentos' => $alimentos,
@@ -219,5 +217,27 @@ class DietaController extends Controller
             'tipo' => $tipoDieta,
             'titulo' => $titulo
         ]);
+    }
+
+
+
+
+    //Funções que retornam consultas ao banco de dados
+
+    //Função para retornar os alimentos selecionados
+    public function retornaSelecionados($id, $tipoId)
+    {
+        $selecionados = DB::table('alimentos')
+                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' , 'dietas_pacientes.*',
+                       'dietas_pacientes.id as dietas_pacientes_id', 'pacientes.id', 'dietas.*')
+                       ->where('dietas_pacientes.id_paciente', '=', $id)
+                       ->where('dietas_pacientes.id_dieta', '=', $tipoId)
+                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
+                       ->get();
+
+        return $selecionados;
     }
 }
