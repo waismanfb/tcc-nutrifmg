@@ -35,6 +35,6 @@
     </div>
 </div><br><br>
 
-<a type="button" href="{{ url('/home') }}" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;">Concluir Avaliação</a>
+<a type="button" href="{{ url('/home') }}" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;">{{$botao}}</a>
 
 @endsection

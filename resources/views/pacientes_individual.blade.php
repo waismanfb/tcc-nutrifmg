@@ -32,6 +32,7 @@
 				<th>Inserir Medidas</th>
 				<th>Editar info. Paciente</th>
 				<th>Cadastro de Dietas</th>
+                <th>Recordátorio 24H</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,6 +62,9 @@
 				</td>
                 <td align="center">
 					<a class="btn btn-sm" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" style="background-color: #ffc107">&nbspInserir Dieta&nbsp</a>
+				</td>
+                <td align="center">
+					<a class="btn btn-sm" href="{{Route('dieta.recordatorio', $registros->id)}}" role="button" style="background-color: #ffc107">&nbspR24H&nbsp</a>
 				</td>
 			</tr>
 			@endforeach

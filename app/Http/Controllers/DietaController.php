@@ -80,6 +80,7 @@ class DietaController extends Controller
 
             $dataColeta = Carbon::today()->toDateString();
             $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
+            $botao = 'Concluir Avaliação';
 
             $titulo = 'Lista de Alimentos Selecionados';
 
@@ -87,7 +88,8 @@ class DietaController extends Controller
                 'dataColeta' => $dataColeta,
                 'titulo' => $titulo,
                 'paciente' => $paciente,
-                'selecionados' => $selecionados
+                'selecionados' => $selecionados,
+                'botao' => $botao
             ]);
         }
 
@@ -219,8 +221,52 @@ class DietaController extends Controller
         ]);
     }
 
+    public function recordatorio($id)
+    {
+        $paciente = DB::table('pacientes')
+                     ->select('pacientes.*')
+                     ->where('pacientes.id', '=', $id)
+                     ->get();
 
+        $registros = DB::table('dietas_pacientes')
+                     ->select('dietas_pacientes.data_coleta')
+                     ->where('dietas_pacientes.id_paciente', '=', $id)
+                     ->groupby('data_coleta')->distinct()->orderby('data_coleta', 'desc')
+                     ->get();
 
+        return view('pacienteRecordatorio', [
+            'paciente'  => $paciente,
+            'registros' => $registros
+        ]);
+    }
+
+    public function recordatorioUnico($id, $data)
+    {
+        $selecionados = DB::table('alimentos')
+                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
+                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
+                       ->where('dietas_pacientes.id_paciente', '=', $id)
+                       ->whereDate('data_coleta', '=', $data)
+                       ->get();
+
+        $paciente = Paciente::find($id);
+
+        $dataColeta = Carbon::parse($data)->format('d/m/Y');
+        $botao = 'Página Inicial';
+
+        $titulo = 'Lista de Alimentos Selecionados';
+
+        return view('lista_dieta', [
+            'dataColeta' => $dataColeta,
+            'titulo' => $titulo,
+            'paciente' => $paciente,
+            'selecionados' => $selecionados,
+            'botao' => $botao
+        ]);
+    }
 
     //Funções que retornam consultas ao banco de dados
 
