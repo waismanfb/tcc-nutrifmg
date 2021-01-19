@@ -13,8 +13,9 @@
         	<table class="table table-bordered table-sm"  id="myTable2">
         		<thead class="table" align="center" style="background-color: #a5a3d4">
         			<tr>
-        				<th><h4>Data da Avaliação</h4></th>
-                        <th><h4>Ver Avaliação</h4></th>
+        				<th><h5>Data da Avaliação</h5></th>
+                        <th><h5>Ver Avaliação Completa</h5></th>
+                        <th><h5>Ver Avaliação Por Dieta</h5></th>
         			</tr>
         		</thead>
         		<tbody>' ?>
@@ -25,6 +26,10 @@
                 <?php   echo '</h5></td>
                         <td align="center">
                             <a href="'. "/recordatorioPacienteUnico/{$paciente[0]->id}/{$registros->data_coleta}" .'"><button type="button" class="btn btn-sm btn-info"
+                             name="button">Ver Avaliação</button></a>
+                        </td>
+                        <td align="center">
+                            <a href="'. "/dietaPacienteUnico/{$paciente[0]->id}/{$registros->data_coleta}" .'"><button type="button" class="btn btn-sm btn-info"
                              name="button">Ver Avaliação</button></a>
                         </td>
         			</tr>' ?>

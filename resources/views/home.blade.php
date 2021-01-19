@@ -69,6 +69,22 @@
     </div>
 
 
+    <div class="col-sm-4" style="padding: 30px 15px;">
+
+      <div class="card" >
+        <div class="card-header bg-secondary text-white">Recordatório de 24 Horas</div>
+        <div class="card-body " style="background-color: #93fae0;padding: 15px">
+          <h5 class="card-title" align="center">Recordatório de 24 Horas</h5><br>
+          <p class="card-text">Consulta de recordatórios de 24 horas de pacientes.</p>
+          <br>
+          <a href="{{Route('dieta.individual')}}" class="btn btn-secondary btn-lg " id="b" >Consultar
+            <i class="material-icons">assignment_ind</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>
 <br>

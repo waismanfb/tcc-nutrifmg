@@ -72,3 +72,7 @@ Route::post('/excluirAlimentoSelecionado', 'DietaController@excluirAlimentoSelec
 Route::get('/listaPacienteRecordatorio/{id}', 'DietaController@recordatorio')->name('dieta.recordatorio')->middleware('auth');
 Route::get('/listaPacienteRecordatorioIndividual/{id}/{data}', 'DietaController@recordatorioIndividual')->name('dieta.recordatorioPacienteIndividual')->middleware('auth');
 Route::get('/recordatorioPacienteUnico/{id}/{data}', 'DietaController@recordatorioUnico')->name('dieta.recordatorioPacienteUnico')->middleware('auth');
+Route::get('/dietaIndividual', 'DietaController@dietaIndividual')->name('dieta.individual')->middleware('auth');
+Route::get('/escolherDieta/{id}/{data}', 'DietaController@escolherDieta')->name('dieta.escolherDieta')->middleware('auth');
+Route::get('/dietaPacienteUnico/{id}/{data}', 'DietaController@dietaUnico')->name('dieta.dietaPacienteUnico')->middleware('auth');
+Route::get('/dietaPacienteUnicoController/{id}/{data}/{dieta}', 'DietaController@dietaPacienteUnicoController')->name('dieta.dietaPacienteUnicoController')->middleware('auth');

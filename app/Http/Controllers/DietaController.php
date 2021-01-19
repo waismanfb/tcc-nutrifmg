@@ -81,6 +81,7 @@ class DietaController extends Controller
             $dataColeta = Carbon::today()->toDateString();
             $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
             $botao = 'Concluir Avaliação';
+            $url = '/home';
 
             $titulo = 'Lista de Alimentos Selecionados';
 
@@ -89,7 +90,8 @@ class DietaController extends Controller
                 'titulo' => $titulo,
                 'paciente' => $paciente,
                 'selecionados' => $selecionados,
-                'botao' => $botao
+                'botao' => $botao,
+                'url' => $url
             ]);
         }
 
@@ -240,6 +242,13 @@ class DietaController extends Controller
         ]);
     }
 
+    public function dietaIndividual()
+    {
+        $registros = Paciente::all();
+
+        return view('dietaIndividual', compact('registros'));
+    }
+
     public function recordatorioUnico($id, $data)
     {
         $selecionados = DB::table('alimentos')
@@ -255,7 +264,8 @@ class DietaController extends Controller
         $paciente = Paciente::find($id);
 
         $dataColeta = Carbon::parse($data)->format('d/m/Y');
-        $botao = 'Página Inicial';
+        $botao = 'Voltar';
+        $url = "javascript:history.back()";
 
         $titulo = 'Lista de Alimentos Selecionados';
 
@@ -264,7 +274,62 @@ class DietaController extends Controller
             'titulo' => $titulo,
             'paciente' => $paciente,
             'selecionados' => $selecionados,
-            'botao' => $botao
+            'botao' => $botao,
+            'url' => $url
+        ]);
+    }
+
+    public function escolherDieta($id, $data)
+    {
+        $paciente = Paciente::find($id);
+        $dataColeta = $data;
+        $url = "javascript:history.back()";
+        $botao = 'Voltar';
+
+        return view('escolherDieta', [
+            'paciente' => $paciente,
+            'data' => $data,
+            'botao' => $botao,
+            'url' => $url
+        ]);
+    }
+
+    public function dietaUnico($id, $data)
+    {
+        return view('escolhaDietaPacienteUnico', [
+            'id' => $id,
+            'data' => $data
+        ]);
+    }
+
+    public function dietaPacienteUnicoController($id, $data, $dieta)
+    {
+        $selecionados = DB::table('alimentos')
+                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
+                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
+                       ->where('dietas_pacientes.id_paciente', '=', $id)
+                       ->where('dietas_pacientes.id_dieta', '=', $dieta)
+                       ->whereDate('data_coleta', '=', $data)
+                       ->get();
+
+        $paciente = Paciente::find($id);
+
+        $dataColeta = Carbon::parse($data)->format('d/m/Y');
+        $botao = 'Voltar';
+        $url = "javascript:history.back()";
+
+        $titulo = 'Lista de Alimentos Selecionados';
+
+        return view('lista_dieta', [
+            'dataColeta' => $dataColeta,
+            'titulo' => $titulo,
+            'paciente' => $paciente,
+            'selecionados' => $selecionados,
+            'botao' => $botao,
+            'url' => $url
         ]);
     }
 

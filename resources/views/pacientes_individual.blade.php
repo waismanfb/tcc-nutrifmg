@@ -10,6 +10,7 @@
 		<div class="row">
 			<div class="col col-md-6">
 				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
+				<input type="text" class="form-control" name="tela" value="paciente_individual" hidden>
 			</div>
 			<div class="col col-md-2">
 				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>
@@ -32,7 +33,6 @@
 				<th>Inserir Medidas</th>
 				<th>Editar info. Paciente</th>
 				<th>Cadastro de Dietas</th>
-                <th>Recordátorio 24H</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,9 +62,6 @@
 				</td>
                 <td align="center">
 					<a class="btn btn-sm" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" style="background-color: #ffc107">&nbspInserir Dieta&nbsp</a>
-				</td>
-                <td align="center">
-					<a class="btn btn-sm" href="{{Route('dieta.recordatorio', $registros->id)}}" role="button" style="background-color: #ffc107">&nbspR24H&nbsp</a>
 				</td>
 			</tr>
 			@endforeach
