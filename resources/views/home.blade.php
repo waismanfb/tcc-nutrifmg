@@ -68,6 +68,37 @@
       </div>
     </div>
 
+    <div class="col-sm-4" style="padding: 30px 15px;">
+
+      <div class="card" >
+        <div class="card-header bg-secondary text-white">Alimentos Unitários</div>
+        <div class="card-body " style="background-color: #93fae0;padding: 15px">
+          <h5 class="card-title" align="center">Consultar Alimentos</h5><br>
+          <p class="card-text">Incluir novos alimentos no banco de dados, alterar ou excluir alimentos já existentes</p>
+          <br>
+          <a href="{{Route('alimento.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Vizualizar Alimentos
+            <i class="material-icons">assignment_ind</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-4" style="padding: 30px 15px;">
+
+      <div class="card" >
+        <div class="card-header bg-secondary text-white">Receitas</div>
+        <div class="card-body " style="background-color: #93fae0;padding: 15px">
+          <h5 class="card-title" align="center">Receitas</h5><br>
+          <p class="card-text">Incluir novos alimentos no banco de dados, alterar ou excluir alimentos já existentes</p>
+          <br>
+          <a href="{{Route('receita.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Exibir
+            <i class="material-icons">assignment_ind</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
 
   </div>
 </div>

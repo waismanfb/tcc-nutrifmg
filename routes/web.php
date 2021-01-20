@@ -18,6 +18,22 @@ Route::get('/', function () {
 //Alimentos
 Route::get('/cadastrar-alimento','AlimentosController@cadastrarAlimento' )->name('alimento.cadastrar')->middleware('auth');
 Route::post('/inserir-alimento', 'AlimentosController@insert')->name('alimento.insert')->middleware('auth');
+Route::get('/deletar-alimento/{id}', 'AlimentosController@delete')->name('alimento.delete')->middleware('auth');
+Route::get('/dados-alimentos', 'AlimentosController@exibir')->name('alimento.exibir')->middleware('auth');
+
+Route::get('/editar-alimento/{id}', 'AlimentosController@editarAlimento')->name('alimento.editarAlimento')->middleware('auth');
+Route::post('/editar-alimento/{id}', 'AlimentosController@update')->name('alimento.update')->middleware('auth');
+
+Route::get('/cadastrar-receita','ReceitasController@cadastrarReceita' )->name('receita.cadastrar')->middleware('auth');
+Route::post('/inserir-receita', 'ReceitasController@insert')->name('receita.insert')->middleware('auth');
+Route::get('/dados-receitas', 'ReceitasController@exibir')->name('receita.exibir')->middleware('auth');
+
+Route::get('/ingredientes-receita/{id}', 'ReceitasController@exibirById')->name('receita.ingredientes')->middleware('auth');
+
+Route::get('/cadastrar-ingrediente','ReceitaIngredienteController@cadastrarIngrediente' )->name('ingrediente.cadastrar')->middleware('auth');
+Route::post('/inserir-ingrediente', 'ReceitaIngredienteController@insert')->name('ingrediente.insert')->middleware('auth');
+
+
 
 
 //------

@@ -49,6 +49,7 @@ class AlimentosController extends Controller
         $alimento->vitaminaC = $request->vitaminaC;
 
         $resposta = $alimento->save();
+        
     }  
 
     public function insert(Request $valores){
@@ -67,6 +68,41 @@ class AlimentosController extends Controller
 
         }
     }
+
+    public function exibir()
+    {
+      $registros = Alimento::orderBy('id','DESC')->get();  
+      return view('dados-alimentos', compact('registros'));  
+    }
+
+    public function editarAlimento($id){
+        $alimento = Alimento::find($id);
+        return view('cadastrar-alimento', compact('alimento'))->with('success','Alimento deletado com sucesso!');
+      }
+
+    public function delete(Alimento $id)
+    {
+      $id->delete();
+      return redirect()->route('alimento.exibir')->with('success','Alimento deletado com sucesso!');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           
