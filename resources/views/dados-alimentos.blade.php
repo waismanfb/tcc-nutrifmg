@@ -13,8 +13,10 @@
 			</div>
 			<div class="col col-md-2">
 				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>
-                <a class="btn btn-success" href="{{Route('paciente.exportar')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
 			</div>
+			<div class="col col-md-4">
+				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir novo alimento</a>		
+			</div>			
 		</div>
 	</form>
 </div>
@@ -32,7 +34,6 @@
 				<th>Proteinas</th>
 				<th>Carboidrato</th>
             <th>Lipideos</th>
-            <th>Vizualizar info. Alimento</th>
 				<th>Editar info. Alimento</th>
 				<th>Excluir Alimento</th>
 			</tr>
