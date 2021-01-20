@@ -100,11 +100,8 @@ class PacienteController extends Controller
 
     //mostra todos os pacientes
   public function pesquisar($mem=0){
-
-
     $registros = Paciente::all();
     $tipo = 'cafeDaManha';
-
 
     return view('pacientes_individual', compact('registros','mem', 'tipo'));
   }
@@ -121,11 +118,21 @@ class PacienteController extends Controller
   public function pesquisados(Request $request)
   {
     $registros = Paciente::where('nome', 'LIKE', '%'. $request->nome . '%')->get();
+    $tipo = 'cafeDaManha';
 
-    return view('pacientes_individual', [
-      'registros' => $registros,
-      'nome' => $request->nome
-    ]);
+    if($request->tela == 'paciente_individual')
+    {
+        return view('pacientes_individual', [
+          'registros' => $registros,
+          'nome' => $request->nome,
+          'tipo' => $tipo
+        ]);
+    }
+    else
+    {
+        return view('dietaIndividual', compact('registros'));
+    }
+
   }
 
   public function ResultadoClassificacao($valor1, $valor2, $valor3){

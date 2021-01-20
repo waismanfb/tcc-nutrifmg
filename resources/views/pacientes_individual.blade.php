@@ -10,6 +10,7 @@
 		<div class="row">
 			<div class="col col-md-6">
 				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
+				<input type="text" class="form-control" name="tela" value="paciente_individual" hidden>
 			</div>
 			<div class="col col-md-2">
 				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>

@@ -1,6 +1,8 @@
 @extends('layouts.menu_topo')
 @section('content')
 
+<script type="text/javascript" src="{{ URL::asset('js/dieta.js') }}"></script>
+
 <script type="text/javascript">
     $(function(){
         $('#id_alimento').selectize();
@@ -17,7 +19,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h4 class="text-center">Digite os alimentos para inserir na dieta:</h4><br>
-            <form method="post" action="{{Route('dieta.inserir')}}">
+            <form method="post" action="{{Route('dieta.inserir')}}" id="inserirDieta">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -45,14 +47,22 @@
                         <tr>
                             <th>Nome do Alimento</th>
                             <th>Quantidade</th>
+                            <th>Excluir</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                             <?php if (isset($selecionados)): ?>
                                 @foreach($selecionados as $selecionados)
                                     <tr>
                                         <td>{{$selecionados->alimentos_nome}}</td>
                                         <td>{{$selecionados->quantidade}}</td>
+                                        <td><button type="button" class="btn btn-sm btn-excluir"
+                                            name="button" style="background-color: #e0372b"
+                                            dietas_pacientes_id='{{$selecionados->dietas_pacientes_id}}'
+                                            paciente_id='{{$paciente->id}}'
+                                            tipo_dieta='{{$tipo}}'
+                                            >Excluir</button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             <?php endif; ?>
@@ -60,9 +70,13 @@
                 </table>
         </div>
     </div>
-</div>
+</div><br><br>
 
-<a class="btn btn-sm" href="{{Route('dieta.atualizarDieta', [$tipo ,$paciente->id])}}" role="button" style="background-color: #ffc107">&nbspContinuar&nbsp</a>
+<!-- linha necessaria para passagem do token csrf para o ajax -->
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
-</script>
+<button type="button" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;" id="botaoContinuar">Continuar</button>
+
+<a class="btn btn-lg" href="{{Route('dieta.atualizarDieta', [$tipo ,$paciente->id])}}" id='linkContinuar' role="button" style="background-color: #ffc107" hidden>&nbspContinuar&nbsp</a>
+
 @endsection

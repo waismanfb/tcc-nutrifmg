@@ -84,3 +84,11 @@ Route::get('/classificacoes/imcIdadeFeminino/info', 'GraficosController@ImcIdade
 Route::get('/dieta/{tipo}/{id}', 'DietaController@inserirDieta')->name('dieta.inserirDieta')->middleware('auth');
 Route::get('/atualizadieta/{tipo}/{id}', 'DietaController@atualizarDieta')->name('dieta.atualizarDieta')->middleware('auth');
 Route::post('/dieta/inserir', 'DietaController@inserir')->name('dieta.inserir')->middleware('auth');
+Route::post('/excluirAlimentoSelecionado', 'DietaController@excluirAlimentoSelecionado')->middleware('auth');
+Route::get('/listaPacienteRecordatorio/{id}', 'DietaController@recordatorio')->name('dieta.recordatorio')->middleware('auth');
+Route::get('/listaPacienteRecordatorioIndividual/{id}/{data}', 'DietaController@recordatorioIndividual')->name('dieta.recordatorioPacienteIndividual')->middleware('auth');
+Route::get('/recordatorioPacienteUnico/{id}/{data}', 'DietaController@recordatorioUnico')->name('dieta.recordatorioPacienteUnico')->middleware('auth');
+Route::get('/dietaIndividual', 'DietaController@dietaIndividual')->name('dieta.individual')->middleware('auth');
+Route::get('/escolherDieta/{id}/{data}', 'DietaController@escolherDieta')->name('dieta.escolherDieta')->middleware('auth');
+Route::get('/dietaPacienteUnico/{id}/{data}', 'DietaController@dietaUnico')->name('dieta.dietaPacienteUnico')->middleware('auth');
+Route::get('/dietaPacienteUnicoController/{id}/{data}/{dieta}', 'DietaController@dietaPacienteUnicoController')->name('dieta.dietaPacienteUnicoController')->middleware('auth');
