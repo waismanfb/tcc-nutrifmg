@@ -5,17 +5,17 @@
 
   @include('layouts.alerts')
 
-	<form method="post" action="{{Route('paciente.pesquisados')}}">
+	<form method="post" action="{{Route('receita.pesquisada')}}">
 		@csrf
 		<div class="row">
-			<div class="col col-md-6">
-				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
+			<div class="col col-md-8">
+				<input type="text" class="form-control" name="nome" placeholder="Nome da receita">
 			</div>
 			<div class="col col-md-2">
-				<button type="submit"  class="form-control btn btn-warning">Pesquisar</button>
+				<button type="submit"  class="form-control btn btn-primary">Pesquisar</button>
 		
 			</div>
-			<div class="col col-md-4">
+			<div class="col col-md-2">
         <a href="{{Route('receita.cadastrar')}}" class="btn btn-success" id="b" >Inserir nova receita</a>		
 			</div>
 		</div>
@@ -39,21 +39,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($registros as $registros)
+			@foreach($registros as $registro)
 			<tr>
-				<td>{{$registros->nome}}</td>
-				<td>{{$registros->totalEnergiaKcal}}</td>
-				<td>{{$registros->totalProteina}}</td>
-				<td>{{$registros->totalLipideos}}</td>
-				<td>{{$registros->totalCarboidrato}}</td>
+				<td>{{$registro->nome}}</td>
+				<td>{{$registro->totalEnergiaKcal}}</td>
+				<td>{{$registro->totalProteina}}</td>
+				<td>{{$registro->totalLipideos}}</td>
+				<td>{{$registro->totalCarboidrato}}</td>
 
 
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('receita.ingredientes', $registros->id)}}" role="button" style="background-color: #ffc107">Vizualizar</a>
+					<a class="btn btn-sm" href="{{Route('receita.ingredientes', $registro->id)}}" role="button" style="background-color: #ffc107">Vizualizar</a>
             </td>
 
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.delete', $registros->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
+					<a class="btn btn-sm" href="{{Route('alimento.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
             </td>
                 
 				
@@ -61,7 +61,10 @@
 			</tr>
 			@endforeach
 		</tbody>
-	</table>
+  </table>
+	<div>
+		{{ $registros->links() }}
+	</div>  
 </div>
 <script type="text/javascript">
 

@@ -63,7 +63,7 @@
           <h5 class="card-title" align="center">Consultar Alimentos</h5><br>
           <p class="card-text">Incluir novos alimentos no banco de dados, alterar ou excluir alimentos já existentes</p>
           <br>
-          <a href="{{Route('alimento.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Exibir Alimentos
+          <a href="{{Route('alimento.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Alimentos
             <i class="material-icons">assignment_ind</i>
           </a>
         </div>
@@ -79,7 +79,7 @@
           <h5 class="card-title" align="center">Receitas</h5><br>
           <p class="card-text">Incluir novos alimentos no banco de dados, alterar ou excluir alimentos já existentes</p>
           <br>
-          <a href="{{Route('receita.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Exibir Receitas
+          <a href="{{Route('receita.exibir')}}" class="btn btn-secondary btn-lg " id="b" >Receitas
             <i class="material-icons">assignment_ind</i>
           </a>
         </div>
@@ -95,7 +95,7 @@
           <h5 class="card-title" align="center">Recordatório de 24 Horas</h5><br>
           <p class="card-text">Consulta de recordatórios de 24 horas de pacientes.</p>
           <br>
-          <a href="{{Route('dieta.individual')}}" class="btn btn-secondary btn-lg " id="b" >Consultar
+          <a href="{{Route('dieta.individual')}}" class="btn btn-secondary btn-lg " id="b" >R24h
             <i class="material-icons">assignment_ind</i>
           </a>
         </div>

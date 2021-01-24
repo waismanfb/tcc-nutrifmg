@@ -5,17 +5,17 @@
 
   @include('layouts.alerts')
 
-	<form method="post" action="{{Route('paciente.pesquisados')}}">
+	<form method="post" action="{{Route('alimento.pesquisado')}}">
 		@csrf
 		<div class="row">
-			<div class="col col-md-6">
-				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
+			<div class="col col-md-8">
+				<input type="text" class="form-control" name="nome" placeholder="Nome do alimento">
 			</div>
 			<div class="col col-md-2">
-				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>
+				<button type="submit" class="form-control btn btn-primary">Pesquisar</button>
 			</div>
-			<div class="col col-md-4">
-				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir novo alimento</a>		
+			<div class="col col-md-2">
+				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir Novo Alimento</a>		
 			</div>			
 		</div>
 	</form>
@@ -28,8 +28,7 @@
 		<thead class="table" align="center" style="background-color: #a5a3d4">
 			<tr>
 				<th onclick="sortTable(0)">Nome</th>
-				<th onclick="sortTable(1)">Tipo</th>
-				<th onclick="sortTable(2)">Grupo</th>
+				<th onclick="sortTable(1)">Grupo</th>
 				<th>Energia (Kcal)</th>
 				<th>Proteinas</th>
 				<th>Carboidrato</th>
@@ -39,30 +38,38 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($registros as $registros)
+			@foreach($registros as $registro)
 			<tr>
-				<td>{{$registros->nome}}</td>
-				<td>{{$registros->tipo}}</td>
-				<td>{{$registros->grupo}}</td>
-				<td>{{$registros->energiaKcal}}</td>
-				<td>{{$registros->proteina}}</td>
-				<td>{{$registros->carboidrato}}</td>
-				<td>{{$registros->lipideos}}</td>
+				<td>{{$registro->nome}}</td>
+				<td>{{$registro->grupo}}</td>
+				<td>{{$registro->energiaKcal}}</td>
+				<td>{{$registro->proteina}}</td>
+				<td>{{$registro->carboidrato}}</td>
+				<td>{{$registro->lipideos}}</td>
 
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registros->id)}}" role="button" style="background-color: #ffc107">Editar</a>
+					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" style="background-color: #ffc107">Editar</a>
         </td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.delete', $registros->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
+					<a class="btn btn-sm" href="{{Route('alimento.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
         </td>
                 
 				
 
 			</tr>
 			@endforeach
+
 		</tbody>
 	</table>
+	<div>
+		{{ $registros->links() }}
+	</div>
+
+
 </div>
+
+
+
 <script type="text/javascript">
 
 	function sortTable(n) {

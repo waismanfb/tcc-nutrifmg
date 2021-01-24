@@ -182,25 +182,25 @@ class DietaController extends Controller
             $tipoId = 2;
             $titulo = 'Lanche da Manha';
         }
-        else if ($tipoDieta == 'almoco')
+        else if ($tipo == 'almoco')
         {
             $tipoId = 3;
             $request['id_dieta'] = 3;
             $titulo = 'Almoco';
         }
-        else if ($tipoDieta == 'lancheDaTarde')
+        else if ($tipo == 'lancheDaTarde')
         {
             $tipoId = 4;
             $request['id_dieta'] = 4;
             $titulo = 'Lanche Da Tarde';
         }
-        else if ($tipoDieta == 'jantar')
+        else if ($tipo == 'jantar')
         {
             $tipoId = 5;
             $request['id_dieta'] = 5;
             $titulo = 'Jantar';
         }
-        else if ($tipoDieta == 'lancheDaNoite')
+        else if ($tipo == 'lancheDaNoite')
         {
             $tipoId = 6;
             $request['id_dieta'] = 6;

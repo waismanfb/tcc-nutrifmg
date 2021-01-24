@@ -45,7 +45,7 @@ class ReceitasController extends Controller
 
     public function exibir()
     {
-      $registros = Receita::orderBy('id','DESC')->get();  
+      $registros = Receita::orderBy('id','DESC')->paginate(10);  
       return view('dados-receitas', compact('registros'));  
     }
 
@@ -55,6 +55,16 @@ class ReceitasController extends Controller
       return view('receita-ingredientes', compact('registros'));  
     }
 
+    public function pesquisarReceita(Request $request)
+    {
+      $registros = Receita::where('nome', 'LIKE', '%'. $request->nome . '%')->get(); 
+
+        return view('dados-receitas', [
+          'registros' => $registros,
+          'nome' => $request->nome
+        ]); 
+
+    }    
 
 
 

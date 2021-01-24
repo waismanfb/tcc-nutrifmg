@@ -18,38 +18,14 @@ class AlimentosController extends Controller
         $alimento = Alimento::find($id);
 
         $alimento->nome = $request->nome;
-        $alimento->tipo = $request->tipo;
         $alimento->grupo = $request->grupo;
         $alimento->fonte = $request->fonte;
-        $alimento->umidade = $request->umidade;
         $alimento->energiaKcal = $request->energiaKcal;
-        $alimento->energiaKj = $request->energiaKj;
         $alimento->proteina = $request->proteina;
         $alimento->lipideos = $request->lipideos;
-        $alimento->colesterol = $request->colesterol;
         $alimento->carboidrato = $request->carboidrato;
-        $alimento->fibraAlimentar = $request->fibraAlimentar;
-        $alimento->cinzas = $request->cinzas;
-        $alimento->calcio = $request->calcio;
-        $alimento->magnesio = $request->magnesio;
-        $alimento->manganes = $request->manganes;
-        $alimento->fosforo = $request->fosforo;
-        $alimento->ferro = $request->ferro;
-        $alimento->sodio = $request->sodio;
-        $alimento->potassio = $request->potassio;
-        $alimento->cobre = $request->cobre;
-        $alimento->zinco = $request->zinco;
-        $alimento->retinol = $request->retinol;
-        $alimento->re = $request->re;
-        $alimento->rae = $request->rae;
-        $alimento->tiamina = $request->tiamina;
-        $alimento->riboflavina = $request->riboflavina;
-        $alimento->piridoxina = $request->piridoxina;
-        $alimento->niacina = $request->niacina;
-        $alimento->vitaminaC = $request->vitaminaC;
 
-        $resposta = $alimento->save();
-        
+        $resposta = $alimento->save();        
     }  
 
     public function insert(Request $valores){
@@ -71,7 +47,7 @@ class AlimentosController extends Controller
 
     public function exibir()
     {
-      $registros = Alimento::orderBy('id','DESC')->get();  
+      $registros = Alimento::orderBy('id','DESC')->paginate(10);  
       return view('dados-alimentos', compact('registros'));  
     }
 
@@ -85,6 +61,17 @@ class AlimentosController extends Controller
       $id->delete();
       return redirect()->route('alimento.exibir')->with('success','Alimento deletado com sucesso!');
     }
+
+    public function pesquisarAlimento(Request $request)
+    {
+      $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->paginate(10);  
+
+        return view('dados-alimentos', [
+          'registros' => $registros,
+          'nome' => $request->nome
+        ]); 
+
+    }    
 
 
 

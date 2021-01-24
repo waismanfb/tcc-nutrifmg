@@ -39,16 +39,6 @@
               </div>
             </div>
           </div>
-          <!-- tipo-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Tipo</label>
-              <label id="alimentoTipo"></label>
-              <div class="input-group ">
-                <input  name="tipo" placeholder="Tipo do Alimento" class="form-control "  type="text" value="<?php if(isset($alimento)){echo $alimento->tipo;}else{echo old('tipo');} ?>">
-              </div>
-            </div>
-          </div>
           <!-- grupo-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -69,16 +59,6 @@
               </div>
             </div>
           </div>
-          <!-- umidade-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Umidade</label>
-              <label id="alimentoUmidade"></label>
-              <div class="input-group ">
-                <input  name="umidade" placeholder="Umidade do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->umidade;}else{echo old('umidade');} ?>">
-              </div>
-            </div>
-          </div>
           <!-- Energia (kcal)-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -86,16 +66,6 @@
               <label id="alimentoEnergiaKcal"></label>
               <div class="input-group ">
                 <input  name="energiaKcal" placeholder="Energia em kcal do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->energiaKcal;}else{echo old('energiaKcal');} ?>">
-              </div>
-            </div>
-          </div>
-          <!-- Energia (kj)-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Energia (kj)</label>
-              <label id="alimentoEnergiaKj"></label>
-              <div class="input-group ">
-                <input  name="energiaKj" placeholder="Energia em kj do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->energiaKj;}else{echo old('energiaKj');} ?>">
               </div>
             </div>
           </div>
@@ -119,16 +89,6 @@
               </div>
             </div>
           </div>
-          <!-- Colesterol-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Colesterol</label>
-              <label id="alimentoColesterol"></label>
-              <div class="input-group ">
-                <input  name="colesterol" placeholder="Colesterol do Alimento" class="form-control "  type="text" value="<?php if(isset($alimento)){echo $alimento->colesterol;}else{echo old('colesterol');} ?>">
-              </div>
-            </div>
-          </div>
           <!-- Carboidrato-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -139,197 +99,7 @@
               </div>
             </div>
           </div>          
-          <!-- Fibra Alimentar-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Fibra Alimentar</label>
-              <label id="alimentoFibraAlimentar"></label>
-              <div class="input-group ">
-                <input  name="fibraAlimentar" placeholder="Fibra Alimentar do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->fibraAlimentar;}else{echo old('fibraAlimentar');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Cinzas-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Cinzas</label>
-              <label id="alimentoCinzas"></label>
-              <div class="input-group ">
-                <input  name="cinzas" placeholder="Cinzas do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->cinzas;}else{echo old('cinzas');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Calcio-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Calcio</label>
-              <label id="alimentoCalcio"></label>
-              <div class="input-group ">
-                <input  name="calcio" placeholder="Calcio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->calcio;}else{echo old('calcio');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Magnesio-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Magnésio</label>
-              <label id="alimentoMagnesio"></label>
-              <div class="input-group ">
-                <input  name="magnesio" placeholder="Magnésio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->magnesio;}else{echo old('magnesio');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Manganes-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Manganês</label>
-              <label id="alimentoManganes"></label>
-              <div class="input-group ">
-                <input  name="manganes" placeholder="Manganes do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->manganes;}else{echo old('manganes');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Fósforo-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Fósforo</label>
-              <label id="alimentoFosforo"></label>
-              <div class="input-group ">
-                <input  name="fosforo" placeholder="Fósforo do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->fosforo;}else{echo old('fosforo');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Ferro-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Ferro</label>
-              <label id="alimentoFerro"></label>
-              <div class="input-group ">
-                <input  name="ferro" placeholder="Ferro do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->ferro;}else{echo old('ferro');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Sódio-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Sódio</label>
-              <label id="alimentoSodio"></label>
-              <div class="input-group ">
-                <input  name="sodio" placeholder="Sodio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->sodio;}else{echo old('sodio');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Potássio-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Potássio</label>
-              <label id="alimentoPotassio"></label>
-              <div class="input-group ">
-                <input  name="potassio" placeholder="Potássio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->potassio;}else{echo old('potassio');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Cobre-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Cobre</label>
-              <label id="alimentoCobre"></label>
-              <div class="input-group ">
-                <input  name="cobre" placeholder="Cobre do Alimento" class="form-control"  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->cobre;}else{echo old('cobre');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Zinco-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Zinco</label>
-              <label id="alimentoZinco"></label>
-              <div class="input-group ">
-                <input  name="zinco" placeholder="Zinco do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->zinco;}else{echo old('zinco');} ?>">
-              </div>
-            </div>
-          </div>          
-          <!-- Retinol -->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Retinol</label>
-              <label id="alimentoRetinol"></label>
-              <div class="input-group ">
-                <input  name="retinol" placeholder="Retinol do Alimento" class="form-control "  type="text" step="any" value="<?php if(isset($alimento)){echo $alimento->retinol;}else{echo old('retinol');} ?>">
-              </div>
-            </div>
-          </div>  
-          <!-- RE-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">RE</label>
-              <label id="alimentoRE"></label>
-              <div class="input-group ">
-                <input  name="re" placeholder="RE do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->re;}else{echo old('re');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- RAE-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">RAE</label>
-              <label id="alimentoRAE"></label>
-              <div class="input-group ">
-                <input  name="rae" placeholder="RAE do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->rae;}else{echo old('rae');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- Tiamina-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Tiamina</label>
-              <label id="alimentoTiamina"></label>
-              <div class="input-group ">
-                <input  name="tiamina" placeholder="Tiamina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->tiamina;}else{echo old('tiamina');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- Riboflavina-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Riboflavina</label>
-              <label id="alimentoRiboflavina"></label>
-              <div class="input-group ">
-                <input  name="riboflavina" placeholder="Riboflavina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->riboflavina;}else{echo old('riboflavina');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- Piridoxina-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Piridoxina</label>
-              <label id="alimentoPiridoxina"></label>
-              <div class="input-group ">
-                <input  name="piridoxina" placeholder="Piridoxina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->piridoxina;}else{echo old('piridoxina');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- niacina-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Niacina</label>
-              <label id="alimentoNiacina"></label>
-              <div class="input-group ">
-                <input  name="niacina" placeholder="Niacina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->niacina;}else{echo old('niacina');} ?>">
-              </div>
-            </div>
-          </div>                    
-          <!-- VitaminaC-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">VitaminaC</label>
-              <label id="alimentoVitaminaC"></label>
-              <div class="input-group ">
-                <input  name="vitaminaC" placeholder="VitaminaC do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->vitaminaC;}else{echo old('vitaminaC');} ?>">
-              </div>
-            </div>
-          </div>                    
-
+         
 
          
          
