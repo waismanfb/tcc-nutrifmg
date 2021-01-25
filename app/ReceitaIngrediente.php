@@ -7,8 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class ReceitaIngrediente extends Model
 {
     protected $fillable = [
-        'nome', 
         'medida',
         'quantidade',
-      ];      
+        'id_alimento',
+        'id_receitas',
+        'energiaKcal',
+        'proteina',
+        'lipideos',
+        'carboidrato'
+      ];
+
+      public $campos = [
+          'id',
+          'medida',
+          'quantidade',
+          'id_alimento',
+          'id_receitas',
+          'energiaKcal',
+          'proteina',
+          'lipideos',
+          'carboidrato'
+      ];
 }

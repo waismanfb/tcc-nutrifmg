@@ -39,6 +39,26 @@
               </div>
             </div>
           </div>
+          <!-- Quantidade Total em gramas-->
+          <div class="form-group">
+            <div class="input-group mb-3 ">
+              <label class="">Peso Total da receita</label>
+              <label id="receitaQuantidadeTotal"></label>
+              <div class="input-group ">
+                <input  name="quantidadeTotal" placeholder="Quantidade total da receita em gramas" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->quantidadeTotal;}else{echo old('quantidadeTotal');} ?>">
+              </div>
+            </div>
+          </div>
+          <!-- Quantidade da porção em gramas-->
+          <div class="form-group">
+            <div class="input-group mb-3 ">
+              <label class="">Peso da porção em gramas</label>
+              <label id="receitaQuantidadePorcao"></label>
+              <div class="input-group ">
+                <input  name="quantidadePorcao" placeholder="Peso da porção em gramas" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->quantidadePorcao;}else{echo old('quantidadePorcao');} ?>">
+              </div>
+            </div>
+          </div>
           <!-- Energia (kcal)-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -79,11 +99,11 @@
                 <input  name="carboidrato" placeholder="Carboidrato da Receita" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->totalCarboidrato;}else{echo old('totalCarboidrato');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
 
 
-         
-         
+
+
 
             <!-- Button -->
             <div class="form-group">

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Receita extends Model
 {
     protected $fillable = [
-        'nome', 
+        'nome',
+        'quantidadeTotal',
+        'quantidadePorcao',
         'totalEnergiaKcal',
         'totalProteina',
         'totalLipideos',
         'totalCarboidrato',
-      ];  
+      ];
 }

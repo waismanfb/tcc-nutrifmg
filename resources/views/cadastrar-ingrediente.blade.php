@@ -32,16 +32,16 @@
           <!-- Nome-->
           <div class="form-group">
             <div class="input-group mb-3 ">
-              <label class="">Nome:</label>
+              <label class="">Nome:</label><br>
               <label id="ingredienteNome"></label>
 
-              <select id="id_alimento" required name="id_alimento"   >
-               <option>Escolha um Alimento:</option>
+              <select id="id_alimento" required name="id_alimento">
+               <option>Escolha um Alimento:</option><br>
                @foreach($alimentos as $alimentos)
-                   <option value="{{$alimentos->id}} <?php if(isset($ingrediente)){echo $ingrediente->nome;}else{echo old('nome');} ?>">{{$alimentos->nome}}</option>
+                   <option value="{{$alimentos->id}}">{{$alimentos->nome}}</option>
                @endforeach
                </select><br>
-               
+
             </div>
           </div>
           <!-- Medida -->
@@ -50,7 +50,7 @@
               <label class="">Medida</label>
               <label id="ingredienteMedida"></label>
               <div class="input-group ">
-                <input  name="medida" placeholder="Medida" class="form-control "  type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->medida;}else{echo old('medida');} ?>">
+                <input  name="medida" placeholder="Medida em gramas" class="form-control "  type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->medida;}else{echo old('medida');} ?>">
               </div>
             </div>
           </div>
@@ -64,7 +64,9 @@
               </div>
             </div>
           </div>
-      
+
+          <input type="number" name="id_receitas" value="{{$id}}" hidden>
+
             <!-- Button -->
             <div class="form-group">
               <label class="input-group mb-3"></label>

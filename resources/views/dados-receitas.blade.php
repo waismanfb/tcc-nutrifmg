@@ -13,10 +13,10 @@
 			</div>
 			<div class="col col-md-2">
 				<button type="submit"  class="form-control btn btn-primary">Pesquisar</button>
-		
+
 			</div>
 			<div class="col col-md-2">
-        <a href="{{Route('receita.cadastrar')}}" class="btn btn-success" id="b" >Inserir nova receita</a>		
+        <a href="{{Route('receita.cadastrar')}}" class="btn btn-success" id="b" >Inserir nova receita</a>
 			</div>
 		</div>
 	</form>
@@ -29,23 +29,19 @@
 		<thead class="table" align="center" style="background-color: #a5a3d4">
 			<tr>
 				<th onclick="sortTable(0)">Nome</th>
-				<th onclick="sortTable(1)">Total de Energia (kcal)</th>
-				<th onclick="sortTable(2)">Total de Proteína</th>
-				<th>Total de Lipídeos</th>
-				<th>Total de Carboidrato</th>
-				<th>Inserir Ingredientes</th>
-            <th>Deletar Receita</th>
+				<th>Peso total da receita (em gramas)</th>
+				<th>Peso total da porção (em gramas)</th>
+				<th>Vizualizar</th>
+				<th>Editar</th>
 
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($registros as $registro)
 			<tr>
-				<td>{{$registro->nome}}</td>
-				<td>{{$registro->totalEnergiaKcal}}</td>
-				<td>{{$registro->totalProteina}}</td>
-				<td>{{$registro->totalLipideos}}</td>
-				<td>{{$registro->totalCarboidrato}}</td>
+				<td align="center">{{$registro->nome}}</td>
+				<td align="center">{{$registro->quantidadeTotal}}</td>
+				<td align="center">{{$registro->quantidadePorcao}}</td>
 
 
 				<td align="center">
@@ -55,8 +51,8 @@
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('alimento.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
             </td>
-                
-				
+
+
 
 			</tr>
 			@endforeach
@@ -64,7 +60,7 @@
   </table>
 	<div>
 		{{ $registros->links() }}
-	</div>  
+	</div>
 </div>
 <script type="text/javascript">
 

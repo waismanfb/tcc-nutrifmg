@@ -15,12 +15,15 @@ class CreateReceitaIngredientesTable extends Migration
     {
         Schema::create('receita_ingredientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string       ('nome', 100)->nullable();;            
             $table->string       ('medida', 100)->nullable();;
             $table->integer      ('quantidade')->nullable();;
 
             $table->integer      ('id_alimento')->nullable();;
             $table->integer      ('id_receitas')->nullable();;
+            $table->integer      ('energiaKcal')->nullable();
+            $table->double       ('proteina', 8, 4)->nullable();
+            $table->double       ('lipideos', 8, 4)->nullable();
+            $table->double       ('carboidrato', 8, 4)->nullable();
             $table->timestamps();
         });
     }
