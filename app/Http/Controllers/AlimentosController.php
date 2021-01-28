@@ -20,10 +20,32 @@ class AlimentosController extends Controller
         $alimento->nome = $request->nome;
         $alimento->grupo = $request->grupo;
         $alimento->fonte = $request->fonte;
+        $alimento->umidade = $request->umidade;
         $alimento->energiaKcal = $request->energiaKcal;
+        $alimento->energiaKj = $request->energiaKj;
         $alimento->proteina = $request->proteina;
         $alimento->lipideos = $request->lipideos;
+        $alimento->colesterol = $request->colesterol;
         $alimento->carboidrato = $request->carboidrato;
+        $alimento->fibraAlimentar = $request->fibraAlimentar;
+        $alimento->cinzas = $request->cinzas;
+        $alimento->calcio = $request->calcio;
+        $alimento->magnesio = $request->magnesio;
+        $alimento->manganes = $request->manganes;
+        $alimento->fosforo = $request->fosforo;
+        $alimento->ferro = $request->ferro;
+        $alimento->sodio = $request->sodio;
+        $alimento->potassio = $request->potassio;
+        $alimento->cobre = $request->cobre;
+        $alimento->zinco = $request->zinco;
+        $alimento->retinol = $request->retinol;
+        $alimento->re = $request->re;
+        $alimento->rae = $request->rae;
+        $alimento->tiamina = $request->tiamina;
+        $alimento->riboflavina = $request->riboflavina;
+        $alimento->piridoxina = $request->piridoxina;
+        $alimento->niacina = $request->niacina;
+        $alimento->vitaminaC = $request->vitaminaC;
 
         $resposta = $alimento->save();        
     }  
