@@ -54,20 +54,104 @@ class ReceitaIngredienteController extends Controller
         $quantidadeTotalReceita = $receita['quantidadeTotal'];
         $quantidadePorcao = $receita['quantidadePorcao'];
 
-        $carboidratoTACO = $alimento['carboidrato'];
+        $umidadeTACO = $alimento['umidade'];
         $proteinaTACO = $alimento['proteina'];
         $lipidioTACO = $alimento['lipideos'];
+        $colesterolTACO = $alimento['colesterol'];
+        $carboidratoTACO = $alimento['carboidrato'];
+        $fibraAlimentarTACO = $alimento['fibraAlimentar'];
+        $cinzasTACO = $alimento['cinzas'];
+        $calcioTACO = $alimento['calcio'];
+        $magnesioTACO = $alimento['magnesio'];
+        $manganesTACO = $alimento['manganes'];
+        $fosforoTACO = $alimento['fosforo'];
+        $ferroTACO = $alimento['ferro'];
+        $sodioTACO = $alimento['sodio'];
+        $potassioTACO = $alimento['potassio'];
+        $cobreTACO = $alimento['cobre'];
+        $zincoTACO = $alimento['zinco'];
+        $retinolTACO = $alimento['retinol'];
+        $reTACO = $alimento['re'];
+        $raeTACO = $alimento['rae'];
+        $tiaminaTACO = $alimento['tiamina'];
+        $riboflavinaTACO = $alimento['riboflavina'];
+        $piridoxinaTACO = $alimento['piridoxina'];
+        $niacinaTACO = $alimento['niacina'];
+        $vitaminaCTACO = $alimento['vitaminaC'];
         $qporcao = $this->calculaAlimentoPorcao($quantidadeTotalAlimento,
         $quantidadeTotalReceita, $quantidadePorcao);
 
-        //calcula carboidrato
-        $qCarboidrato = $this->calculaComposicaoItens($qporcao,$carboidratoTACO);
+        //calcula umidade
+        $qUmidade = $this->calculaComposicaoItens($qporcao, $umidadeTACO);
 
         //calcula proteina
         $qProteina = $this->calculaComposicaoItens($qporcao,$proteinaTACO);
 
         //calcula lipidios
         $qLipidios = $this->calculaComposicaoItens($qporcao,$lipidioTACO);
+
+        //calcula colesterol
+        $qColesterol = $this->calculaComposicaoItens($qporcao,$colesterolTACO);
+
+        //calcula carboidrato
+        $qCarboidrato = $this->calculaComposicaoItens($qporcao,$carboidratoTACO);
+
+        //calcula fibraAlimentar
+        $qFibraAlimentar = $this->calculaComposicaoItens($qporcao,$fibraAlimentarTACO);
+
+        //calcula cinzas
+        $qCinzas = $this->calculaComposicaoItens($qporcao,$cinzasTACO);
+
+        //calcula calcio
+        $qCalcio = $this->calculaComposicaoItens($qporcao,$calcioTACO);
+
+        //calcula magnesio
+        $qMagnesio = $this->calculaComposicaoItens($qporcao,$magnesioTACO);
+
+        //calcula manganes
+        $qManganes = $this->calculaComposicaoItens($qporcao,$manganesTACO);
+
+        //calcula fosforo
+        $qFosforo = $this->calculaComposicaoItens($qporcao,$fosforoTACO);
+
+        //calcula ferro
+        $qFerro = $this->calculaComposicaoItens($qporcao,$ferroTACO);
+
+        //calcula sodio
+        $qSodio = $this->calculaComposicaoItens($qporcao,$sodioTACO);
+
+        //calcula potassio
+        $qPotassio = $this->calculaComposicaoItens($qporcao,$potassioTACO);
+
+        //calcula cobre
+        $qCobre = $this->calculaComposicaoItens($qporcao,$cobreTACO);
+
+        //calcula zinco
+        $qZinco = $this->calculaComposicaoItens($qporcao,$zincoTACO);
+
+        //calcula retinol
+        $qRetinol = $this->calculaComposicaoItens($qporcao,$retinolTACO);
+
+        //calcula re
+        $qRe = $this->calculaComposicaoItens($qporcao,$reTACO);
+
+        //calcula rae
+        $qRae = $this->calculaComposicaoItens($qporcao,$raeTACO);
+
+        //calcula tiamina
+        $qTiamina = $this->calculaComposicaoItens($qporcao,$tiaminaTACO);
+
+        //calcula riboflavina
+        $qRiboflavina = $this->calculaComposicaoItens($qporcao,$riboflavinaTACO);
+
+        //calcula piridoxina
+        $qPiridoxina = $this->calculaComposicaoItens($qporcao,$piridoxinaTACO);
+
+        //calcula niacina
+        $qNiacina = $this->calculaComposicaoItens($qporcao,$niacinaTACO);
+
+        //calcula vitaminaC
+        $qVitaminaC = $this->calculaComposicaoItens($qporcao,$vitaminaCTACO);
 
         //calculo valor energético carboidrato
         $VECarboidratoKcal = $this->calculaValorEnergeticoKcal($qCarboidrato, 4);
@@ -81,18 +165,41 @@ class ReceitaIngredienteController extends Controller
         $VELipideosKcal = $this->calculaValorEnergeticoKcal($qLipidios, 9);
         $VELipideosKj = $this->calculaValorEnergeticoKcal($qLipidios, 37);
 
-        $valorTotal = $this->calculoValorEnergeticoTotal($VECarboidratoKcal, $VEProteinaKcal, $VELipideosKcal);
+        $valorTotalKcal = $this->calculoValorEnergeticoTotal($VECarboidratoKcal, $VEProteinaKcal, $VELipideosKcal);
+        $valorTotalKj = $this->calculoValorEnergeticoTotal($VECarboidratoKj, $VEProteinaKj, $VELipideosKj);
 
-        $dados['energiaKcal'] = $valorTotal;
+        $dados['umidade'] = $qUmidade;
+        $dados['energiaKcal'] = $valorTotalKcal;
+        $dados['energiaKj'] = $valorTotalKj;
         $dados['proteina'] = $qProteina;
         $dados['lipideos'] = $qLipidios;
+        $dados['colesterol'] = $qColesterol;
         $dados['carboidrato'] = $qCarboidrato;
+        $dados['fibraAlimentar'] = $qFibraAlimentar;
+        $dados['cinzas'] = $qCinzas;
+        $dados['calcio'] = $qCalcio;
+        $dados['magnesio'] = $qMagnesio;
+        $dados['manganes'] = $qManganes;
+        $dados['fosforo'] = $qFosforo;
+        $dados['ferro'] = $qFerro;
+        $dados['sodio'] = $qSodio;
+        $dados['potassio'] = $qPotassio;
+        $dados['cobre'] = $qCobre;
+        $dados['zinco'] = $qZinco;
+        $dados['retinol'] = $qRetinol;
+        $dados['re'] = $qRe;
+        $dados['rae'] = $qRae;
+        $dados['tiamina'] = $qTiamina;
+        $dados['riboflavina'] = $qRiboflavina;
+        $dados['piridoxina'] = $qPiridoxina;
+        $dados['niacina'] = $qNiacina;
+        $dados['vitaminaC'] = $qVitaminaC;
 
         $resposta = ReceitaIngrediente::create($dados);
 
-        echo "<script>alert('Alimento Cadastrado com sucesso!!');</alert>";
-
-        return view('home');
+        // return redirect()
+        //           ->route('ingrediente.cadastrar', [$dados['id_receitas']])
+        //           ->with('success', 'Os Dados do ingrediente foram cadastrados!');
     }
 
     public function calculaAlimentoPorcao($quantidadeTotalAlimento,

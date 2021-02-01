@@ -17,7 +17,7 @@ $(document).ready(function() {
         })
     });
 
-    //Função para deletar alimento Selecionado
+    //Função para deletar alimento/receita Selecionado
     $(".btn-excluir").on("click", function() {
         Swal.fire({
             title: 'Excluir esse item?',

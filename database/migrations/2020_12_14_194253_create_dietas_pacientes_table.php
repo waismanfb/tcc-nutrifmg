@@ -16,7 +16,8 @@ class CreateDietasPacientesTable extends Migration
         Schema::create('dietas_pacientes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_paciente');
-            $table->integer('id_alimento');
+            $table->integer('id_alimento')->nullable();
+            $table->integer('id_receita')->nullable();
             $table->integer('id_dieta')->nullable();
             $table->decimal('quantidade',8,2);
             $table->date('data_coleta');

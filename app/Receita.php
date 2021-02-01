@@ -10,9 +10,5 @@ class Receita extends Model
         'nome',
         'quantidadeTotal',
         'quantidadePorcao',
-        'totalEnergiaKcal',
-        'totalProteina',
-        'totalLipideos',
-        'totalCarboidrato',
       ];
 }

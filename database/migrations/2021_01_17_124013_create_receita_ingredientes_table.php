@@ -15,15 +15,37 @@ class CreateReceitaIngredientesTable extends Migration
     {
         Schema::create('receita_ingredientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string       ('medida', 100)->nullable();;
-            $table->integer      ('quantidade')->nullable();;
+            $table->string       ('medida', 100)->nullable();
+            $table->integer      ('quantidade')->nullable();
 
-            $table->integer      ('id_alimento')->nullable();;
-            $table->integer      ('id_receitas')->nullable();;
-            $table->integer      ('energiaKcal')->nullable();
+            $table->integer      ('id_alimento')->nullable();
+            $table->integer      ('id_receitas')->nullable();
+            $table->double       ('umidade', 8, 4)->nullable();
+            $table->double       ('energiaKcal', 8, 4)->nullable();
+            $table->double       ('energiaKj', 8, 4)->nullable();
             $table->double       ('proteina', 8, 4)->nullable();
             $table->double       ('lipideos', 8, 4)->nullable();
+            $table->double       ('colesterol', 8, 4)->nullable();
             $table->double       ('carboidrato', 8, 4)->nullable();
+            $table->double       ('fibraAlimentar', 8, 4)->nullable();
+            $table->double       ('cinzas', 8, 4)->nullable();
+            $table->double       ('calcio', 8, 4)->nullable();
+            $table->double       ('magnesio', 8, 4)->nullable();
+            $table->double       ('manganes', 8, 4)->nullable();
+            $table->double       ('fosforo', 8, 4)->nullable();
+            $table->double       ('ferro', 8, 4)->nullable();
+            $table->double       ('sodio', 8, 4)->nullable();
+            $table->double       ('potassio', 8, 4)->nullable();
+            $table->double       ('cobre', 8, 4)->nullable();
+            $table->double       ('zinco', 8, 4)->nullable();
+            $table->double       ('retinol', 8, 4)->nullable();
+            $table->double       ('re', 8, 4)->nullable();
+            $table->double       ('rae', 8, 4)->nullable();
+            $table->double       ('tiamina', 8, 4)->nullable();
+            $table->double       ('riboflavina', 8, 4)->nullable();
+            $table->double       ('piridoxina', 8, 4)->nullable();
+            $table->double       ('niacina', 8, 4)->nullable();
+            $table->double       ('vitaminaC', 8, 4)->nullable();
             $table->timestamps();
         });
     }

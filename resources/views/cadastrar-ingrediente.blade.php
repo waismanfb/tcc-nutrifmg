@@ -50,7 +50,7 @@
               <label class="">Medida</label>
               <label id="ingredienteMedida"></label>
               <div class="input-group ">
-                <input  name="medida" placeholder="Medida em gramas" class="form-control "  type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->medida;}else{echo old('medida');} ?>">
+                <input  name="medida" placeholder="Medida em gramas" required class="form-control "  type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->medida;}else{echo old('medida');} ?>">
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
               <label class="">Quantidade</label>
               <label id="ingredienteQuantidade"></label>
               <div class="input-group ">
-                <input  name="quantidade" placeholder="Quantidade" class="form-control "  type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->quantidade;}else{echo old('quantidade');} ?>">
+                <input  name="quantidade" placeholder="Quantidade" required class="form-control" min="1" type="number" step="any" value="<?php if(isset($ingrediente)){echo $ingrediente->quantidade;}else{echo old('quantidade');} ?>">
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="form-group">
               <label class="input-group mb-3"></label>
               <div class="col-md-2">
-                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">Cadastrar <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">Cadastrar Ingrediente<span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
               </div>
             </div>
           </div>
