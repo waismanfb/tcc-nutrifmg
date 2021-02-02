@@ -380,6 +380,7 @@ class DietaController extends Controller
                        ->where('dietas_pacientes.id_paciente', '=', $id)
                        ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
                        ->groupBy('receitas.id')
+                       ->groupBy('dietas.id')
                        ->get();
 
         return $receitas;
@@ -430,7 +431,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['energiaKcal'] = $totais['energiaKcal'] +
-            $receitas[$key]->energiaKcal * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->energiaKcal * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['energiaKj'] = 0;
@@ -440,7 +441,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['energiaKj'] = $totais['energiaKj'] +
-            $receitas[$key]->energiaKj * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->energiaKj * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['proteina'] = 0;
@@ -450,7 +451,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['proteina'] = $totais['proteina'] +
-            $receitas[$key]->proteina * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->proteina * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['lipideos'] = 0;
@@ -460,7 +461,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['lipideos'] = $totais['lipideos'] +
-            $receitas[$key]->lipideos * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->lipideos * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['colesterol'] = 0;
@@ -470,7 +471,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['colesterol'] = $totais['colesterol'] +
-            $receitas[$key]->colesterol * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->colesterol * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['carboidrato'] = 0;
@@ -480,7 +481,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['carboidrato'] = $totais['carboidrato'] +
-            $receitas[$key]->carboidrato * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->carboidrato * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['fibraAlimentar'] = 0;
@@ -490,7 +491,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['fibraAlimentar'] = $totais['fibraAlimentar'] +
-            $receitas[$key]->fibraAlimentar * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->fibraAlimentar * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['cinzas'] = 0;
@@ -500,7 +501,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['cinzas'] = $totais['cinzas'] +
-            $receitas[$key]->cinzas * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->cinzas * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['calcio'] = 0;
@@ -510,7 +511,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['calcio'] = $totais['calcio'] +
-            $receitas[$key]->calcio * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->calcio * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['magnesio'] = 0;
@@ -520,7 +521,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['magnesio'] = $totais['magnesio'] +
-            $receitas[$key]->magnesio * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->magnesio * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['manganes'] = 0;
@@ -530,7 +531,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['manganes'] = $totais['manganes'] +
-            $receitas[$key]->manganes * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->manganes * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['fosforo'] = 0;
@@ -540,7 +541,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['fosforo'] = $totais['fosforo'] +
-            $receitas[$key]->fosforo * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->fosforo * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['ferro'] = 0;
@@ -550,7 +551,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['ferro'] = $totais['ferro'] +
-            $receitas[$key]->ferro * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->ferro * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['sodio'] = 0;
@@ -560,7 +561,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['sodio'] = $totais['sodio'] +
-            $receitas[$key]->sodio * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->sodio * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['potassio'] = 0;
@@ -570,7 +571,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['potassio'] = $totais['potassio'] +
-            $receitas[$key]->potassio * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->potassio * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['cobre'] = 0;
@@ -580,7 +581,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['cobre'] = $totais['cobre'] +
-            $receitas[$key]->cobre * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->cobre * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['zinco'] = 0;
@@ -590,7 +591,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['zinco'] = $totais['zinco'] +
-            $receitas[$key]->zinco * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->zinco * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['retinol'] = 0;
@@ -600,7 +601,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['retinol'] = $totais['retinol'] +
-            $receitas[$key]->retinol * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->retinol * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['re'] = 0;
@@ -610,7 +611,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['re'] = $totais['re'] +
-            $receitas[$key]->re * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->re * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['rae'] = 0;
@@ -620,7 +621,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['rae'] = $totais['rae'] +
-            $receitas[$key]->rae * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->rae * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['tiamina'] = 0;
@@ -630,7 +631,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['tiamina'] = $totais['tiamina'] +
-            $receitas[$key]->tiamina * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->tiamina * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['riboflavina'] = 0;
@@ -640,7 +641,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['riboflavina'] = $totais['riboflavina'] +
-            $receitas[$key]->riboflavina * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->riboflavina * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['piridoxina'] = 0;
@@ -650,7 +651,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['piridoxina'] = $totais['piridoxina'] +
-            $receitas[$key]->piridoxina * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->piridoxina * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['niacina'] = 0;
@@ -660,7 +661,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['niacina'] = $totais['niacina'] +
-            $receitas[$key]->niacina * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->niacina * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         $totais['vitaminaC'] = 0;
@@ -670,7 +671,7 @@ class DietaController extends Controller
         }
         foreach ($receitas as $key => $value) {
             $totais['vitaminaC'] = $totais['vitaminaC'] +
-            $receitas[$key]->vitaminaC * $selecionados[$key]->dietas_pacientes_quantidades;
+            $receitas[$key]->vitaminaC * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         return $totais;
