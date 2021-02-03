@@ -205,24 +205,24 @@ class ReceitaIngredienteController extends Controller
     public function calculaAlimentoPorcao($quantidadeTotalAlimento,
     $quantidadeTotalReceita, $quantidadePorcao){
         $result = $quantidadeTotalAlimento * $quantidadePorcao / $quantidadeTotalReceita;
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculaComposicaoItens($qporcao,$composicaoTACO)
     {
         $result = $qporcao * $composicaoTACO / 100;
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculaValorEnergeticoKcal($quantidade, $conversao)
     {
         $result = $quantidade * $conversao;
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculoValorEnergeticoTotal($VECarboidratoKcal, $VEProteinaKcal, $VELipideosKcal)
     {
         $result = $VECarboidratoKcal + $VEProteinaKcal + $VELipideosKcal;
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 }

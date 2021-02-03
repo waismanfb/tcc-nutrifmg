@@ -135,6 +135,9 @@
     </div>
 </div><br><br>
 
-<a type="button" href="{{$url}}" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;">{{$botao}}</a>
+<a type="button" href="{{$url}}" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;">{{$botao}}</a><br><br>
+
+<a class="btn btn-success" href="{{Route('dieta.exportar' , $paciente->id)}}" role="button" style="margin-left:45%;"
+>&nbsp&nbsp&nbsp Exportar para Excel &nbsp&nbsp&nbsp</a><br>
 
 @endsection

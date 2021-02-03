@@ -111,6 +111,244 @@ class DietaController extends Controller
         ]);
     }
 
+    public function exportar($id)
+    {
+        $paciente = Paciente::find($id);
+        // Definimos o nome do arquivo que será exportado
+        $dataColeta = Carbon::today()->toDateString();
+        $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
+        $arquivo = $paciente->nome . '_' . $dataColeta . '.xls';
+
+        $selecionados = $this->retornaAlimentosSelecionados($id);
+        $receitas = $this->retornaReceitas($id);
+        $totais = $this->somaTotais($selecionados, $receitas);
+
+        // Criamos uma tabela HTML com o formato da planilha
+        $html = '';
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Total</tr>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '</tr>';
+
+            $html .= '<tr>';
+            $html .= '<td>'.$totais['quantidade'].'</td>';
+            $html .= '<td>'.$totais['energiaKcal'].'</td>';
+            $html .= '<td>'.$totais['energiaKj'].'</td>';
+            $html .= '<td>'.$totais['proteina'].'</td>';
+            $html .= '<td>'.$totais['lipideos'].'</td>';
+            $html .= '<td>'.$totais['colesterol'].'</td>';
+            $html .= '<td>'.$totais['carboidrato'].'</td>';
+            $html .= '<td>'.$totais['fibraAlimentar'].'</td>';
+            $html .= '<td>'.$totais['cinzas'].'</td>';
+            $html .= '<td>'.$totais['calcio'].'</td>';
+            $html .= '<td>'.$totais['magnesio'].'</td>';
+            $html .= '<td>'.$totais['manganes'].'</td>';
+            $html .= '<td>'.$totais['fosforo'].'</td>';
+            $html .= '<td>'.$totais['ferro'].'</td>';
+            $html .= '<td>'.$totais['sodio'].'</td>';
+            $html .= '<td>'.$totais['potassio'].'</td>';
+            $html .= '<td>'.$totais['cobre'].'</td>';
+            $html .= '<td>'.$totais['zinco'].'</td>';
+            $html .= '<td>'.$totais['retinol'].'</td>';
+            $html .= '<td>'.$totais['re'].'</td>';
+            $html .= '<td>'.$totais['rae'].'</td>';
+            $html .= '<td>'.$totais['tiamina'].'</td>';
+            $html .= '<td>'.$totais['riboflavina'].'</td>';
+            $html .= '<td>'.$totais['piridoxina'].'</td>';
+            $html .= '<td>'.$totais['niacina'].'</td>';
+            $html .= '<td>'.$totais['vitaminaC'].'</td>';
+            $html .= '</tr>';
+
+        // Criamos uma tabela HTML com o formato da planilha
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Alimentos Selecionados</tr>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td><b>Nome do Alimento<b></td>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '<td><b>Dieta Nome</b></td>';
+        $html .= '</tr>';
+
+        $selecionados = $this->selecionadosQuantidade($selecionados);
+
+        foreach ($selecionados as $selecionados) {
+            # code...
+            $html .= '<tr>';
+            $html .= '<td>'.$selecionados->alimentos_nome.'</td>';
+            $html .= '<td>'.$selecionados->quantidade.'</td>';
+            $html .= '<td>'.$selecionados->energiaKcal.'</td>';
+            $html .= '<td>'.$selecionados->energiaKj.'</td>';
+            $html .= '<td>'.$selecionados->proteina.'</td>';
+            $html .= '<td>'.$selecionados->lipideos.'</td>';
+            $html .= '<td>'.$selecionados->colesterol.'</td>';
+            $html .= '<td>'.$selecionados->carboidrato.'</td>';
+            $html .= '<td>'.$selecionados->fibraAlimentar.'</td>';
+            $html .= '<td>'.$selecionados->cinzas.'</td>';
+            $html .= '<td>'.$selecionados->calcio.'</td>';
+            $html .= '<td>'.$selecionados->magnesio.'</td>';
+            $html .= '<td>'.$selecionados->manganes.'</td>';
+            $html .= '<td>'.$selecionados->fosforo.'</td>';
+            $html .= '<td>'.$selecionados->ferro.'</td>';
+            $html .= '<td>'.$selecionados->sodio.'</td>';
+            $html .= '<td>'.$selecionados->potassio.'</td>';
+            $html .= '<td>'.$selecionados->cobre.'</td>';
+            $html .= '<td>'.$selecionados->zinco.'</td>';
+            $html .= '<td>'.$selecionados->retinol.'</td>';
+            $html .= '<td>'.$selecionados->re.'</td>';
+            $html .= '<td>'.$selecionados->rae.'</td>';
+            $html .= '<td>'.$selecionados->tiamina.'</td>';
+            $html .= '<td>'.$selecionados->riboflavina.'</td>';
+            $html .= '<td>'.$selecionados->piridoxina.'</td>';
+            $html .= '<td>'.$selecionados->niacina.'</td>';
+            $html .= '<td>'.$selecionados->vitaminaC.'</td>';
+            $html .= '<td>'.$selecionados->dietas_nome.'</td>';
+            $html .= '</tr>';
+            ;
+        }
+
+        // Criamos uma tabela HTML com o formato da planilha
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Receitas Selecionadas</tr>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td><b>Nome da Receita<b></td>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '<td><b>Nome da Dieta</b></td>';
+        $html .= '</tr>';
+
+        $receitas = $this->receitasQuantidade($receitas);
+
+        foreach ($receitas as $receitas) {
+            # code...
+            $html .= '<tr>';
+            $html .= '<td>'.$receitas->receitas_nome.'</td>';
+            $html .= '<td>'.$receitas->quantidade.'</td>';
+            $html .= '<td>'.$receitas->energiaKcal.'</td>';
+            $html .= '<td>'.$receitas->energiaKj.'</td>';
+            $html .= '<td>'.$receitas->proteina.'</td>';
+            $html .= '<td>'.$receitas->lipideos.'</td>';
+            $html .= '<td>'.$receitas->colesterol.'</td>';
+            $html .= '<td>'.$receitas->carboidrato.'</td>';
+            $html .= '<td>'.$receitas->fibraAlimentar.'</td>';
+            $html .= '<td>'.$receitas->cinzas.'</td>';
+            $html .= '<td>'.$receitas->calcio.'</td>';
+            $html .= '<td>'.$receitas->magnesio.'</td>';
+            $html .= '<td>'.$receitas->manganes.'</td>';
+            $html .= '<td>'.$receitas->fosforo.'</td>';
+            $html .= '<td>'.$receitas->ferro.'</td>';
+            $html .= '<td>'.$receitas->sodio.'</td>';
+            $html .= '<td>'.$receitas->potassio.'</td>';
+            $html .= '<td>'.$receitas->cobre.'</td>';
+            $html .= '<td>'.$receitas->zinco.'</td>';
+            $html .= '<td>'.$receitas->retinol.'</td>';
+            $html .= '<td>'.$receitas->re.'</td>';
+            $html .= '<td>'.$receitas->rae.'</td>';
+            $html .= '<td>'.$receitas->tiamina.'</td>';
+            $html .= '<td>'.$receitas->riboflavina.'</td>';
+            $html .= '<td>'.$receitas->piridoxina.'</td>';
+            $html .= '<td>'.$receitas->niacina.'</td>';
+            $html .= '<td>'.$receitas->vitaminaC.'</td>';
+            $html .= '<td>'.$receitas->nome.'</td>';
+            $html .= '</tr>';
+            ;
+        }
+
+        // Configurações header para forçar o download
+        header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+        header ("Cache-Control: no-cache, must-revalidate");
+        header ("Pragma: no-cache");
+        header ("Content-type: application/x-msexcel");
+        header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+        header ("Content-Description: PHP Generated Data" );
+        // Envia o conteúdo do arquivo
+        echo $html;
+        exit;
+    }
+
     public function inserir(Request $request)
     {
         $tipoDieta = $request['tipo_dieta'];
@@ -675,5 +913,215 @@ class DietaController extends Controller
         }
 
         return $totais;
+    }
+
+    public function selecionadosQuantidade($selecionados)
+    {
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->energiaKcal = $selecionados[$key]->energiaKcal * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->energiaKj = $selecionados[$key]->energiaKj * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->proteina = $selecionados[$key]->proteina * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->lipideos = $selecionados[$key]->lipideos * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->colesterol = $selecionados[$key]->colesterol * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->carboidrato = $selecionados[$key]->carboidrato * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->fibraAlimentar = $selecionados[$key]->fibraAlimentar * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->cizas = $selecionados[$key]->cinzas * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->calcio = $selecionados[$key]->calcio * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->magnesio = $selecionados[$key]->magnesio * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->fosforo = $selecionados[$key]->fosforo * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->ferro = $selecionados[$key]->ferro * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->sodio = $selecionados[$key]->sodio * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->potassio = $selecionados[$key]->potassio * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->cobre = $selecionados[$key]->cobre * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->zinco = $selecionados[$key]->zinco * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->retinol = $selecionados[$key]->retinol * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->re = $selecionados[$key]->re * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->rae = $selecionados[$key]->rae * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->tiamina = $selecionados[$key]->tiamina * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->riboflavina = $selecionados[$key]->riboflavina * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->piridoxina = $selecionados[$key]->piridoxina * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->niacina = $selecionados[$key]->niacina * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->vitaminaC = $selecionados[$key]->vitaminaC * $selecionados[$key]->quantidade;
+        }
+
+        return $selecionados;
+    }
+
+    public function receitasQuantidade($receitas)
+    {
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->quantidade = $receitas[$key]->quantidade  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->energiaKcal = $receitas[$key]->energiaKcal  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->energiaKj = $receitas[$key]->energiaKj  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->proteina = $receitas[$key]->proteina  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->lipideos = $receitas[$key]->lipideos  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->colesterol = $receitas[$key]->colesterol  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->carboidrato = $receitas[$key]->carboidrato  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->fibraAlimentar = $receitas[$key]->fibraAlimentar  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->cinzas = $receitas[$key]->cinzas  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->calcio = $receitas[$key]->calcio  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->magnesio = $receitas[$key]->magnesio  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->manganes = $receitas[$key]->manganes  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->fosforo = $receitas[$key]->fosforo  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->ferro = $receitas[$key]->ferro  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->sodio = $receitas[$key]->sodio  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->potassio = $receitas[$key]->potassio  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->cobre = $receitas[$key]->cobre  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->zinco = $receitas[$key]->zinco  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->retinol = $receitas[$key]->retinol  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->re = $receitas[$key]->re  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->rae = $receitas[$key]->rae  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->tiamina = $receitas[$key]->tiamina  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->riboflavina = $receitas[$key]->riboflavina  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->piridoxina = $receitas[$key]->piridoxina  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->niacina = $receitas[$key]->niacina  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->vitaminaC = $receitas[$key]->vitaminaC  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        return $receitas;
     }
 }
