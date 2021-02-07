@@ -20,10 +20,7 @@ class ReceitasController extends Controller
         $receita = Receita::find($id);
 
         $receita->nome = $request->nome;
-        $receita->totalEnergiaKcal = $request->totalEnergiaKcal;
-        $receita->totalProteina = $request->totalProteina;
-        $receita->totalLipideos = $request->totalLipideos;
-        $receita->totalCarboidrato = $request->totalCarboidrato;
+
         $resposta = $receita->save();
 
     }
@@ -79,7 +76,7 @@ class ReceitasController extends Controller
 
     public function pesquisarReceita(Request $request)
     {
-      $registros = Receita::where('nome', 'LIKE', '%'. $request->nome . '%')->get();
+      $registros = Receita::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10); ;
 
         return view('dados-receitas', [
           'registros' => $registros,
@@ -123,5 +120,12 @@ class ReceitasController extends Controller
         }
         return round((float)$result, 4);
     }
+
+
+    public function delete(Receita $id)
+    {
+      $id->delete();
+      return redirect()->route('receita.exibir')->with('success','Receita deletada com sucesso!');
+    }    
 
 }

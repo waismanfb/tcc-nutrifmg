@@ -9,6 +9,11 @@
       echo Route('receita.insert');
     } ?>" method="post"  id="contact_form" name="cadastro">
     @csrf
+    <div class="row">
+			<div class="col col-md-2">
+				<a href="{{Route('receita.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>		
+			</div>			
+		</div>      
     <fieldset>
 
       <!-- Form Name -->
@@ -59,51 +64,6 @@
               </div>
             </div>
           </div>
-          <!-- Energia (kcal)-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Energia (kcal)</label>
-              <label id="receitaEnergiaKcal"></label>
-              <div class="input-group ">
-                <input  name="energiaKcal" placeholder="Energia em kcal da Receita" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->totalEnergiaKcal;}else{echo old('totalEnergiaKcal');} ?>">
-              </div>
-            </div>
-          </div>
-          <!-- Proteina-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Proteina</label>
-              <label id="receitaProteina"></label>
-              <div class="input-group ">
-                <input  name="proteina" placeholder="Proteina da Receita" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->totalProteina;}else{echo old('totalProteina');} ?>">
-              </div>
-            </div>
-          </div>
-          <!-- Lipideos-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Lipídeos</label>
-              <label id="receitaLipideos"></label>
-              <div class="input-group ">
-                <input  name="lipideos" placeholder="Lipideos da Receita" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->totalLipideos;}else{echo old('totalLipideos');} ?>">
-              </div>
-            </div>
-          </div>
-
-          <!-- Carboidrato-->
-          <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Carboidrato</label>
-              <label id="receitaCarboidrato"></label>
-              <div class="input-group ">
-                <input  name="carboidrato" placeholder="Carboidrato da Receita" class="form-control "  type="number" step="any" value="<?php if(isset($receita)){echo $receita->totalCarboidrato;}else{echo old('totalCarboidrato');} ?>">
-              </div>
-            </div>
-          </div>
-
-
-
-
 
             <!-- Button -->
             <div class="form-group">

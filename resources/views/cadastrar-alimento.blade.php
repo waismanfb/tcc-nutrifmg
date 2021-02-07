@@ -3,21 +3,23 @@
 @section('content')
 
 <body class="bg-light">
+  
   <div class=" bg-white container">
+    
     @include('layouts.alerts')
     <form class="border form-horizontal" action="<?php if(isset($alimento)){echo Route('alimento.update', $alimento->id);}else {
       echo Route('alimento.insert');
     } ?>" method="post"  id="contact_form" name="cadastro">
     @csrf
+
+    <div class="row">
+			<div class="col col-md-2">
+				<a href="{{Route('alimento.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>		
+			</div>			
+		</div>    
     <fieldset>
-
-      <!-- Form Name -->
-      <br><br>
-
-
       <legend><center><h2><b>Cadastro de Alimentos</b></h2></center></legend>
 
-      <!-- se tiver qualquer erro -->
       @if($errors->any())
         <div class="alert alert-danger">
           @foreach($errors->all() as $erro)
@@ -45,7 +47,7 @@
               <label class="">Grupo</label>
               <label id="alimentoGrupo"></label>
               <div class="input-group ">
-                <input  name="grupo" placeholder="grupo do Alimento" class="form-control "  type="text" value="<?php if(isset($alimento)){echo $alimento->grupo;}else{echo old('grupo');} ?>">
+                <input  name="grupo" placeholder="Grupo do Alimento" class="form-control "  type="text" value="<?php if(isset($alimento)){echo $alimento->grupo;}else{echo old('grupo');} ?>">
               </div>
             </div>
           </div>

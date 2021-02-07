@@ -49,7 +49,7 @@
             </td>
 
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
+					<a class="btn btn-sm" href="{{Route('receita.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
             </td>
 
 

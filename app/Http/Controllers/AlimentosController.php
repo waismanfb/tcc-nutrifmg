@@ -75,7 +75,8 @@ class AlimentosController extends Controller
 
     public function editarAlimento($id){
         $alimento = Alimento::find($id);
-        return view('cadastrar-alimento', compact('alimento'))->with('success','Alimento deletado com sucesso!');
+        return view('cadastrar-alimento', compact('alimento'));
+        
       }
 
     public function delete(Alimento $id)
@@ -86,7 +87,7 @@ class AlimentosController extends Controller
 
     public function pesquisarAlimento(Request $request)
     {
-      $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->paginate(10);  
+      $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10);  
 
         return view('dados-alimentos', [
           'registros' => $registros,

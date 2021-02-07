@@ -29,12 +29,10 @@
 			<tr>
 				<th onclick="sortTable(0)">Nome</th>
 				<th onclick="sortTable(1)">Grupo</th>
-				<th>Energia (Kcal)</th>
-				<th>Proteinas</th>
-				<th>Carboidrato</th>
-            <th>Lipideos</th>
+				<th>Fonte</th>
 				<th>Editar info. Alimento</th>
 				<th>Excluir Alimento</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -42,10 +40,8 @@
 			<tr>
 				<td>{{$registro->nome}}</td>
 				<td>{{$registro->grupo}}</td>
-				<td>{{$registro->energiaKcal}}</td>
-				<td>{{$registro->proteina}}</td>
-				<td>{{$registro->carboidrato}}</td>
-				<td>{{$registro->lipideos}}</td>
+				<td>{{$registro->fonte}}</td>
+
 
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" style="background-color: #ffc107">Editar</a>
