@@ -32,10 +32,10 @@ class ReceitasController extends Controller
             if ($resposta)
             return redirect()
                       ->route('receita.cadastrar')
-                      ->with('success', 'Os Dados do alimento foram cadastrados!');
+                      ->with('success', 'Os Dados da Receita foram cadastrados!');
             return redirect()
                       ->back()
-                      ->with('error', 'Falha ao cadastrar os dados do alimento!');
+                      ->with('error', 'Falha ao cadastrar os dados da receita!');
 
         }catch (Exception $e) {
 

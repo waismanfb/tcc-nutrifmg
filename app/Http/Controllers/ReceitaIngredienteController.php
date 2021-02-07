@@ -197,9 +197,9 @@ class ReceitaIngredienteController extends Controller
 
         $resposta = ReceitaIngrediente::create($dados);
 
-        // return redirect()
-        //           ->route('ingrediente.cadastrar', [$dados['id_receitas']])
-        //           ->with('success', 'Os Dados do ingrediente foram cadastrados!');
+         return redirect()
+                   ->route('ingrediente.cadastrar', [$dados['id_receitas']])
+                   ->with('success', 'Os Dados do ingrediente foram cadastrados!');
     }
 
     public function calculaAlimentoPorcao($quantidadeTotalAlimento,
