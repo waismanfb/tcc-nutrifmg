@@ -27,12 +27,17 @@
   <a href="{{Route('recordatorioMasNutri')}}">R24h - NUTRIÇÃO MASCULINO</a><br>
   <a href="{{Route('recordatorioFemNutri')}}">R24h - NUTRIÇÃO FEMININO</a><br>
 
-  <a href="{{Route('ImcIdadeAgroMas')}}">IMC por idade - AGROPECUÁRIA MASCULINO</a><br>
-  <a href="{{Route('ImcIdadeAgroFem')}}">IMC por idade - AGROPECUÁRIA FEMININO</a><br>
+  <a href="{{Route('recordatorioAgroMas')}}">R24h - AGROPECUÁRIA MASCULINO</a><br>
+  <a href="{{Route('recordatorioAgroFem')}}">R24h - AGROPECUÁRIA FEMININO</a><br>
 
-  <a href="{{Route('ImcIdadeInfoMas')}}">IMC por idade - INFORMÁTICA MASCULINO</a><br>
-  <a href="{{Route('ImcIdadeInfoFem')}}">IMC por idade - INFORMÁTICA FEMININO</a><br>
+  <a href="{{Route('recordatorioInfoMas')}}">R24h - INFORMÁTICA MASCULINO</a><br>
+  <a href="{{Route('recordatorioInfoFem')}}">R24h - INFORMÁTICA FEMININO</a><br>
 </div>
+
+<br><br>
+
+<a style="margin-left:45%;" type="button" href="{{url('home')}}" class="btn btn-primary btn-lg"
+name="button">Voltar</a><br><br>
 
 
 @endsection
