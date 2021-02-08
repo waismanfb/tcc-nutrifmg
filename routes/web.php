@@ -88,13 +88,13 @@ Route::get('/recordatorio/recordatorioMasculino', 'GruposController@recordatorio
 Route::get('/recordatorio/recordatorioFeminino', 'GruposController@recordatorioFem')->name('recordatorioFem')->middleware('auth');
 
 Route::get('/recordatorio/recordatorioMasculino/nutri', 'GruposController@recordatorioMasNutri')->name('recordatorioMasNutri')->middleware('auth');
-Route::get('/recordatorio/recordatorioMasculino/nutri', 'GruposController@recordatorioFemNutri')->name('recordatorioFemNutri')->middleware('auth');
+Route::get('/recordatorio/recordatorioFeminino/nutri', 'GruposController@recordatorioFemNutri')->name('recordatorioFemNutri')->middleware('auth');
 
-Route::get('/classificacoes/imcIdadeMasculino/agro', 'GraficosController@ImcIdadeAgroMas')->name('ImcIdadeAgroMas')->middleware('auth');
-Route::get('/classificacoes/imcIdadeFeminino/agro', 'GraficosController@ImcIdadeAgroFem')->name('ImcIdadeAgroFem')->middleware('auth');
+Route::get('/recordatorio/recordatorioMasculino/agro', 'GruposController@recordatorioAgroMas')->name('recordatorioAgroMas')->middleware('auth');
+Route::get('/recordatorio/recordatorioFeminino/agro', 'GruposController@recordatorioAgroFem')->name('recordatorioAgroFem')->middleware('auth');
 
-Route::get('/classificacoes/imcIdadeMasculino/info', 'GraficosController@ImcIdadeInfoMas')->name('ImcIdadeInfoMas')->middleware('auth');
-Route::get('/classificacoes/imcIdadeFeminino/info', 'GraficosController@ImcIdadeInfoFem')->name('ImcIdadeInfoFem')->middleware('auth');
+Route::get('/recordatorio/recordatorioMasculino/info', 'GruposController@recordatorioInfoMas')->name('recordatorioInfoMas')->middleware('auth');
+Route::get('/recordatorio/recordatorioFeminino/info', 'GruposController@recordatorioInfoFem')->name('recordatorioInfoFem')->middleware('auth');
 
 Route::get('/recordatorio/recordatorioMasculino/{grupo}', 'GruposController@exportar')->name('grupos.exportar')->middleware('auth');
 

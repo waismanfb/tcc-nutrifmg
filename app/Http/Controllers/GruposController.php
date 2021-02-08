@@ -35,78 +35,236 @@ class GruposController extends Controller
 
     public function recordatorioMas()
     {
-        $quantidadeHomens   = $this->contarPacientes(1);
-        $selecionados       = $this->retornaAlimentosSelecionados(1);
-        $receitas           = $this->retornaReceitas(1);
-        $totais             = $this->somaTotais($selecionados, $receitas);
-        $media              = $this->media($totais, $quantidadeHomens);
-        $grupo              = 'Masculino';
+        $quantidadeRegistros   = $this->contarPacientes(1, 0); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(1, 0);
+        $receitas              = $this->retornaReceitas(1, 0);
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Masculino';
 
-        return view('grupos', [
-            'media' => $media,
-            'quantidade' => $quantidadeHomens,
-            'grupo' => $grupo
-        ]);
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
     }
 
     public function recordatorioFem()
     {
-        $quantidadeHomens   = $this->contarPacientes(2);
-        $selecionados       = $this->retornaAlimentosSelecionados(2);
-        $receitas           = $this->retornaReceitas(2);
-        $totais             = $this->somaTotais($selecionados, $receitas);
-        $media              = $this->media($totais, $quantidadeHomens);
-        $grupo              = 'Feminino';
+        $quantidadeRegistros   = $this->contarPacientes(2, 0); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(2, 0);
+        $receitas              = $this->retornaReceitas(2, 0);
 
-        return view('grupos', [
-            'media' => $media,
-            'quantidade' => $quantidadeHomens,
-            'grupo' => $grupo
-        ]);
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+                $grupo                 = 'Feminino';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
     }
 
     public function recordatorioMasNutri()
     {
-        $quantidadeHomens   = $this->contarPacientes(1);
-        $selecionados       = $this->retornaAlimentosSelecionados(1);
-        $receitas           = $this->retornaReceitas(1);
-        $totais             = $this->somaTotais($selecionados, $receitas);
-        $media              = $this->media($totais, $quantidadeHomens);
-        $grupo              = 'Masculino';
+        $quantidadeRegistros   = $this->contarPacientes(1, 1); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(1, 1);
+        $receitas              = $this->retornaReceitas(1, 1);
 
-        return view('grupos', [
-            'media' => $media,
-            'quantidade' => $quantidadeHomens,
-            'grupo' => $grupo
-        ]);
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Masculino Nutrição';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
     }
 
-    public function contarPacientes($sexoId)
+    public function recordatorioFemNutri()
     {
-        return count(Paciente::where('sexo', '=', $sexoId)->get());
+        $quantidadeRegistros   = $this->contarPacientes(2, 1); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(2, 1);
+        $receitas              = $this->retornaReceitas(2, 1);
+
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Feminino Nutrição';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
+    }
+
+    public function recordatorioAgroMas()
+    {
+        $quantidadeRegistros   = $this->contarPacientes(1, 2); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(1, 2);
+        $receitas              = $this->retornaReceitas(1, 2);
+
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Masculino Agropecuária';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
+    }
+
+    public function recordatorioAgroFem()
+    {
+        $quantidadeRegistros   = $this->contarPacientes(2, 2); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(2, 2);
+        $receitas              = $this->retornaReceitas(2, 2);
+
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Feminino Agropecuária';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
+    }
+
+    public function recordatorioInfoMas()
+    {
+        $quantidadeRegistros   = $this->contarPacientes(1, 3); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(1, 3);
+        $receitas              = $this->retornaReceitas(1, 3);
+
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Informática Masculino';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
+    }
+
+    public function recordatorioInfoFem()
+    {
+        $quantidadeRegistros   = $this->contarPacientes(2, 3); //parametros(sexo, curso)
+        $selecionados          = $this->retornaAlimentosSelecionados(2, 3);
+        $receitas              = $this->retornaReceitas(2, 3);
+
+        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+            $media                 = $this->media($totais, $quantidadeRegistros);
+            $grupo                 = 'Informática Feminino';
+
+            return view('grupos', [
+                'media' => $media,
+                'quantidade' => $quantidadeRegistros,
+                'grupo' => $grupo
+            ]);
+        }
+        else{
+            return view('error');
+        }
+    }
+
+    public function contarPacientes($sexoId, $curso)
+    {
+        if ($curso == 0) {
+            return count(Paciente::where('sexo', '=', $sexoId)->get());
+        }
+        else {
+            return count(Paciente::where('sexo', '=', $sexoId)
+            ->where('curso', '=', $curso)->get());
+        }
+
     }
 
     public function exportar($grupo)
     {
         if ($grupo == 'Masculino') {
             $sexoId = 1;
+            $curso  = 0;
         }
         else if ($grupo == 'Feminino') {
             $sexoId = 2;
+            $curso  = 0;
         }
-
-        echo $grupo;
+        else if ($grupo == 'Masculino Nutrição') {
+            $sexoId = 1;
+            $curso  = 1;
+        }
+        else if ($grupo == 'Feminino Nutrição') {
+            $sexoId = 2;
+            $curso  = 1;
+        }
+        else if ($grupo == 'Masculino Agropecuária') {
+            $sexoId = 1;
+            $curso  = 2;
+        }
+        else if ($grupo == 'Feminino Agropecuária') {
+            $sexoId = 2;
+            $curso  = 2;
+        }
+        else if ($grupo == 'Informática Masculino') {
+            $sexoId = 1;
+            $curso  = 3;
+        }
+        else if ($grupo == 'Informática Feminino') {
+            $sexoId = 2;
+            $curso  = 3;
+        }
 
         // Definimos o nome do arquivo que será exportado
         $dataColeta = Carbon::today()->toDateString();
         $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
         $arquivo = $grupo . '_' . $dataColeta . '.xls';
 
-        $quantidadeHomens   = count(Paciente::where('sexo', '=', $sexoId)->get());
-        $selecionados       = $this->retornaAlimentosSelecionados($sexoId);
-        $receitas           = $this->retornaReceitas($sexoId);
-        $totais             = $this->somaTotais($selecionados, $receitas);
-        $media              = $this->media($totais, $quantidadeHomens);
+        $quantidadeRegistros   = $this->contarPacientes($sexoId, $curso);
+        $selecionados          = $this->retornaAlimentosSelecionados($sexoId, $curso);
+        $receitas              = $this->retornaReceitas($sexoId, $curso);
+        $totais                = $this->somaTotais($selecionados, $receitas);
+        $media                 = $this->media($totais, $quantidadeRegistros);
 
         // Criamos uma tabela HTML com o formato da planilha
         $html = '';
@@ -189,50 +347,95 @@ class GruposController extends Controller
     //Funções que retornam consultas ao banco de dados
 
     //Função para retornar os alimentos selecionados
-    public function retornaAlimentosSelecionados($sexo)
+    public function retornaAlimentosSelecionados($sexo, $curso)
     {
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
-                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
-                       ->where('pacientes.sexo', '=', $sexo)
-                       ->get();
+        if ($curso == 0) {
+            $selecionados = DB::table('alimentos')
+                           ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                           ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                           ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                           ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
+                            'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
+                           ->where('pacientes.sexo', '=', $sexo)
+                           ->get();
+        }
+        else {
+            $selecionados = DB::table('alimentos')
+                           ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
+                           ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                           ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                           ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
+                            'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
+                           ->where('pacientes.sexo', '=', $sexo)
+                           ->where('pacientes.curso', '=', $curso)
+                           ->get();
+        }
 
         return $selecionados;
     }
 
     //Função para retornar as receitas selecionados
-    public function retornaReceitas($sexo)
+    public function retornaReceitas($sexo, $curso)
     {
-        $receitas = DB::table('receitas')
-                       ->join('dietas_pacientes', 'receitas.id', '=', 'dietas_pacientes.id_receita')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->join('receita_ingredientes', 'receita_ingredientes.id_receitas', '=', 'receitas.id')
-                       ->select('receitas.nome as receitas_nome', 'receitas.*' ,
-                        'dietas_pacientes.quantidade as dietas_pacientes_quantidade',
-                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*',
-                        'receita_ingredientes.*',
-                        DB::raw('sum(energiaKcal) as energiaKcal'),
-                        DB::raw('sum(energiaKj) as energiaKj'),
-                        DB::raw('sum(proteina) as proteina'),
-                        DB::raw('sum(lipideos) as lipideos'),
-                        DB::raw('sum(colesterol) as colesterol'),
-                        DB::raw('sum(carboidrato) as carboidrato'),
-                        DB::raw('sum(fibraAlimentar) as fibraAlimentar'),
-                        DB::raw('sum(cinzas) as cinzas'),
-                        DB::raw('sum(calcio) as calcio'),
-                        DB::raw('sum(magnesio) as magnesio'),
-                        DB::raw('sum(manganes) as manganes'),
-                        DB::raw('sum(fosforo) as fosforo'),
-                        DB::raw('sum(ferro) as ferro'),
-                        DB::raw('sum(sodio) as sodio'))
-                       ->where('pacientes.sexo', '=', $sexo)
-                       ->groupBy('receitas.id')
-                       ->groupBy('dietas.id')
-                       ->get();
+        if ($curso == 0) {
+            $receitas = DB::table('receitas')
+                           ->join('dietas_pacientes', 'receitas.id', '=', 'dietas_pacientes.id_receita')
+                           ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                           ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                           ->join('receita_ingredientes', 'receita_ingredientes.id_receitas', '=', 'receitas.id')
+                           ->select('receitas.nome as receitas_nome', 'receitas.*' ,
+                            'dietas_pacientes.quantidade as dietas_pacientes_quantidade',
+                            'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*',
+                            'receita_ingredientes.*',
+                            DB::raw('sum(energiaKcal) as energiaKcal'),
+                            DB::raw('sum(energiaKj) as energiaKj'),
+                            DB::raw('sum(proteina) as proteina'),
+                            DB::raw('sum(lipideos) as lipideos'),
+                            DB::raw('sum(colesterol) as colesterol'),
+                            DB::raw('sum(carboidrato) as carboidrato'),
+                            DB::raw('sum(fibraAlimentar) as fibraAlimentar'),
+                            DB::raw('sum(cinzas) as cinzas'),
+                            DB::raw('sum(calcio) as calcio'),
+                            DB::raw('sum(magnesio) as magnesio'),
+                            DB::raw('sum(manganes) as manganes'),
+                            DB::raw('sum(fosforo) as fosforo'),
+                            DB::raw('sum(ferro) as ferro'),
+                            DB::raw('sum(sodio) as sodio'))
+                           ->where('pacientes.sexo', '=', $sexo)
+                           ->groupBy('receitas.id')
+                           ->groupBy('dietas.id')
+                           ->get();
+        }
+        else {
+            $receitas = DB::table('receitas')
+                           ->join('dietas_pacientes', 'receitas.id', '=', 'dietas_pacientes.id_receita')
+                           ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
+                           ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
+                           ->join('receita_ingredientes', 'receita_ingredientes.id_receitas', '=', 'receitas.id')
+                           ->select('receitas.nome as receitas_nome', 'receitas.*' ,
+                            'dietas_pacientes.quantidade as dietas_pacientes_quantidade',
+                            'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*',
+                            'receita_ingredientes.*',
+                            DB::raw('sum(energiaKcal) as energiaKcal'),
+                            DB::raw('sum(energiaKj) as energiaKj'),
+                            DB::raw('sum(proteina) as proteina'),
+                            DB::raw('sum(lipideos) as lipideos'),
+                            DB::raw('sum(colesterol) as colesterol'),
+                            DB::raw('sum(carboidrato) as carboidrato'),
+                            DB::raw('sum(fibraAlimentar) as fibraAlimentar'),
+                            DB::raw('sum(cinzas) as cinzas'),
+                            DB::raw('sum(calcio) as calcio'),
+                            DB::raw('sum(magnesio) as magnesio'),
+                            DB::raw('sum(manganes) as manganes'),
+                            DB::raw('sum(fosforo) as fosforo'),
+                            DB::raw('sum(ferro) as ferro'),
+                            DB::raw('sum(sodio) as sodio'))
+                           ->where('pacientes.sexo', '=', $sexo)
+                           ->where('pacientes.curso', '=', $curso)
+                           ->groupBy('receitas.id')
+                           ->groupBy('dietas.id')
+                           ->get();
+        }
 
         return $receitas;
     }
@@ -494,34 +697,34 @@ class GruposController extends Controller
         return $totais;
     }
 
-    public function media($totais, $quantidadeHomens)
+    public function media($totais, $quantidadeRegistros)
     {
-        $totais['quantidade']       = $totais['quantidade']     / $quantidadeHomens;
-        $totais['energiaKcal']      = $totais['energiaKcal']    / $quantidadeHomens;
-        $totais['energiaKj']        = $totais['energiaKj']      / $quantidadeHomens;
-        $totais['proteina']         = $totais['proteina']       / $quantidadeHomens;
-        $totais['lipideos']         = $totais['lipideos']       / $quantidadeHomens;
-        $totais['colesterol']       = $totais['colesterol']     / $quantidadeHomens;
-        $totais['carboidrato']      = $totais['carboidrato']    / $quantidadeHomens;
-        $totais['fibraAlimentar']   = $totais['fibraAlimentar'] / $quantidadeHomens;
-        $totais['cinzas']           = $totais['cinzas']         / $quantidadeHomens;
-        $totais['calcio']           = $totais['calcio']         / $quantidadeHomens;
-        $totais['magnesio']         = $totais['magnesio']       / $quantidadeHomens;
-        $totais['manganes']         = $totais['manganes']       / $quantidadeHomens;
-        $totais['fosforo']          = $totais['fosforo']        / $quantidadeHomens;
-        $totais['ferro']            = $totais['ferro']          / $quantidadeHomens;
-        $totais['sodio']            = $totais['sodio']          / $quantidadeHomens;
-        $totais['potassio']         = $totais['potassio']       / $quantidadeHomens;
-        $totais['cobre']            = $totais['cobre']          / $quantidadeHomens;
-        $totais['zinco']            = $totais['zinco']          / $quantidadeHomens;
-        $totais['retinol']          = $totais['retinol']        / $quantidadeHomens;
-        $totais['re']               = $totais['re']             / $quantidadeHomens;
-        $totais['rae']              = $totais['rae']            / $quantidadeHomens;
-        $totais['tiamina']          = $totais['tiamina']        / $quantidadeHomens;
-        $totais['riboflavina']      = $totais['riboflavina']    / $quantidadeHomens;
-        $totais['piridoxina']       = $totais['piridoxina']     / $quantidadeHomens;
-        $totais['niacina']          = $totais['niacina']        / $quantidadeHomens;
-        $totais['vitaminaC']        = $totais['vitaminaC']      / $quantidadeHomens;
+        $totais['quantidade']       = $totais['quantidade']     / $quantidadeRegistros;
+        $totais['energiaKcal']      = $totais['energiaKcal']    / $quantidadeRegistros;
+        $totais['energiaKj']        = $totais['energiaKj']      / $quantidadeRegistros;
+        $totais['proteina']         = $totais['proteina']       / $quantidadeRegistros;
+        $totais['lipideos']         = $totais['lipideos']       / $quantidadeRegistros;
+        $totais['colesterol']       = $totais['colesterol']     / $quantidadeRegistros;
+        $totais['carboidrato']      = $totais['carboidrato']    / $quantidadeRegistros;
+        $totais['fibraAlimentar']   = $totais['fibraAlimentar'] / $quantidadeRegistros;
+        $totais['cinzas']           = $totais['cinzas']         / $quantidadeRegistros;
+        $totais['calcio']           = $totais['calcio']         / $quantidadeRegistros;
+        $totais['magnesio']         = $totais['magnesio']       / $quantidadeRegistros;
+        $totais['manganes']         = $totais['manganes']       / $quantidadeRegistros;
+        $totais['fosforo']          = $totais['fosforo']        / $quantidadeRegistros;
+        $totais['ferro']            = $totais['ferro']          / $quantidadeRegistros;
+        $totais['sodio']            = $totais['sodio']          / $quantidadeRegistros;
+        $totais['potassio']         = $totais['potassio']       / $quantidadeRegistros;
+        $totais['cobre']            = $totais['cobre']          / $quantidadeRegistros;
+        $totais['zinco']            = $totais['zinco']          / $quantidadeRegistros;
+        $totais['retinol']          = $totais['retinol']        / $quantidadeRegistros;
+        $totais['re']               = $totais['re']             / $quantidadeRegistros;
+        $totais['rae']              = $totais['rae']            / $quantidadeRegistros;
+        $totais['tiamina']          = $totais['tiamina']        / $quantidadeRegistros;
+        $totais['riboflavina']      = $totais['riboflavina']    / $quantidadeRegistros;
+        $totais['piridoxina']       = $totais['piridoxina']     / $quantidadeRegistros;
+        $totais['niacina']          = $totais['niacina']        / $quantidadeRegistros;
+        $totais['vitaminaC']        = $totais['vitaminaC']      / $quantidadeRegistros;
 
 
         return $totais;
@@ -735,5 +938,13 @@ class GruposController extends Controller
         }
 
         return $receitas;
+    }
+
+    public function erroPage()
+    {
+        echo "<br><br><br><h1 align='center'> Nenhum Registro Encontrado!! </h1>";
+        echo "<h1><a type='button' href='javascript:history.back()'
+        class='btn btn-primary btn-lg' name='button' style='margin-left:47%;text-decoration:none;'>
+        Voltar</a></h1><br><br>";
     }
 }
