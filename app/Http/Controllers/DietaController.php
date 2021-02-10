@@ -69,27 +69,33 @@ class DietaController extends Controller
         }
         else
         {
-            $selecionados = $this->retornaAlimentosSelecionados($id);
-
-            $receitas = $this->retornaReceitas($id);
-
+            $dataColeta = Carbon::today()->toDateString();
+            $selecionados = $this->retornaAlimentosSelecionados($id, $dataColeta, 0);
+            $receitas = $this->retornaReceitas($id, $dataColeta, 0);
             $totais = $this->somaTotais($selecionados, $receitas);
 
-            $dataColeta = Carbon::today()->toDateString();
-            $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
+            $dataColetaFormatada = Carbon::parse($dataColeta)->format('d/m/Y');
+
+            $tela = 1; //tela apresentada no final do recordatorio 24 horas
+
             $botao = 'Concluir Avaliação';
             $url = '/home';
+
+            $dieta = 0;
 
             $titulo = 'Lista de Alimentos Selecionados';
 
             return view('lista_dieta', [
                 'totais' => $totais,
                 'dataColeta' => $dataColeta,
+                'dataColetaFormatada' => $dataColetaFormatada,
+                'tela' => $tela,
                 'titulo' => $titulo,
                 'receitas' => $receitas,
                 'paciente' => $paciente,
                 'selecionados' => $selecionados,
                 'botao' => $botao,
+                'dieta' => $dieta,
                 'url' => $url,
                 'titulo' => $titulo
             ]);
@@ -111,7 +117,7 @@ class DietaController extends Controller
         ]);
     }
 
-    public function exportar($id)
+    public function exportar($id, $data, $tela, $dieta)
     {
         $paciente = Paciente::find($id);
         // Definimos o nome do arquivo que será exportado
@@ -119,8 +125,15 @@ class DietaController extends Controller
         $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
         $arquivo = $paciente->nome . '_' . $dataColeta . '.xls';
 
-        $selecionados = $this->retornaAlimentosSelecionados($id);
-        $receitas = $this->retornaReceitas($id);
+        if ($tela == 1 || $tela == 2) {
+            $selecionados = $this->retornaAlimentosSelecionados($id, $data, 0);
+            $receitas = $this->retornaReceitas($id, $data, 0);
+        }
+        if ($tela == 3) {
+            $selecionados = $this->retornaAlimentosSelecionados($id, $data, $dieta);
+            $receitas = $this->retornaReceitas($id, $data, $dieta);
+        }
+
         $totais = $this->somaTotais($selecionados, $receitas);
 
         // Criamos uma tabela HTML com o formato da planilha
@@ -497,21 +510,35 @@ class DietaController extends Controller
 
     public function recordatorioUnico($id, $data)
     {
-        $selecionados = $this->retornaAlimentosSelecionados($id);
+        $selecionados = $this->retornaAlimentosSelecionados($id, $data, 0);
+        $receitas = $this->retornaReceitas($id, $data, 0);
+        $totais = $this->somaTotais($selecionados, $receitas);
 
         $paciente = Paciente::find($id);
 
-        $dataColeta = Carbon::parse($data)->format('d/m/Y');
+        $dataColeta = $data;
+
+
+        $tela = 2; //tela de recordatorio 24 de pacientes por data
+
+        $dataColetaFormatada = Carbon::parse($data)->format('d/m/Y');
         $botao = 'Voltar';
         $url = "javascript:history.back()";
 
         $titulo = 'Lista de Alimentos Selecionados';
 
+        $dieta = 0;
+
         return view('lista_dieta', [
             'dataColeta' => $dataColeta,
+            'dataColetaFormatada' => $dataColetaFormatada,
             'titulo' => $titulo,
+            'tela' => $tela,
             'paciente' => $paciente,
             'selecionados' => $selecionados,
+            'receitas' => $receitas,
+            'totais' => $totais,
+            'dieta' => $dieta,
             'botao' => $botao,
             'url' => $url
         ]);
@@ -542,57 +569,72 @@ class DietaController extends Controller
 
     public function dietaPacienteUnicoController($id, $data, $dieta)
     {
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
-                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->where('dietas_pacientes.id_dieta', '=', $dieta)
-                       ->whereDate('data_coleta', '=', $data)
-                       ->get();
+        $selecionados = $this->retornaAlimentosSelecionados($id, $data, $dieta);
+        $receitas = $this->retornaReceitas($id, $data, $dieta);
+        $totais = $this->somaTotais($selecionados, $receitas);
 
         $paciente = Paciente::find($id);
 
-        $dataColeta = Carbon::parse($data)->format('d/m/Y');
+        $dataColeta = $data;
+        $dataColetaFormatada = Carbon::parse($data)->format('d/m/Y');
         $botao = 'Voltar';
         $url = "javascript:history.back()";
 
+        $tela = 3; //tela onde mostra a dieta do paciente de acordo com o tipo
+
         $titulo = 'Lista de Alimentos Selecionados';
 
-        return view('lista_dieta', [
-            'dataColeta' => $dataColeta,
-            'titulo' => $titulo,
-            'paciente' => $paciente,
-            'selecionados' => $selecionados,
-            'botao' => $botao,
-            'url' => $url
-        ]);
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
+            $totais                = $this->somaTotais($selecionados, $receitas);
+
+            return view('lista_dieta', [
+                'dataColeta' => $dataColeta,
+                'dataColetaFormatada' => $dataColetaFormatada,
+                'tela' => $tela,
+                'titulo' => $titulo,
+                'paciente' => $paciente,
+                'selecionados' => $selecionados,
+                'receitas' => $receitas,
+                'totais' => $totais,
+                'dieta' => $dieta,
+                'botao' => $botao,
+                'url' => $url
+            ]);
+        }
+        else{
+            return view('error');
+        }
     }
 
     //Funções que retornam consultas ao banco de dados
 
     //Função para retornar os alimentos selecionados
-    public function retornaAlimentosSelecionados($id)
+    public function retornaAlimentosSelecionados($id, $data, $dieta)
     {
-        $selecionados = DB::table('alimentos')
+        $query = DB::table('alimentos')
                        ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
                        ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
                        ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
                        ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
                         'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->get();
+                       ->where('dietas_pacientes.id_paciente', '=', $id);
+          if ($data != 0) {
+              $query = $query->whereDate('data_coleta', '=', $data);
+          }
+
+          if ($dieta != 0) {
+              $query = $query->where('dietas.id', '=', $dieta);
+          }
+
+          $selecionados = $query->get();
 
         return $selecionados;
     }
 
     //Função para retornar as receitas selecionados
-    public function retornaReceitas($id)
+    public function retornaReceitas($id, $data, $dieta)
     {
-        $receitas = DB::table('receitas')
+        $query = DB::table('receitas')
                        ->join('dietas_pacientes', 'receitas.id', '=', 'dietas_pacientes.id_receita')
                        ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
                        ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
@@ -615,11 +657,18 @@ class DietaController extends Controller
                         DB::raw('sum(fosforo) as fosforo'),
                         DB::raw('sum(ferro) as ferro'),
                         DB::raw('sum(sodio) as sodio'))
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->groupBy('receitas.id')
-                       ->groupBy('dietas.id')
-                       ->get();
+                       ->where('dietas_pacientes.id_paciente', '=', $id);
+
+        if ($data != 0) {
+            $query = $query->whereDate('data_coleta', '=', $data);
+        }
+        if ($dieta != 0) {
+            $query = $query->where('dietas.id', '=', $dieta);
+        }
+
+                       $query = $query->groupBy('receitas.id');
+                       $query = $query->groupBy('dietas.id');
+        $receitas =    $query->get();
 
         return $receitas;
     }

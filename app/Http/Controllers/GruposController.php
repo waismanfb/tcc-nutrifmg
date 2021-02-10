@@ -38,7 +38,7 @@ class GruposController extends Controller
         $quantidadeRegistros   = $this->contarPacientes(1, 0); //parametros(sexo, curso)
         $selecionados          = $this->retornaAlimentosSelecionados(1, 0);
         $receitas              = $this->retornaReceitas(1, 0);
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Masculino';
@@ -60,7 +60,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(2, 0);
         $receitas              = $this->retornaReceitas(2, 0);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
                 $grupo                 = 'Feminino';
@@ -82,7 +82,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(1, 1);
         $receitas              = $this->retornaReceitas(1, 1);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Masculino Nutrição';
@@ -104,7 +104,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(2, 1);
         $receitas              = $this->retornaReceitas(2, 1);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Feminino Nutrição';
@@ -126,7 +126,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(1, 2);
         $receitas              = $this->retornaReceitas(1, 2);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Masculino Agropecuária';
@@ -148,7 +148,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(2, 2);
         $receitas              = $this->retornaReceitas(2, 2);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Feminino Agropecuária';
@@ -170,7 +170,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(1, 3);
         $receitas              = $this->retornaReceitas(1, 3);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Informática Masculino';
@@ -192,7 +192,7 @@ class GruposController extends Controller
         $selecionados          = $this->retornaAlimentosSelecionados(2, 3);
         $receitas              = $this->retornaReceitas(2, 3);
 
-        if (!$selecionados->isEmpty() or !$selecionados->isEmpty()) {
+        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
             $totais                = $this->somaTotais($selecionados, $receitas);
             $media                 = $this->media($totais, $quantidadeRegistros);
             $grupo                 = 'Informática Feminino';

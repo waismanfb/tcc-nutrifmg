@@ -6,7 +6,7 @@
 
 <h1 class="text-center">{{$titulo}}</h1>
 <h4 class="text-center">Paciente: {{$paciente->nome}}</h4>
-<h4 class="text-center">Data da coleta: {{$dataColeta}}</h4><br>
+<h4 class="text-center">Data da coleta: {{$dataColetaFormatada}}</h4><br>
 
 @include('layouts.alerts')
 
@@ -137,7 +137,8 @@
 
 <a type="button" href="{{$url}}" class="btn btn-primary btn-lg" name="button" style="margin-left:45%;">{{$botao}}</a><br><br>
 
-<a class="btn btn-success" href="{{Route('dieta.exportar' , $paciente->id)}}" role="button" style="margin-left:45%;"
+<a class="btn btn-success" href="{{Route('dieta.exportar' , [$paciente->id, $dataColeta, $tela, $dieta])}}"
+    role="button" style="margin-left:45%;"
 >&nbsp&nbsp&nbsp Exportar para Excel &nbsp&nbsp&nbsp</a><br>
 
 @endsection

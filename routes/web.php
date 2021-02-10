@@ -110,4 +110,4 @@ Route::get('/dietaIndividual', 'DietaController@dietaIndividual')->name('dieta.i
 Route::get('/escolherDieta/{id}/{data}', 'DietaController@escolherDieta')->name('dieta.escolherDieta')->middleware('auth');
 Route::get('/dietaPacienteUnico/{id}/{data}', 'DietaController@dietaUnico')->name('dieta.dietaPacienteUnico')->middleware('auth');
 Route::get('/dietaPacienteUnicoController/{id}/{data}/{dieta}', 'DietaController@dietaPacienteUnicoController')->name('dieta.dietaPacienteUnicoController')->middleware('auth');
-Route::get('/atualizadieta/{id}', 'DietaController@exportar')->name('dieta.exportar')->middleware('auth');
+Route::get('/atualizadieta/{id}/{data}/{tela}/{dieta}', 'DietaController@exportar')->name('dieta.exportar')->middleware('auth');
