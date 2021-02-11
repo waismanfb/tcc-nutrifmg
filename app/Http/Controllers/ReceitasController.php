@@ -91,7 +91,7 @@ class ReceitasController extends Controller
         foreach ($ingredientes as $key => $value) {
             $result = $result + $ingredientes[$key]['energiaKcal'];
         }
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculoTotalProteina($ingredientes)
@@ -100,7 +100,7 @@ class ReceitasController extends Controller
         foreach ($ingredientes as $key => $value) {
             $result = $result + $ingredientes[$key]['proteina'];
         }
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculoTotalLipideos($ingredientes)
@@ -109,7 +109,7 @@ class ReceitasController extends Controller
         foreach ($ingredientes as $key => $value) {
             $result = $result + $ingredientes[$key]['lipideos'];
         }
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
     public function calculoTotalCarboidratos($ingredientes)
@@ -118,7 +118,7 @@ class ReceitasController extends Controller
         foreach ($ingredientes as $key => $value) {
             $result = $result + $ingredientes[$key]['carboidrato'];
         }
-        return round((float)$result, 4);
+        return round((float)$result, 2);
     }
 
 
@@ -126,6 +126,6 @@ class ReceitasController extends Controller
     {
       $id->delete();
       return redirect()->route('receita.exibir')->with('success','Receita deletada com sucesso!');
-    }    
+    }
 
 }
