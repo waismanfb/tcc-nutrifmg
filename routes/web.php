@@ -36,6 +36,8 @@ Route::post('/inserir-ingrediente', 'ReceitaIngredienteController@insert')->name
 Route::match(array('GET', 'POST'), '/pesquisar-alimento', 'AlimentosController@pesquisarAlimento')->name('alimento.pesquisado')->middleware('auth');
 Route::post('/pesquisar-receita', 'ReceitasController@pesquisarReceita')->name('receita.pesquisada')->middleware('auth');
 Route::get('/deletar-receita/{id}', 'ReceitasController@delete')->name('receita.delete')->middleware('auth');
+Route::get('/editar-receita/{id}', 'ReceitasController@editar')->name('receita.editar')->middleware('auth');
+Route::post('/update-receita/{id}', 'ReceitasController@update')->name('receita.update')->middleware('auth');
 
 
 

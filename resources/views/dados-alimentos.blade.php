@@ -1,6 +1,8 @@
 @extends('layouts.menu_topo')
 @section('content')
 
+<script type="text/javascript" src="{{ URL::asset('js/alimentos.js') }}"></script>
+
 <div class="container">
 
   @include('layouts.alerts')
@@ -15,8 +17,8 @@
 				<button type="submit" class="form-control btn btn-primary">Pesquisar</button>
 			</div>
 			<div class="col col-md-2">
-				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir Novo Alimento</a>		
-			</div>			
+				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir Novo Alimento</a>
+			</div>
 		</div>
 	</form>
 </div>
@@ -32,7 +34,7 @@
 				<th>Fonte</th>
 				<th>Editar info. Alimento</th>
 				<th>Excluir Alimento</th>
-				
+
 			</tr>
 		</thead>
 		<tbody>
@@ -46,11 +48,14 @@
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" style="background-color: #ffc107">Editar</a>
         </td>
-				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.delete', $registro->id)}}" role="button" style="background-color: #ed7f64">Excluir</a>
-        </td>
-                
-				
+				    <td align="center">
+                        <a class="btn btn-sm" id="btn-confirmation" href="#"
+                            role="button" style="background-color: #ed7f64">Excluir</a>
+    					<a class="btn btn-sm" hidden id="btn-excluir-alimento" href="{{Route('alimento.delete', $registro->id)}}"
+                            role="button" style="background-color: #ed7f64">Excluir</a>
+                    </td>
+
+
 
 			</tr>
 			@endforeach

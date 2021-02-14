@@ -20,8 +20,18 @@ class ReceitasController extends Controller
         $receita = Receita::find($id);
 
         $receita->nome = $request->nome;
+        $receita->quantidadeTotal = $request->quantidadeTotal;
+        $receita->quantidadePorcao = $request->quantidadePorcao;
 
         $resposta = $receita->save();
+
+        if ($resposta)
+        return redirect()
+                  ->route('receita.editar', $id)
+                  ->with('success', 'Os Dados da Receita foram cadastrados!');
+        return redirect()
+                  ->back()
+                  ->with('error', 'Falha ao cadastrar os dados da receita!');
 
     }
 
@@ -46,6 +56,12 @@ class ReceitasController extends Controller
     {
       $registros = Receita::orderBy('id','DESC')->paginate(10);
       return view('dados-receitas', compact('registros'));
+    }
+
+    public function editar($id)
+    {
+        $receita = Receita::find($id);
+        return view('cadastrar-receita', compact('receita'));
     }
 
     public function exibirById($id)
@@ -76,7 +92,9 @@ class ReceitasController extends Controller
 
     public function pesquisarReceita(Request $request)
     {
-      $registros = Receita::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10); ;
+      $registros = Receita::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10);
+
+      $registros->appends(['nome' => $request->nome]);
 
         return view('dados-receitas', [
           'registros' => $registros,

@@ -97,6 +97,8 @@ class AlimentosController extends Controller
     {
       $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10);
 
+      $registros->appends(['nome' => $request->nome]);
+
         return view('dados-alimentos', [
           'registros' => $registros,
           'nome' => $request->nome

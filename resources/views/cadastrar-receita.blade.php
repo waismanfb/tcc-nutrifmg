@@ -11,16 +11,18 @@
     @csrf
     <div class="row">
 			<div class="col col-md-2">
-				<a href="{{Route('receita.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>		
-			</div>			
-		</div>      
+				<a href="{{Route('receita.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>
+			</div>
+		</div>
     <fieldset>
 
       <!-- Form Name -->
       <br><br>
 
 
-      <legend><center><h2><b>Cadastro de Receitas</b></h2></center></legend>
+      <legend><center><h2><b><?php if(!isset($receita)){echo "Cadastro de Receitas";}else {
+        echo "Editar Receita";
+      } ?></b></h2></center></legend>
 
       <!-- se tiver qualquer erro -->
       @if($errors->any())
@@ -69,7 +71,11 @@
             <div class="form-group">
               <label class="input-group mb-3"></label>
               <div class="col-md-2">
-                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">Cadastrar <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">
+                    <?php if(!isset($receita)){echo "Cadastrar";}else {
+                      echo "Editar";
+                    } ?>
+                    <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
               </div>
             </div>
           </div>
@@ -81,45 +87,5 @@
   </div>
 </div><!-- /.container -->
 
-<!-- <script type="text/javascript">
-
-
-
-function validaRenda(renda)
-{
-  const valor = renda.value;
-  if(!isNaN(parseFloat(valor)) && isFinite(valor)){
-    return;
-  }
-  else{
-    document.getElementById('msgRenda').style.display = "block";
-    document.getElementById('msgRenda').innerHTML = "Favor digitar somente números (00.00)";
-    document.getElementById('msgRenda').style.color = "red";
-    setTimeout(function(){
-      document.getElementById('msgRenda').style.display = "none";
-    },2000);
-    renda.focus();
-    return;
-  }
-}
-function validaNome(nome)
-{
-  const valor = nome.value;
-  if(!isNaN(parseFloat(valor)) && isFinite(valor)){
-    document.getElementById('msgNome').style.display = "block";
-    document.getElementById('msgNome').innerHTML = "Favor digitar apenas letras";
-    document.getElementById('msgNome').style.color = "red";
-    setTimeout(function(){
-      document.getElementById('msgNome').style.display = "none";
-    },2000);
-    nome.focus();
-    return;
-  }
-  else{
-    return;
-  }
-}
-
-</script>-->
 </body>
 @endsection
