@@ -3,9 +3,9 @@
 @section('content')
 
 <body class="bg-light">
-  
+
   <div class=" bg-white container">
-    
+
     @include('layouts.alerts')
     <form class="border form-horizontal" action="<?php if(isset($alimento)){echo Route('alimento.update', $alimento->id);}else {
       echo Route('alimento.insert');
@@ -14,11 +14,13 @@
 
     <div class="row">
 			<div class="col col-md-2">
-				<a href="{{Route('alimento.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>		
-			</div>			
-		</div>    
+				<a href="{{Route('alimento.exibir')}}" class="btn btn-primary" style="margin: 10px">Voltar</a>
+			</div>
+		</div>
     <fieldset>
-      <legend><center><h2><b>Cadastro de Alimentos</b></h2></center></legend>
+      <legend><center><h2><b><?php if(!isset($alimento)){echo 'Cadastro de Alimentos';}else {
+        echo 'Edição de Alimentos';
+      } ?></b></h2></center></legend>
 
       @if($errors->any())
         <div class="alert alert-danger">
@@ -62,7 +64,7 @@
                 <input  name="fonte" placeholder="Fonte do Alimento" class="form-control "  type="text" value="<?php if(isset($alimento)){echo $alimento->fonte;}else{echo old('fonte');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
 
           <!-- umidade-->
           <div class="form-group">
@@ -138,8 +140,8 @@
                 <input  name="carboidrato" placeholder="Carboidrato do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->carboidrato;}else{echo old('carboidrato');} ?>">
               </div>
             </div>
-          </div>       
-          
+          </div>
+
           <!-- Fibra Alimentar-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -149,7 +151,7 @@
                 <input  name="fibraAlimentar" placeholder="Fibra Alimentar do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->fibraAlimentar;}else{echo old('fibraAlimentar');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Cinzas-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -159,7 +161,7 @@
                 <input  name="cinzas" placeholder="Cinzas do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->cinzas;}else{echo old('cinzas');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Calcio-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -169,7 +171,7 @@
                 <input  name="calcio" placeholder="Calcio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->calcio;}else{echo old('calcio');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Magnesio-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -179,7 +181,7 @@
                 <input  name="magnesio" placeholder="Magnésio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->magnesio;}else{echo old('magnesio');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Manganes-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -189,7 +191,7 @@
                 <input  name="manganes" placeholder="Manganes do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->manganes;}else{echo old('manganes');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Fósforo-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -199,7 +201,7 @@
                 <input  name="fosforo" placeholder="Fósforo do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->fosforo;}else{echo old('fosforo');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Ferro-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -209,7 +211,7 @@
                 <input  name="ferro" placeholder="Ferro do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->ferro;}else{echo old('ferro');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Sódio-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -219,7 +221,7 @@
                 <input  name="sodio" placeholder="Sodio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->sodio;}else{echo old('sodio');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Potássio-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -229,7 +231,7 @@
                 <input  name="potassio" placeholder="Potássio do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->potassio;}else{echo old('potassio');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Cobre-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -239,7 +241,7 @@
                 <input  name="cobre" placeholder="Cobre do Alimento" class="form-control"  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->cobre;}else{echo old('cobre');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Zinco-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -249,7 +251,7 @@
                 <input  name="zinco" placeholder="Zinco do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->zinco;}else{echo old('zinco');} ?>">
               </div>
             </div>
-          </div>          
+          </div>
           <!-- Retinol -->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -259,7 +261,7 @@
                 <input  name="retinol" placeholder="Retinol do Alimento" class="form-control "  type="text" step="any" value="<?php if(isset($alimento)){echo $alimento->retinol;}else{echo old('retinol');} ?>">
               </div>
             </div>
-          </div>  
+          </div>
           <!-- RE-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -269,7 +271,7 @@
                 <input  name="re" placeholder="RE do Alimento" class="form-control "  type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->re;}else{echo old('re');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- RAE-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -279,7 +281,7 @@
                 <input  name="rae" placeholder="RAE do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->rae;}else{echo old('rae');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- Tiamina-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -289,7 +291,7 @@
                 <input  name="tiamina" placeholder="Tiamina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->tiamina;}else{echo old('tiamina');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- Riboflavina-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -299,7 +301,7 @@
                 <input  name="riboflavina" placeholder="Riboflavina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->riboflavina;}else{echo old('riboflavina');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- Piridoxina-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -309,7 +311,7 @@
                 <input  name="piridoxina" placeholder="Piridoxina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->piridoxina;}else{echo old('piridoxina');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- niacina-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -319,7 +321,7 @@
                 <input  name="niacina" placeholder="Niacina do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->niacina;}else{echo old('niacina');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
           <!-- VitaminaC-->
           <div class="form-group">
             <div class="input-group mb-3 ">
@@ -329,18 +331,22 @@
                 <input  name="vitaminaC" placeholder="VitaminaC do Alimento" class="form-control" type="number" step="any" value="<?php if(isset($alimento)){echo $alimento->vitaminaC;}else{echo old('vitaminaC');} ?>">
               </div>
             </div>
-          </div>                    
+          </div>
 
-         
 
-         
-         
+
+
+
 
             <!-- Button -->
             <div class="form-group">
               <label class="input-group mb-3"></label>
               <div class="col-md-2">
-                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">Cadastrar <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">
+                    <?php if(!isset($alimento)){echo 'Cadastrar';}else {
+                      echo 'Editar';
+                    } ?>
+                    <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
               </div>
             </div>
           </div>

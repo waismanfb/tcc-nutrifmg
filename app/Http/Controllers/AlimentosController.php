@@ -11,7 +11,7 @@ class AlimentosController extends Controller
 
     public function cadastrarAlimento(){
         return view('cadastrar-alimento');
-    }    
+    }
 
     public function update(Request $request, $id){
 
@@ -47,12 +47,20 @@ class AlimentosController extends Controller
         $alimento->niacina = $request->niacina;
         $alimento->vitaminaC = $request->vitaminaC;
 
-        $resposta = $alimento->save();        
-    }  
+        $resposta = $alimento->save();
+
+        if ($resposta)
+        return redirect()
+                  ->route('alimento.editarAlimento', $id)
+                  ->with('success', 'Os Dados do alimento foram editados com Sucesso!');
+        return redirect()
+                  ->back()
+                  ->with('error', 'Falha ao editar os dados do alimento!');
+    }
 
     public function insert(Request $valores){
         try {
-            $dados = $valores->All(); 
+            $dados = $valores->All();
             $resposta = Alimento::create($dados);
             if ($resposta)
             return redirect()
@@ -61,7 +69,7 @@ class AlimentosController extends Controller
             return redirect()
                       ->back()
                       ->with('error', 'Falha ao cadastrar os dados do alimento!');
-    
+
         }catch (Exception $e) {
 
         }
@@ -69,14 +77,14 @@ class AlimentosController extends Controller
 
     public function exibir()
     {
-      $registros = Alimento::orderBy('id','DESC')->paginate(10);  
-      return view('dados-alimentos', compact('registros'));  
+      $registros = Alimento::orderBy('id','DESC')->paginate(10);
+      return view('dados-alimentos', compact('registros'));
     }
 
     public function editarAlimento($id){
         $alimento = Alimento::find($id);
         return view('cadastrar-alimento', compact('alimento'));
-        
+
       }
 
     public function delete(Alimento $id)
@@ -87,16 +95,14 @@ class AlimentosController extends Controller
 
     public function pesquisarAlimento(Request $request)
     {
-      $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10);  
+      $registros = Alimento::where('nome', 'LIKE', '%'. $request->nome . '%')->orderBy('id','DESC')->paginate(10);
 
         return view('dados-alimentos', [
           'registros' => $registros,
           'nome' => $request->nome
-        ]); 
+        ]);
 
-    }    
-
-
+    }
 
 
 
@@ -115,9 +121,9 @@ class AlimentosController extends Controller
 
 
 
-          
-    
+
+
+
+
 
 }
-
-
