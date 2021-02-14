@@ -5,13 +5,7 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#id_alimento').selectize();
-    });
-</script>
-
-<script type="text/javascript">
-    $(function(){
-        $('#id_receita').selectize();
+        $('#id_alimento_receita').selectize();
     });
 </script>
 
@@ -20,8 +14,10 @@
 
 @include('layouts.alerts')
 
-<div class="container-fluid">
+<div class="container-fluid" align="center">
     <div class="row">
+        <div class="col-lg-3">
+        </div>
         <div class="col-lg-6">
             <h4 class="text-center">Digite os alimentos para inserir na dieta:</h4><br>
             <form method="post" action="{{Route('dieta.inserir')}}" id="inserirDieta">
@@ -29,10 +25,10 @@
                 <div class="row">
                     <div class="col-12" align="center">
                         <h6>Escolha o Alimento:</h6>
-                        <select id="id_alimento" required name="id_alimento">
+                        <select id="id_alimento_receita" required name="id_alimento_receita">
                             <option value="">Escolha um Alimento:</option>
-                            @foreach($alimentos as $alimentos)
-                                <option value="{{$alimentos->id}}">{{$alimentos->nome}}</option>
+                            @foreach($alimentosReceitas as $alimentosReceitas)
+                                <option value="{{$alimentosReceitas->id}}">{{$alimentosReceitas->nome}}</option>
                             @endforeach
                         </select>
                         <h6>Digite a quantidade:</h6>
@@ -46,29 +42,7 @@
                 </div>
             </form><br>
         </div>
-        <div class="col-lg-6">
-            <h4 class="text-center">Digite as receitas para inserir na dieta:</h4><br>
-            <form method="post" action="{{Route('dieta.inserir')}}">
-                @csrf
-                <div class="row">
-                    <div class="col-12" align="center">
-                        <h6>Escolha a Receita:</h6>
-                        <select id="id_receita" required name="id_receita">
-                            <option value="">Escolha uma Receita:</option>
-                            @foreach($receitas as $receitas)
-                                <option value="{{$receitas->id}}">{{$receitas->nome}}</option>
-                            @endforeach
-                        </select>
-                        <h6>Digite a quantidade:</h6>
-                        <input type="number" name="quantidade" min="1" value="" required><br><br><br>
-                        <input type="text" name="id_paciente" value="{{$paciente->id}}" hidden>
-                        <input type="text" name="tipo_dieta" value="{{$tipo}}" hidden>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="form-control btn btn-warning">Inserir Receita</button>
-                    </div>
-                </div>
-            </form><br>
+        <div class="col-lg-3">
         </div>
     </div>
 </div><br><br>

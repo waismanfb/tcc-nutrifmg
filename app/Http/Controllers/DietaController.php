@@ -107,9 +107,10 @@ class DietaController extends Controller
 
         $selecionados = $this->retornaSelecionados($id, $tipoId);
 
+        $alimentosReceitas = $alimentos->concat($receitas);
+
         return view('dieta', [
-            'alimentos' => $alimentos,
-            'receitas' => $receitas,
+            'alimentosReceitas' => $alimentosReceitas,
             'paciente' => $paciente,
             'selecionados' => $selecionados,
             'tipo' => $tipoDieta,
@@ -364,47 +365,56 @@ class DietaController extends Controller
 
     public function inserir(Request $request)
     {
+        $dados = $request->All();
+        $dados['data_coleta'] = Carbon::now();
         $tipoDieta = $request['tipo_dieta'];
+
+        if ($request['id_alimento_receita'] > 1000) {
+            $dados['id_receita'] = $request['id_alimento_receita'];
+        }
+        else {
+            $dados['id_alimento'] = $request['id_alimento_receita'];
+        }
 
         if ($tipoDieta == 'cafeDaManha')
         {
             $tipoId = 1;
-            $request['id_dieta'] = 1;
+            $dados['id_dieta'] = 1;
             $titulo = 'Café Da Manhã';
         }
         else if ($tipoDieta == 'lancheDaManha')
         {
             $tipoId = 2;
-            $request['id_dieta'] = 2;
+            $dados['id_dieta'] = 2;
             $titulo = 'Lanche Da Manhã';
         }
         else if ($tipoDieta == 'almoco')
         {
             $tipoId = 3;
-            $request['id_dieta'] = 3;
+            $dados['id_dieta'] = 3;
             $titulo = 'Almoco';
         }
         else if ($tipoDieta == 'lancheDaTarde')
         {
             $tipoId = 4;
-            $request['id_dieta'] = 4;
+            $dados['id_dieta'] = 4;
             $titulo = 'Lanche Da Tarde';
         }
         else if ($tipoDieta == 'jantar')
         {
             $tipoId = 5;
-            $request['id_dieta'] = 5;
+            $dados['id_dieta'] = 5;
             $titulo = 'Jantar';
         }
         else if ($tipoDieta == 'lancheDaNoite')
         {
             $tipoId = 6;
-            $request['id_dieta'] = 6;
+            $dados['id_dieta'] = 6;
             $titulo = 'Lanche Da Noite';
         }
 
-        $dados = $request->All();
-        $dados['data_coleta'] = Carbon::now();
+        echo $request['id_dieta'];
+
         $resposta = DietasPaciente::create($dados);
         $alimentos = Alimento::all();
         $receitas = Receita::all();
@@ -430,11 +440,13 @@ class DietaController extends Controller
         if ($tipo == 'cafeDaManha')
         {
             $tipoId = 1;
+            $request['id_dieta'] = 1;
             $titulo = 'Café Da Manhã';
         }
         else if ($tipo == 'lancheDaManha')
         {
             $tipoId = 2;
+            $request['id_dieta'] = 2;
             $titulo = 'Lanche da Manha';
         }
         else if ($tipo == 'almoco')
@@ -471,14 +483,15 @@ class DietaController extends Controller
         $selecionados = $this->retornaSelecionados($id, $tipoId);
         $receitasSelecionadas = $this->retornaReceitasSelecionadas($id, $tipoId);
 
+        $alimentosReceitas = $alimentos->concat($receitas);
+
         return view('dieta', [
-            'alimentos' => $alimentos,
-            'receitas' => $receitas,
-            'paciente' => $paciente,
-            'selecionados' => $selecionados,
-            'receitasSelecionadas' => $receitasSelecionadas,
-            'tipo' => $tipoDieta,
-            'titulo' => $titulo
+            'alimentosReceitas'     => $alimentosReceitas,
+            'paciente'              => $paciente,
+            'selecionados'          => $selecionados,
+            'receitasSelecionadas'  => $receitasSelecionadas,
+            'tipo'                  => $tipoDieta,
+            'titulo'                => $titulo
         ]);
     }
 
