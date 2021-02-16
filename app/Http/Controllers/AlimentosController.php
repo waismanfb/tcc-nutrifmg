@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Alimento;
+use DB;
 
 class AlimentosController extends Controller
 {
@@ -87,10 +88,10 @@ class AlimentosController extends Controller
 
       }
 
-    public function delete(Alimento $id)
+    public function delete()
     {
-      $id->delete();
-      return redirect()->route('alimento.exibir')->with('success','Alimento deletado com sucesso!');
+        $alimento_id = $_POST['alimento_id'];
+        DB::table('alimentos')->where('id', '=', $alimento_id)->delete();
     }
 
     public function pesquisarAlimento(Request $request)

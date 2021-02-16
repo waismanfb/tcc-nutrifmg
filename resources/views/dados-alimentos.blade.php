@@ -34,7 +34,6 @@
 				<th>Fonte</th>
 				<th>Editar info. Alimento</th>
 				<th>Excluir Alimento</th>
-
 			</tr>
 		</thead>
 		<tbody>
@@ -43,34 +42,24 @@
 				<td>{{$registro->nome}}</td>
 				<td>{{$registro->grupo}}</td>
 				<td>{{$registro->fonte}}</td>
-
-
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" style="background-color: #ffc107">Editar</a>
-        </td>
-				    <td align="center">
-                        <a class="btn btn-sm" id="btn-confirmation" href="#"
-                            role="button" style="background-color: #ed7f64">Excluir</a>
-    					<a class="btn btn-sm" hidden id="btn-excluir-alimento" href="{{Route('alimento.delete', $registro->id)}}"
-                            role="button" style="background-color: #ed7f64">Excluir</a>
-                    </td>
-
-
-
-			</tr>
+                </td>
+				<td align="center">
+                    <button type="button" class="btn btn-sm btn-excluir-alimento"
+                        name="button" style="background-color: #e0372b"
+                        alimento_id='{{$registro->id}}'
+                        >Excluir
+                    </button>
+                </td>
+			  </tr>
 			@endforeach
-
 		</tbody>
 	</table>
 	<div>
 		{{ $registros->links() }}
 	</div>
-
-
 </div>
-
-
-
 <script type="text/javascript">
 
 	function sortTable(n) {
@@ -131,6 +120,8 @@ if (shouldSwitch) {
 
 </script>
 
+<!-- linha necessaria para passagem do token csrf para o ajax -->
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
 
 @endsection

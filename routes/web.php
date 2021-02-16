@@ -18,7 +18,7 @@ Route::get('/', function () {
 //Alimentos
 Route::get('/cadastrar-alimento','AlimentosController@cadastrarAlimento' )->name('alimento.cadastrar')->middleware('auth');
 Route::post('/inserir-alimento', 'AlimentosController@insert')->name('alimento.insert')->middleware('auth');
-Route::get('/deletar-alimento/{id}', 'AlimentosController@delete')->name('alimento.delete')->middleware('auth');
+Route::post('/deletar-alimento', 'AlimentosController@delete')->name('alimento.delete')->middleware('auth');
 Route::get('/dados-alimentos', 'AlimentosController@exibir')->name('alimento.exibir')->middleware('auth');
 
 Route::get('/editar-alimento/{id}', 'AlimentosController@editarAlimento')->name('alimento.editarAlimento')->middleware('auth');

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     //Função para deletar alimento Selecionado
-    $("#btn-confirmation").on("click", function() {
+    $(".btn-excluir-alimento").on("click", function() {
         Swal.fire({
             title: 'Excluir esse item?',
             text: 'Você não pode desfazer essa ação',
@@ -12,7 +12,16 @@ $(document).ready(function() {
             cancelButtonText: 'Não'
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#btn-excluir-alimento")[0].click();
+                var alimento_id = $(this).attr('alimento_id');
+                $.ajax({
+        			type: "post",
+        			url: "/deletar-alimento",
+        			data: {
+                        "_token": $('#token').val(),
+                         "alimento_id": alimento_id
+                      },
+        		});
+                window.location.reload();
             }
         })
         return false;
