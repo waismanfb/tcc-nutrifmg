@@ -21,6 +21,14 @@ class ReceitaIngredienteController extends Controller
         ]);
     }
 
+    public function delete()
+    {
+        $receita_id      = $_POST['receita_id'];
+        $id  = $_POST['id'];
+        DB::table('receita_ingredientes')->where('id', '=', $id)
+        ->where('id_receitas', '=', $receita_id)->delete();
+    }
+
     public function update(Request $request, $id){
 
         $ingrediente = ReceitaIngrediente::find($id);

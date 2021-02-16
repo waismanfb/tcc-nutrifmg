@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{ URL::asset('js/alimentos_receitas.js') }}"></script>
+
 
 <div class="card-group ">
   <div>
@@ -42,15 +44,23 @@
       @foreach($alimentos as $alimentos)
 			<tr align="center">
 				<td>{{$alimentos->nome}}</td>
-        <td>{{$alimentos->medida}}</td>
-        <td>{{$alimentos->quantidade}}</td>
-        <td><a class="btn btn-sm"  role="button" style="background-color: #ed7f64">Excluir</a></td>
-
+                <td>{{$alimentos->medida}}</td>
+                <td>{{$alimentos->quantidade}}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-excluir-ingrediente-receitas"
+                        name="button" style="background-color: #e0372b"
+                        receita_id='{{$idReceita}}'
+                        id='{{$alimentos->id}}'
+                        >Excluir
+                    </button>
+                </td>
 			</tr>
 		@endforeach
   </tbody>
 </table>
 </div>
 </div>
+
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
 @endsection

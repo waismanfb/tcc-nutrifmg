@@ -28,6 +28,7 @@
 				<th onclick="sortTable(1)">Curso</th>
 				<th onclick="sortTable(2)">Data Nascimento</th>
 				<th>Avaliação Individual</th>
+                <th>Inserir Dieta</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,10 +50,16 @@
 				<td align="center">
 					<a class="btn btn-sm" href="{{Route('dieta.recordatorio', $registros->id)}}" role="button" style="background-color: #4fc266">&nbspVer Avaliação&nbsp</a>
 				</td>
+                <td align="center">
+					<a class="btn btn-sm" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" style="background-color: #ffc107">&nbspInserir Dieta&nbsp</a>
+				</td>
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
 </div>
+
+<div align='center'><a href='/home'><button type='button' class='btn btn-lg btn-primary'
+name='button'>Voltar</button></a></div>
 
 @endsection

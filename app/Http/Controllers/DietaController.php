@@ -517,8 +517,9 @@ class DietaController extends Controller
     public function dietaIndividual()
     {
         $registros = Paciente::all();
+        $tipo = 'cafeDaManha';
 
-        return view('dietaIndividual', compact('registros'));
+        return view('dietaIndividual', compact('registros', 'tipo'));
     }
 
     public function recordatorioUnico($id, $data)

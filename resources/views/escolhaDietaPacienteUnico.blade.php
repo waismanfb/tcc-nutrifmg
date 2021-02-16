@@ -76,4 +76,7 @@
 <br>
 
 </div>
+
+<div align='center'><a href='javascript:history.back()'><button type='button' class='btn btn-lg btn-primary'
+name='button'>Voltar</button></a></div>
 @endsection

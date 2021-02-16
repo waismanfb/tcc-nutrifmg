@@ -52,11 +52,11 @@
                     $registro->id)}}" role="button" style="background-color: #007bff; color: white">Editar</a>
                 </td>
 				<td align="center">
-                    <a id="btn-excluir-receitas" class="btn btn-sm" href="#" role="button"
-                     style="background-color: #ed7f64">Excluir</a>
-					<a id="btn-excluir-receitas-confirmation" hidden class="btn btn-sm"
-                     href="{{Route('receita.delete', $registro->id)}}"
-                         role="button" style="background-color: #ed7f64">Excluir</a>
+                    <button type="button" class="btn btn-sm btn-excluir-receitas"
+                        name="button" style="background-color: #e0372b"
+                        receita_id='{{$registro->id}}'
+                        >Excluir
+                    </button>
                 </td>
 			</tr>
 			@endforeach
@@ -67,6 +67,9 @@
 	</div>
 </div>
 
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
+<div align='center'><a href='/home'><button type='button' class='btn btn-lg btn-primary'
+name='button'>Voltar</button></a></div>
 
 @endsection

@@ -6,10 +6,10 @@
 <div class="card-group ">
   <div>
     <div class="container">
-      <div class="card" style="width: 18rem; background-color:<?php 
+      <div class="card" style="width: 18rem; background-color:<?php
       if ($paciente->curso == 1) {echo "#c1ffb8";}
       elseif ($paciente->curso == 2) {echo "#52ba50";}
-      elseif ($paciente->curso == 3) {echo "#82b6f5";}              
+      elseif ($paciente->curso == 3) {echo "#82b6f5";}
       ?>">
       <!-- <img src="..." class="card-img-top" alt="..."> -->
       <div class="card-body">
@@ -19,7 +19,7 @@
         }
         elseif ($paciente->curso == 2) {
           echo "Curso Técnico em Agropecuária";
-        } 
+        }
         elseif ($paciente->curso == 3) {
           echo " Curso Técnico em Informática";
         }
@@ -28,7 +28,7 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          Sexo: <?php 
+          Sexo: <?php
           if ($paciente->sexo == 1) {
             echo "Masculino";
           }
@@ -74,11 +74,11 @@
 
 <div class="card" style="border: 1px solid <?php if ($paciente->curso==3){echo "#82b6f5";} else{echo "#a8e89e";}?>; border-radius: 5px;">
   <table class="table table-sm table-striped table-bordered" id="myTable2">
-    <thead> 
-      <tr align="center" style="background-color:<?php 
+    <thead>
+      <tr align="center" style="background-color:<?php
       if ($paciente->curso == 1) {echo "#c1ffb8";}
       elseif ($paciente->curso == 2) {echo "#52ba50";}
-      elseif ($paciente->curso == 3) {echo "#82b6f5";}              
+      elseif ($paciente->curso == 3) {echo "#82b6f5";}
       ?>">
       <th scope="col">Data da Avaliação</th>
       <th scope="col">Imc</th>

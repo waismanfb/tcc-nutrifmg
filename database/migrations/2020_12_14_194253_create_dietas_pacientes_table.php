@@ -19,7 +19,7 @@ class CreateDietasPacientesTable extends Migration
             $table->integer('id_alimento')->nullable();
             $table->integer('id_receita')->nullable();
             $table->integer('id_dieta')->nullable();
-            $table->decimal('quantidade',8,2);
+            $table->decimal('quantidade',12, 2);
             $table->date('data_coleta');
             $table->timestamps();
         });

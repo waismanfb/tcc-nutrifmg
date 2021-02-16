@@ -2,6 +2,12 @@
 
 @section('content')
 
+<script type="text/javascript">
+    $(function(){
+        $('#id_alimento').selectize();
+    });
+</script>
+
 <body class="bg-light">
   <div class=" bg-white container">
     @include('layouts.alerts')
@@ -26,13 +32,12 @@
         </div>
       @endif
 
-      <div class="container">
-        <div class="col-sm"></div>
+      <div class="container-fluid">
+        <div class="row"></div>
         <div class="container col-sm-6">
           <!-- Nome-->
           <div class="form-group">
-            <div class="input-group mb-3 ">
-              <label class="">Nome:</label><br>
+              <label class="">Nome:</label>
               <label id="ingredienteNome"></label>
 
               <select id="id_alimento" required name="id_alimento">
@@ -40,9 +45,7 @@
                @foreach($alimentos as $alimentos)
                    <option value="{{$alimentos->id}}">{{$alimentos->nome}}</option>
                @endforeach
-               </select><br>
-
-            </div>
+               </select>
           </div>
           <!-- Medida -->
           <div class="form-group">
@@ -83,45 +86,8 @@
   </div>
 </div><!-- /.container -->
 
-<!-- <script type="text/javascript">
+<div align='center'><a href='javascript:history.back()'><button type='button' class='btn btn-lg btn-primary'
+name='button'>Voltar</button></a></div>
 
-
-
-function validaRenda(renda)
-{
-  const valor = renda.value;
-  if(!isNaN(parseFloat(valor)) && isFinite(valor)){
-    return;
-  }
-  else{
-    document.getElementById('msgRenda').style.display = "block";
-    document.getElementById('msgRenda').innerHTML = "Favor digitar somente números (00.00)";
-    document.getElementById('msgRenda').style.color = "red";
-    setTimeout(function(){
-      document.getElementById('msgRenda').style.display = "none";
-    },2000);
-    renda.focus();
-    return;
-  }
-}
-function validaNome(nome)
-{
-  const valor = nome.value;
-  if(!isNaN(parseFloat(valor)) && isFinite(valor)){
-    document.getElementById('msgNome').style.display = "block";
-    document.getElementById('msgNome').innerHTML = "Favor digitar apenas letras";
-    document.getElementById('msgNome').style.color = "red";
-    setTimeout(function(){
-      document.getElementById('msgNome').style.display = "none";
-    },2000);
-    nome.focus();
-    return;
-  }
-  else{
-    return;
-  }
-}
-
-</script>-->
 </body>
 @endsection

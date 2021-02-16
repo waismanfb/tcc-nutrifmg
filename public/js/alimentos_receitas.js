@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    //Função para deletar alimento/receita Selecionado
-    $(".btn-excluir-receitas").on("click", function() {
+    //Função para deletar alimento da receita Selecionada
+    $(".btn-excluir-ingrediente-receitas").on("click", function() {
         Swal.fire({
             title: 'Excluir esse item?',
             text: 'Você não pode desfazer essa ação',
@@ -13,12 +13,14 @@ $(document).ready(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 var receita_id = $(this).attr('receita_id');
+                var id = $(this).attr('id');
                 $.ajax({
                     type: "post",
-                    url: "/deletar-receita",
+                    url: "/deletar-alimento-receitas",
                     data: {
                         "_token": $('#token').val(),
-                         "receita_id": receita_id
+                         "receita_id": receita_id,
+                         "id": id
                       },
                 });
                 window.location.reload();

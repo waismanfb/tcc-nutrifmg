@@ -80,6 +80,7 @@ class ReceitasController extends Controller
       $totalCarboidratos = $this->calculoTotalCarboidratos($ingredientes);
 
       return view('receita-ingredientes', [
+          'idReceita' => $id,
           'registros' => $registros,
           'ingredientes' => $ingredientes,
           'totalEnergia' => $totalEnergia,
@@ -140,10 +141,11 @@ class ReceitasController extends Controller
     }
 
 
-    public function delete(Receita $id)
+    public function delete()
     {
-      $id->delete();
-      return redirect()->route('receita.exibir')->with('success','Receita deletada com sucesso!');
+      $receita_id = $_POST['receita_id'];
+      DB::table('receitas')->where('id', '=', $receita_id)->delete();
+      DB::table('receita_ingredientes')->where('id_receitas', '=', $receita_id)->delete();
     }
 
 }

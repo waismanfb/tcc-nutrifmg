@@ -17,8 +17,8 @@ class CreateReceitasTable extends Migration
             $table->bigIncrements('id');
             $table->string       ('nome', 100)->nullable();
 
-            $table->double       ('quantidadeTotal', 8, 2)->nullable();
-            $table->double       ('quantidadePorcao', 8, 2)->nullable();
+            $table->double       ('quantidadeTotal', 12, 2)->nullable();
+            $table->double       ('quantidadePorcao', 12, 2)->nullable();
             $table->timestamps();
         });
     }
