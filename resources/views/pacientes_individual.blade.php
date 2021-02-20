@@ -8,13 +8,15 @@
 	<form method="post" action="{{Route('paciente.pesquisados')}}">
 		@csrf
 		<div class="row">
-			<div class="col col-md-6">
+			<div class="col col-md-8">
 				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
 				<input type="text" class="form-control" name="tela" value="paciente_individual" hidden>
 			</div>
 			<div class="col col-md-2">
-				<button type="submit" class="form-control btn btn-warning">Pesquisar</button>
-                <a class="btn btn-success" href="{{Route('paciente.exportar')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
+				<button type="submit" class="form-control btn btn-secondary">Pesquisar</button>                
+			</div>
+			<div class="col col-md-2">
+				<a class="btn btn-success" href="{{Route('paciente.exportar')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>              
 			</div>
 		</div>
 	</form>
@@ -30,7 +32,7 @@
 				<th onclick="sortTable(1)">Curso</th>
 				<th onclick="sortTable(2)">Data Nascimento</th>
 				<th>Avaliação Individual</th>
-				<th>Inserir Medidas</th>
+				<th>Avaliação Antropométrica</th>
 				<th>Editar info. Paciente</th>
 			</tr>
 		</thead>
@@ -51,13 +53,13 @@
 				?></td>
 				<td align="center">{{$registros->dataNascimento}}</td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('paciente.exibir', $registros->id)}}" role="button" style="background-color: #4fc266">&nbspInserir&nbsp</a>
+					<a class="btn btn-sm btn-primary" href="{{Route('paciente.exibir', $registros->id)}}" role="button" >&nbspInserir&nbsp</a>
 				</td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('paciente.avaliacao', $registros->id)}}" role="button" style="background-color: #7e79fc">Individual</a>
+					<a class="btn btn-sm btn-primary" href="{{Route('paciente.avaliacao', $registros->id)}}" role="button" >Visualizar</a>
 				</td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('paciente.editar', $registros->id)}}" role="button" style="background-color: #ed7f64">&nbspEditar&nbsp</a>
+					<a class="btn btn-sm btn-warning" href="{{Route('paciente.editar', $registros->id)}}" role="button" >&nbspEditar&nbsp</a>
 				</td>
 			</tr>
 			@endforeach

@@ -14,10 +14,10 @@
 				<input type="text" class="form-control" name="nome" placeholder="Nome do alimento">
 			</div>
 			<div class="col col-md-2">
-				<button type="submit" class="form-control btn btn-primary">Pesquisar</button>
+				<button type="submit" class="form-control btn btn-secondary">Pesquisar</button>
 			</div>
 			<div class="col col-md-2">
-				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-success" id="b" >Inserir Novo Alimento</a>
+				<a href="{{Route('alimento.cadastrar')}}" class="btn btn-primary" id="b" >Inserir Novo Alimento</a>
 			</div>
 		</div>
 	</form>
@@ -43,14 +43,14 @@
 				<td>{{$registro->grupo}}</td>
 				<td>{{$registro->fonte}}</td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" style="background-color: #ffc107">Editar</a>
+					<a class="btn btn-sm btn-warning " href="{{Route('alimento.editarAlimento', $registro->id)}}" role="button" >Editar</a>
                 </td>
 				<td align="center">
-                    <button type="button" class="btn btn-sm btn-excluir-alimento"
-                        name="button" style="background-color: #e0372b"
-                        alimento_id='{{$registro->id}}'
-                        >Excluir
-                    </button>
+            <button type="button" class="btn btn-sm btn-excluir-alimento"
+            name="button" style="background-color: #e0372b"
+            alimento_id='{{$registro->id}}'
+            >Excluir
+            </button>
                 </td>
 			  </tr>
 			@endforeach

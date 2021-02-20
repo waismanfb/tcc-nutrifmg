@@ -65,8 +65,8 @@ class AlimentosController extends Controller
             $resposta = Alimento::create($dados);
             if ($resposta)
             return redirect()
-                      ->route('alimento.cadastrar')
-                      ->with('success', 'Os Dados do alimento foram cadastrados!');
+                      ->route('alimento.exibir')
+                      ->with('success', 'Alimento cadastrado com Sucesso!');
             return redirect()
                       ->back()
                       ->with('error', 'Falha ao cadastrar os dados do alimento!');

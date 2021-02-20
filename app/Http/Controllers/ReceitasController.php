@@ -73,20 +73,64 @@ class ReceitasController extends Controller
                         ->select('alimentos.nome', 'receita_ingredientes.*')
                         ->where('receita_ingredientes.id_receitas', $id)->get();
 
-
-      $totalEnergia = $this->calculoTotalEnergia($ingredientes);
+      $totalUmidade = $this->calculoTotalUmidade($ingredientes);
+      $totalEnergiaKcal = $this->calculoTotalEnergiaKcal($ingredientes);
+      $totalEnergiaKj = $this->calculoTotalEnergiaKj($ingredientes);
       $totalProteina = $this->calculoTotalProteina($ingredientes);
       $totalLipideos = $this->calculoTotalLipideos($ingredientes);
+      $totalColesterol = $this->calculoTotalColesterol($ingredientes);
       $totalCarboidratos = $this->calculoTotalCarboidratos($ingredientes);
+      $totalFibraAlimentar = $this->calculoTotalFibraAlimentar($ingredientes);
+      $totalCinzas = $this->calculoTotalCinzas($ingredientes);
+      $totalCalcio = $this->calculoCalcio($ingredientes);
+      $totalMagnesio = $this->calculoMagnesio($ingredientes);
+      $totalManganes = $this->calculoManganes($ingredientes);
+      $totalFosforo = $this->calculoFosforo($ingredientes);
+      $totalFerro = $this->calculoFerro($ingredientes);
+      $totalSodio = $this->calculoSodio($ingredientes);
+      $totalPotassio = $this->calculoPotassio($ingredientes);
+      $totalCobre = $this->calculoCobre($ingredientes);
+      $totalZinco = $this->calculoZinco($ingredientes);
+      $totalRetinol = $this->calculoRetinol($ingredientes);
+      $totalRe = $this->calculoRe($ingredientes);
+      $totalRae = $this->calculoRae($ingredientes);
+      $totalTiamina = $this->calculoTiamina($ingredientes);
+      $totalRiboflavina = $this->calculoRiboflavina($ingredientes);
+      $totalPiridoxina = $this->calculoPiridoxina($ingredientes);
+      $totalNiacina = $this->calculoNiacina($ingredientes);
+      $totalVitaminaC = $this->calculoVitaminaC($ingredientes);
+    
 
       return view('receita-ingredientes', [
           'idReceita' => $id,
           'registros' => $registros,
           'ingredientes' => $ingredientes,
-          'totalEnergia' => $totalEnergia,
+          'totalUmidade' => $totalUmidade,
+          'totalEnergiaKcal' => $totalEnergiaKcal,
+          'totalEnergiaKj' => $totalEnergiaKj,
           'totalProteina' => $totalProteina,
           'totalLipideos' => $totalLipideos,
+          'totalColesterol' => $totalColesterol,
           'totalCarboidrato' => $totalCarboidratos,
+          'totalFibraAlimentar' => $totalFibraAlimentar,
+          'totalCinzas' => $totalCinzas,
+          'totalCalcio' => $totalCalcio,
+          'totalMagnesio' => $totalMagnesio,
+          'totalManganes' => $totalManganes,
+          'totalFosforo' => $totalFosforo,
+          'totalFerro' => $totalFerro,
+          'totalSodio' => $totalSodio,
+          'totalPotassio'=> $totalPotassio,
+          'totalCobre'=> $totalCobre,
+          'totalZinco'=> $totalZinco,
+          'totalRetinol'=> $totalRetinol,
+          'totalRe'=> $totalRe,
+          'totalRae'=> $totalRae,
+          'totalTiamina'=> $totalTiamina,
+          'totalRiboflavina'=> $totalRiboflavina,
+          'totalPiridoxina'=> $totalPiridoxina,
+          'totalNiacina'=> $totalNiacina,
+          'totalVitaminaC'=> $totalVitaminaC,
           'alimentos' => $alimentos
       ]);
     }
@@ -104,11 +148,29 @@ class ReceitasController extends Controller
 
     }
 
-    public function calculoTotalEnergia($ingredientes)
+    public function calculoTotalUmidade($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['umidade'];
+        }
+        return round((float)$result, 2);
+    }
+
+    public function calculoTotalEnergiaKcal($ingredientes)
     {
         $result = 0;
         foreach ($ingredientes as $key => $value) {
             $result = $result + $ingredientes[$key]['energiaKcal'];
+        }
+        return round((float)$result, 2);
+    }
+
+    public function calculoTotalEnergiaKj($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['energiaKj'];
         }
         return round((float)$result, 2);
     }
@@ -130,6 +192,15 @@ class ReceitasController extends Controller
         }
         return round((float)$result, 2);
     }
+    
+    public function calculoTotalColesterol($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['colesterol'];
+        }
+        return round((float)$result, 2);
+    }
 
     public function calculoTotalCarboidratos($ingredientes)
     {
@@ -139,6 +210,165 @@ class ReceitasController extends Controller
         }
         return round((float)$result, 2);
     }
+
+    public function calculoTotalFibraAlimentar($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['fibraAlimentar'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoTotalCinzas($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['cinzas'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoCalcio($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['calcio'];
+        }
+        return round((float)$result, 2);
+    }
+
+    public function calculoMagnesio($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['magnesio'];
+        }
+        return round((float)$result, 2);
+    }
+    
+    public function calculoManganes($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['manganes'];
+        }
+        return round((float)$result, 2);
+    }
+
+    public function calculoFosforo($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['fosforo'];
+        }
+        return round((float)$result, 2);
+    }
+
+    public function calculoFerro($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['ferro'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoSodio($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['sodio'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoPotassio($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['potassio'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoCobre($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['Cobre'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoZinco($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['zinco'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoRetinol($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['retinol'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoRe($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['re'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoRae($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['rae'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoTiamina($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['tiamina'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoRiboflavina($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['riboflavina'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoPiridoxina($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['piridoxina'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoNiacina($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['niacina'];
+        }
+        return round((float)$result, 2);
+    }
+    public function calculoVitaminaC($ingredientes)
+    {
+        $result = 0;
+        foreach ($ingredientes as $key => $value) {
+            $result = $result + $ingredientes[$key]['vitaminaC'];
+        }
+        return round((float)$result, 2);
+    }
+
+
 
 
     public function delete()

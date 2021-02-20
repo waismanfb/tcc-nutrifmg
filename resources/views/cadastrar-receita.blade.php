@@ -70,13 +70,13 @@
             <!-- Button -->
             <div class="form-group">
               <label class="input-group mb-3"></label>
-              <div class="col-md-2">
-                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">
-                    <?php if(!isset($receita)){echo "Cadastrar";}else {
-                      echo "Editar";
+              
+                <button type="submit" class="btn btn-primary" value="enviar" onclick="return validar()">
+                    <?php if(!isset($receita)){echo "Cadastrar Receita";}else {
+                      echo "Editar Receita";
                     } ?>
-                    <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
-              </div>
+                  
+             
             </div>
           </div>
           <div class="col-sm"></div>

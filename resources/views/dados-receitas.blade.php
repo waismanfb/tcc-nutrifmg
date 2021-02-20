@@ -14,10 +14,10 @@
 				<input type="text" class="form-control" name="nome" placeholder="Nome da receita">
 			</div>
 			<div class="col col-md-2">
-				<button type="submit"  class="form-control btn btn-primary">Pesquisar</button>
+				<button type="submit"  class="form-control btn btn-secondary">Pesquisar</button>
 			</div>
 			<div class="col col-md-2">
-                <a href="{{Route('receita.cadastrar')}}" class="btn btn-success" id="b" >Inserir nova receita</a>
+                <a href="{{Route('receita.cadastrar')}}" class="btn btn-primary" id="b" >Inserir nova receita</a>
 			</div>
 		</div>
 	</form>
@@ -32,7 +32,7 @@
 				<th onclick="sortTable(0)">Nome</th>
 				<th>Peso total da receita (em gramas)</th>
 				<th>Peso total da porção (em gramas)</th>
-				<th>Vizualizar</th>
+				<th>Inserir Ingredientes</th>
 				<th>Editar</th>
                 <th>Excluir</th>
 			</tr>
@@ -44,12 +44,12 @@
 				<td align="center">{{$registro->quantidadeTotal}}</td>
 				<td align="center">{{$registro->quantidadePorcao}}</td>
                 <td align="center">
-					<a class="btn btn-sm" href="{{Route('receita.ingredientes',
-                     $registro->id)}}" role="button" style="background-color: #ffc107">Vizualizar</a>
+					<a class="btn btn-sm btn-primary" href="{{Route('receita.ingredientes',
+                     $registro->id)}}" role="button" >Inserir</a>
                 </td>
 				<td align="center">
-					<a class="btn btn-sm" href="{{Route('receita.editar',
-                    $registro->id)}}" role="button" style="background-color: #007bff; color: white">Editar</a>
+					<a class="btn btn-sm btn-warning" href="{{Route('receita.editar',
+                    $registro->id)}}" role="button " >Editar</a>
                 </td>
 				<td align="center">
                     <button type="button" class="btn btn-sm btn-excluir-receitas"
@@ -69,7 +69,6 @@
 
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
-<div align='center'><a href='/home'><button type='button' class='btn btn-lg btn-primary'
-name='button'>Voltar</button></a></div>
+
 
 @endsection

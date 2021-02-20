@@ -18,7 +18,7 @@
 			</div>
 		</div>
     <fieldset>
-      <legend><center><h2><b><?php if(!isset($alimento)){echo 'Cadastro de Alimentos';}else {
+      <legend style="padding: 40px"><center><h2><b><?php if(!isset($alimento)){echo 'Cadastro de Alimentos (100g de parte comestível)';}else {
         echo 'Edição de Alimentos';
       } ?></b></h2></center></legend>
 
@@ -336,18 +336,16 @@
 
 
 
-
-
             <!-- Button -->
             <div class="form-group">
               <label class="input-group mb-3"></label>
-              <div class="col-md-2">
-                <button type="submit" class="btn btn-success" value="enviar" onclick="return validar()">
-                    <?php if(!isset($alimento)){echo 'Cadastrar';}else {
+             
+                <button type="submit" class="btn btn-primary" value="enviar" onclick="return validar()">
+                    <?php if(!isset($alimento)){echo 'Cadastrar Alimento';}else {
                       echo 'Editar';
                     } ?>
-                    <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
-              </div>
+                    
+              
             </div>
           </div>
           <div class="col-sm"></div>

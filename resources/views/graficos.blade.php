@@ -1,7 +1,10 @@
 @extends('layouts.menu_topo')
 
 @section('content')
+
+
 <div class="container">
+  <a  type="button" href="{{url('home')}}" class="btn btn-primary "name="button">Voltar</a><br><br>
     <h3>Avaliação Antropométrica</h3>
 
   <a href="{{Route('imcIdadeMas')}}">IMC por idade - MASCULINO</a><br>
@@ -36,8 +39,7 @@
 
 <br><br>
 
-<a style="margin-left:45%;" type="button" href="{{url('home')}}" class="btn btn-primary btn-lg"
-name="button">Voltar</a><br><br>
+
 
 
 @endsection

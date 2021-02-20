@@ -30,14 +30,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <style type="text/css">
         #menu:hover{
-            background-color: #faf6e6;
+            /* background-color: #faf6e6; */
         }
         #sair:hover{
-            background-color: #cc1717;
+            /* background-color: #cc1717; */
         }
         body{
-            background-color: #fffefa;
+            /* background-color: #fffefa; */
 
+        }
+        .btns a{
+            padding: 10px;
+            font-size: 20px;            
+            font-weight: bolder;
+            text-decoration: none;
         }
 
     </style>
@@ -48,12 +54,12 @@
 <body >
     <div id="app" >
 
-        <nav class="navbar navbar-expand-md  shadow-sm " style="background-color: #1abaad">
+        <nav class="navbar navbar-expand-md  shadow-sm bg-success " >
 
             <div class="container">
 
                 <a href="{{ url('/home') }}">
-                    <img src="{{url('image/logo.png')}}" class="img-fluid " alt="Responsive image" style="max-width: 70px">
+                    <img src="{{url('image/new-logo-white.png')}}" class="img-fluid " alt="Responsive image" style="max-width: 350px">
                 </a>
 
             </div>
@@ -73,7 +79,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto btns">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
@@ -85,34 +91,34 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="menu" class="btn btn btn-outline-light" href="{{ url('/home') }}" style="border-radius: 50px;">
+                        <li class="nav-item dropdown ">
+                            <a id="menu" class="text-light" href="{{ url('/home') }}" style="border-radius: 50px;">
                                 <!-- {{ config('app.name', 'NUTRIFMG') }} -->
-                                <i class="material-icons">home</i>&nbsp Início
+                                 Início
                             </a>
-                            <a id="menu"class="btn btn-outline-light" href="{{Route('paciente.cadastrar')}}" style="border-radius: 50px;">
+                            <a id="menu"class="text-light" href="{{Route('paciente.cadastrar')}}" style="border-radius: 50px;">
                                 <!-- {{ config('app.name', 'NUTRIFMG') }} -->
-                                <i class="material-icons">person_add</i>&nbsp Cadastrar
+                                 Cadastrar
                             </a>
-                            <a id="menu"class="btn btn-outline-light" href="{{Route('paciente.pesquisar')}}" style="border-radius: 50px;">
+                            <a id="menu"class="text-light" href="{{Route('paciente.pesquisar')}}" style="border-radius: 50px;">
                                 <!-- {{ config('app.name', 'NUTRIFMG') }} -->
-                                <i class="material-icons">assignment_ind</i>&nbsp Av. Individual
+                                 Av. Individual
                             </a>
-                            <a id="menu"class="btn btn-outline-light" href="{{Route('graficos')}}" style="border-radius: 50px;">
+                            <a id="menu"class="text-light" href="{{Route('graficos')}}" style="border-radius: 50px;">
                                 <!-- {{ config('app.name', 'NUTRIFMG') }} -->
-                                <i class="material-icons">assignment_ind</i>&nbsp Av. Grupo
+                                 Av. Grupo
                             </a>
                             <!-- <a class="btn btn-outline-light" href="{{ url('/') }}">
                                  {{ config('app.name', 'NUTRIFMG') }}
                                 <i class="material-icons">find_in_page</i>&nbsp Ver Informações
                             </a> -->
-                            <a id="sair"id="navbarDropdown" class="btn btn-outline-light dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="border-radius: 50px;">
-                             <i class="material-icons">cancel</i>
+                            <a id="sair"id="navbarDropdown" class="text-light dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="border-radius: 50px;">
+                             
                              <!-- {{ Auth::user()->name }} --> Sair<span class="caret"></span>
 
                          </a>
 
-                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                         <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

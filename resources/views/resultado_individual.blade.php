@@ -65,7 +65,7 @@
         </li>
       </ul>
       <div class="card-body" align="center">
-        <a class="btn btn-sm text-danger font-weight-bold" href="{{Route('paciente.editar', $paciente->id)}}" role="button" style="border: 1px solid black; background-color: white">Editar Informações</a>
+        <a class="btn  btn-warning font-weight-bold" href="{{Route('paciente.editar', $paciente->id)}}" role="button">Editar Informações</a>
       </div>
     </div>
 

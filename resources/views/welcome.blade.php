@@ -71,10 +71,16 @@
             .btn {
                 color: white;
             }
+            .bg-img{
+                background-image: url('../public/image/bg-home.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                
+            }
         </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height p-3 mb-2 bg-light text-dark">
+    <body >
+        <div  class="flex-center position-ref full-height p-3 mb-2  text-dark  bg-img" >
             @if (Route::has('login'))
                 <div class="top-right links">
 
@@ -82,18 +88,18 @@
             @endif
 
 
-            <div class="content p-3 mb-2 bg-white text-dark">
-                <div class="title m-b-md alert alert-success" role="alert">
-                    <p><span id="cor1">NUTR</span><span id="cor2">IFMG</span></p>
+            <div class="content p-3 mb-2 bg-white">
+                <div class="title m-b-md alert border border-dark" role="alert">
+                    <img src="{{url('image/logo-new.png')}}" class="img-fluid " alt="Responsive image" style="max-width: 750px">
 
                 </div>
                 @if (Route::has('login'))
-                <div class="badge badge-success links">
+                <div class="btn btn-success links">
                     @auth
                         <a href="{{ url('/home') }}">Entrar</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-success " role="button">
-                            Login 
+                        <a href="{{ route('login') }}" class="btn btn-white " role="button">
+                            Entrar 
                         </a>
                     @endauth
                 </div>
