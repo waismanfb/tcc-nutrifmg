@@ -41,7 +41,7 @@
         }
         .btns a{
             padding: 10px;
-            font-size: 20px;            
+            font-size: 20px;
             font-weight: bolder;
             text-decoration: none;
         }
@@ -113,18 +113,29 @@
                                 <i class="material-icons">find_in_page</i>&nbsp Ver Informações
                             </a> -->
                             <a id="sair"id="navbarDropdown" class="text-light dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="border-radius: 50px;">
-                             
+
                              <!-- {{ Auth::user()->name }} --> Sair<span class="caret"></span>
 
                          </a>
 
                          <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
+
+                             <a class="dropdown-item" href="{{ route('register') }}">
+                             {{ __('Cadastrar') }}
+
+                             </a>
+
+                             <a class="dropdown-item" href="{{ route('admin.list') }}">
+                             {{ __('Administradores') }}
+
+                             </a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             {{ __('Sair do Sistema') }}
 
-                        </a>
+                            </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

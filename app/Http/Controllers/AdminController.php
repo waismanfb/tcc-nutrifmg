@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use DB;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,8 +24,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function listAdmins()
     {
-        return view('home');
+        $admins = User::where('id', '!=', Auth::user()->id)->get();
+        return view('admin', compact('admins'));
+    }
+
+    public function deleteAdmins()
+    {
+        $id  = $_POST['id'];
+        DB::table('users')->where('id', '=', $id)->delete();
     }
 }

@@ -124,13 +124,18 @@ class DietaController extends Controller
         // Definimos o nome do arquivo que será exportado
         $dataColeta = Carbon::today()->toDateString();
         $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
-        $arquivo = $paciente->nome . '_' . $dataColeta . '.xls';
+        if ($tela != 9999) {
+            $arquivo = $paciente->nome . '_' . $dataColeta . '.xls';
+        }
+        else{
+            $arquivo = 'Completa_' . $dataColeta . '.xls';
+        }
 
         if ($tela == 1 || $tela == 2) {
             $selecionados = $this->retornaAlimentosSelecionados($id, $data, 0);
             $receitas = $this->retornaReceitas($id, $data, 0);
         }
-        if ($tela == 3) {
+        if ($tela == 3 || $tela == 9999) {
             $selecionados = $this->retornaAlimentosSelecionados($id, $data, $dieta);
             $receitas = $this->retornaReceitas($id, $data, $dieta);
         }
@@ -630,13 +635,16 @@ class DietaController extends Controller
                        ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
                        ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
                        ->select('alimentos.nome as alimentos_nome', 'alimentos.*' ,
-                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id);
-          if ($data != 0) {
+                        'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*');
+
+            if ($data != 9999) {
+                $query = $query->where('dietas_pacientes.id_paciente', '=', $id);
+            }
+          if ($data != 0 and $data != 9999) {
               $query = $query->whereDate('data_coleta', '=', $data);
           }
 
-          if ($dieta != 0) {
+          if ($dieta != 0 and $dieta != 9999) {
               $query = $query->where('dietas.id', '=', $dieta);
           }
 
@@ -670,13 +678,16 @@ class DietaController extends Controller
                         DB::raw('sum(manganes) as manganes'),
                         DB::raw('sum(fosforo) as fosforo'),
                         DB::raw('sum(ferro) as ferro'),
-                        DB::raw('sum(sodio) as sodio'))
-                       ->where('dietas_pacientes.id_paciente', '=', $id);
+                        DB::raw('sum(sodio) as sodio'));
 
-        if ($data != 0) {
+        if ($data != 9999) {
+            $query = $query->where('dietas_pacientes.id_paciente', '=', $id);
+        }
+
+        if ($data != 0 and $data != 9999) {
             $query = $query->whereDate('data_coleta', '=', $data);
         }
-        if ($dieta != 0) {
+        if ($dieta != 0 and $dieta != 9999) {
             $query = $query->where('dietas.id', '=', $dieta);
         }
 

@@ -22,7 +22,7 @@
                 @csrf
                 <div class="row">
                     <div class="col col-md-2">
-                        <a href="{{ url()->previous() }}" class="btn btn-primary" style="margin: 10px">Voltar</a>
+                        <a href="{{url('ingredientes-receita/' . $id)}}" class="btn btn-primary" style="margin: 10px">Voltar</a>
                     </div>
                 </div>
                 <fieldset>

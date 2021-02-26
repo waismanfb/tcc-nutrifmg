@@ -40,6 +40,9 @@ Route::get('/editar-receita/{id}', 'ReceitasController@editar')->name('receita.e
 Route::post('/update-receita/{id}', 'ReceitasController@update')->name('receita.update')->middleware('auth');
 Route::post('/deletar-alimento-receitas', 'ReceitaIngredienteController@delete')->name('alimentoReceita.delete')->middleware('auth');
 
+Route::get('/admins', 'AdminController@listAdmins')->name('admin.list')->middleware('auth');
+Route::post('/admins_delete', 'AdminController@deleteAdmins')->name('admin.delete')->middleware('auth');
+
 
 
 //------

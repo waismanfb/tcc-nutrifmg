@@ -14,7 +14,7 @@
           <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div class="form-group row justify-content-center">           
+            <div class="form-group row justify-content-center">
               <div class="col-md-8">
                 <input placeholder="E-mail" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
@@ -25,7 +25,7 @@
               </div>
             </div>
 
-            <div class="form-group row justify-content-center">             
+            <div class="form-group row justify-content-center">
               <div class="col-md-8">
                 <input placeholder="Senha" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" >
 
@@ -57,7 +57,7 @@
             </div>
 
             <div class="form-group row justify-content-center">
-              
+
               <div class=" col col-md-8 ">
                 <button type="submit" class="btn btn-success  btn-block " align="center"  >
                   <strong>{{ __('Entrar') }}</strong>
@@ -69,7 +69,6 @@
                 </a>
                 @endif -->
               </div>
-              
             </div>
           </form>
         </div>
