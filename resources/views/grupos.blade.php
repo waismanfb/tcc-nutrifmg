@@ -17,6 +17,7 @@
                  align="center" style="background-color: #a5a3d4">
                     <tr>
                         <th>Quantidade</th>
+                        <th>Umidade</th>
                         <th>Kcal</th>
                         <th>KJ</th>
                         <th>Proteina</th>
@@ -36,6 +37,7 @@
                 <tbody class="text-center">
                     <tr>
                         <td>{{$media['quantidade']}}</td>
+                        <td>{{$media['umidade']}}</td>
                         <td>{{$media['energiaKcal']}}</td>
                         <td>{{$media['energiaKj']}}</td>
                         <td>{{$media['proteina']}}</td>

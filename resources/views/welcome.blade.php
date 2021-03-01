@@ -63,7 +63,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-            a { 
+            a {
                 color: inherit;
                 text-decoration: none
             }
@@ -75,7 +75,7 @@
                 background-image: url('../public/image/bg-home.png');
                 background-repeat: no-repeat;
                 background-size: cover;
-                
+
             }
         </style>
     </head>
@@ -99,7 +99,7 @@
                         <a href="{{ url('/home') }}">Entrar</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-white " role="button">
-                            Entrar 
+                            Entrar
                         </a>
                     @endauth
                 </div>

@@ -19,6 +19,7 @@
                  align="center" style="background-color: #a5a3d4">
                     <tr>
                         <th>Quantidade</th>
+                        <th>Umidade</th>
                         <th>Kcal</th>
                         <th>KJ</th>
                         <th>Proteina</th>
@@ -32,7 +33,7 @@
                         <th>Manganês</th>
                         <th>Fósforo</th>
                         <th>Ferro</th>
-                        <th>Sódio</th>
+                        <th>sodio</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">

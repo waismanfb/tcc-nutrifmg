@@ -16,8 +16,7 @@
 				<button type="submit" class="form-control btn btn-secondary">Pesquisar</button>
 			</div>
             <div class="col col-md-2">
-                <a class="btn btn-success" href="{{Route('dieta.exportar' ,
-                [9999, 9999, 9999, 9999])}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
+                <a class="btn btn-success" href="{{Route('dieta.exportarTudo')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
 			</div>
 		</div>
 	</form>
