@@ -8,7 +8,7 @@
 	<form method="post" action="{{Route('paciente.pesquisados')}}">
 		@csrf
 		<div class="row">
-			<div class="col col-md-6">
+			<div class="col col-md-8">
 				<input type="text" class="form-control" name="nome" placeholder="Nome do paciente">
 				<input type="text" class="form-control" name="tela" value="" hidden>
 			</div>
@@ -16,8 +16,7 @@
 				<button type="submit" class="form-control btn btn-secondary">Pesquisar</button>
 			</div>
             <div class="col col-md-2">
-                <a class="btn btn-success" href="{{Route('dieta.exportar' ,
-                [9999, 9999, 9999, 9999])}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
+                <a class="btn btn-success" href="{{Route('dieta.exportarTudo')}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
 			</div>
 		</div>
 	</form>
@@ -31,8 +30,9 @@
 				<th onclick="sortTable(0)">Nome</th>
 				<th onclick="sortTable(1)">Curso</th>
 				<th onclick="sortTable(2)">Data Nascimento</th>
+				<th>Inserir Dieta</th>
 				<th>Avaliação Individual</th>
-            <th>Inserir Dieta</th>
+           
 			</tr>
 		</thead>
 		<tbody>
@@ -51,12 +51,13 @@
 
 				?></td>
 				<td align="center">{{$registros->dataNascimento}}</td>
+            <td align="center">
+					<a class="btn btn-sm btn-primary" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" >&nbspInserir Dieta&nbsp</a>
+				</td>				
 				<td align="center">
 					<a class="btn btn-sm btn-warning" href="{{Route('dieta.recordatorio', $registros->id)}}" role="button" >&nbspVer Avaliação&nbsp</a>
 				</td>
-                <td align="center">
-					<a class="btn btn-sm btn-primary" href="{{Route('dieta.inserirDieta', [$tipo ,$registros->id])}}" role="button" >&nbspInserir Dieta&nbsp</a>
-				</td>
+
 			</tr>
 			@endforeach
 		</tbody>

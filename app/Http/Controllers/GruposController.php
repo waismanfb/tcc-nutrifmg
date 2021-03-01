@@ -275,6 +275,7 @@ class GruposController extends Controller
 
         $html .= '<tr>';
         $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Umidade</b></td>';
         $html .= '<td><b>Kcal</b></td>';
         $html .= '<td><b>Kj</b></td>';
         $html .= '<td><b>Proteina</b></td>';
@@ -304,6 +305,7 @@ class GruposController extends Controller
 
             $html .= '<tr>';
             $html .= '<td>'.'"'.$media['quantidade'].'"'.'</td>';
+            $html .= '<td>'.'"'.$media['umidade'].'"'.'</td>';
             $html .= '<td>'.'"'.$media['energiaKcal'].'"'.'</td>';
             $html .= '<td>'.'"'.$media['energiaKj'].'"'.'</td>';
             $html .= '<td>'.'"'.$media['proteina'].'"'.'</td>';
@@ -443,6 +445,16 @@ class GruposController extends Controller
     public function somaTotais($selecionados, $receitas)
     {
         $totais['quantidade'] = $selecionados->sum('quantidade') + $receitas->sum('dietas_pacientes_quantidade');
+
+        $totais['umidade'] = 0;
+        foreach ($selecionados as $key => $value) {
+            $totais['umidade'] = $totais['umidade'] +
+            $selecionados[$key]->umidade * $selecionados[$key]->quantidade;
+        }
+        foreach ($receitas as $key => $value) {
+            $totais['umidade'] = $totais['umidade'] +
+            $receitas[$key]->umidade * $receitas[$key]->dietas_pacientes_quantidade;
+        }
 
         $totais['energiaKcal'] = 0;
         foreach ($selecionados as $key => $value) {
@@ -700,6 +712,7 @@ class GruposController extends Controller
     public function media($totais, $quantidadeRegistros)
     {
         $totais['quantidade']       = round($totais['quantidade']     / $quantidadeRegistros, 2);
+        $totais['umidade']          = round($totais['umidade']        / $quantidadeRegistros, 2);
         $totais['energiaKcal']      = round($totais['energiaKcal']    / $quantidadeRegistros, 2);
         $totais['energiaKj']        = round($totais['energiaKj']      / $quantidadeRegistros, 2);
         $totais['proteina']         = round($totais['proteina']       / $quantidadeRegistros, 2);
@@ -726,7 +739,6 @@ class GruposController extends Controller
         $totais['niacina']          = round($totais['niacina']        / $quantidadeRegistros, 2);
         $totais['vitaminaC']        = round($totais['vitaminaC']      / $quantidadeRegistros, 2);
 
-
         return $totais;
     }
 
@@ -734,6 +746,10 @@ class GruposController extends Controller
     {
         foreach ($selecionados as $key => $value) {
             $selecionados[$key]->energiaKcal = $selecionados[$key]->energiaKcal * $selecionados[$key]->quantidade;
+        }
+
+        foreach ($selecionados as $key => $value) {
+            $selecionados[$key]->umidade = $selecionados[$key]->umidade * $selecionados[$key]->quantidade;
         }
 
         foreach ($selecionados as $key => $value) {
@@ -835,6 +851,10 @@ class GruposController extends Controller
     {
         foreach ($receitas as $key => $value) {
             $receitas[$key]->quantidade = $receitas[$key]->quantidade  * $receitas[$key]->dietas_pacientes_quantidade;
+        }
+
+        foreach ($receitas as $key => $value) {
+            $receitas[$key]->umidade = $receitas[$key]->umidade  * $receitas[$key]->dietas_pacientes_quantidade;
         }
 
         foreach ($receitas as $key => $value) {

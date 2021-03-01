@@ -8,6 +8,10 @@
 <h1 class="text-center">Recordatórios cadastrados do(a) paciente:</h1>
 <h2 class="text-center">{{$paciente[0]->nome}}</h2><br>
 
+<div class="col col-md-2" style="margin-left: 41%">
+    <a class="btn btn-success" href="{{Route("dieta.exportarTudoPaciente", [$paciente[0]->id])}}" role="button">&nbsp&nbsp&nbsp Exportar Excel &nbsp&nbsp&nbsp</a><br>
+</div><br>
+
 <?php if ($registros->count() != 0) {
     echo '<div class="container">
         	<table class="table table-bordered table-sm"  id="myTable2">

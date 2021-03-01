@@ -11,7 +11,7 @@ use App\DietasPaciente;
 use Carbon\Carbon;
 use DB;
 
-class DietaController extends Controller
+class ExportarController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -33,346 +33,273 @@ class DietaController extends Controller
         return view('home');
     }
 
-    public function atualizarDieta($tipo, $id)
+    public function exportar($id, $data, $tela, $dieta)
     {
         $paciente = Paciente::find($id);
+        // Definimos o nome do arquivo que será exportado
+        $dataColeta = Carbon::today()->toDateString();
+        $dataColeta = Carbon::parse($dataColeta)->format('d/m/Y');
 
-        if ($tipo == 'cafeDaManha')
-        {
-            $tipoId = 2;
-            $tipo = 'lancheDaManha';
-            $titulo = 'Lanche da Manha';
+        if ($tela == 1 || $tela == 2) {
+            $selecionados = $this->retornaAlimentosSelecionados($id, $data, 0);
+            $receitas = $this->retornaReceitas($id, $data, 0);
+            $arquivo = $paciente->nome . '_' . $dataColeta . '.xls';
         }
-        else if ($tipo == 'lancheDaManha')
-        {
-            $tipoId = 3;
-            $tipo = 'almoco';
-            $titulo = 'Almoço';
-        }
-        else if ($tipo == 'almoco')
-        {
-            $tipoId = 4;
-            $tipo = 'lancheDaTarde';
-            $titulo = 'Lanche da Tarde';
-        }
-        else if ($tipo == 'lancheDaTarde')
-        {
-            $tipoId = 5;
-            $tipo = 'jantar';
-            $titulo = 'Jantar';
-        }
-        else if ($tipo == 'jantar')
-        {
-            $tipoId = 6;
-            $tipo = 'lancheDaNoite';
-            $titulo = 'Lanche Da Noite';
-        }
-        else
-        {
-            $dataColeta = Carbon::today()->toDateString();
-            $selecionados = $this->retornaAlimentosSelecionados($id, $dataColeta, 0);
-            $receitas = $this->retornaReceitas($id, $dataColeta, 0);
-            $totais = $this->somaTotais($selecionados, $receitas);
+        if ($tela == 3) {
+            $selecionados = $this->retornaAlimentosSelecionados($id, $data, $dieta);
+            $receitas = $this->retornaReceitas($id, $data, $dieta);
 
-            $dataColetaFormatada = Carbon::parse($dataColeta)->format('d/m/Y');
+            if ($dieta == 1) {
+                $dietanome = 'Cafe_da_Manha';
+            }else if ($dieta == 2) {
+                $dietanome = 'Lanche_da_Manha';
+            }else if ($dieta == 3) {
+                $dietanome = 'Almoço';
+            }else if ($dieta == 4) {
+                $dietanome = 'Lanche_da_Tarde';
+            }else if ($dieta == 5) {
+                $dietanome = 'Jantar';
+            }else if ($dieta == 6) {
+                $dietanome = 'Lanche_da_Noite';
+            }
 
-            $tela = 1; //tela apresentada no final do recordatorio 24 horas
-
-            $botao = 'Concluir Avaliação';
-            $url = '/home';
-
-            $dieta = 0;
-
-            $titulo = 'Lista de Alimentos Selecionados';
-
-            return view('lista_dieta', [
-                'totais' => $totais,
-                'dataColeta' => $dataColeta,
-                'dataColetaFormatada' => $dataColetaFormatada,
-                'tela' => $tela,
-                'titulo' => $titulo,
-                'receitas' => $receitas,
-                'paciente' => $paciente,
-                'selecionados' => $selecionados,
-                'botao' => $botao,
-                'dieta' => $dieta,
-                'url' => $url,
-                'titulo' => $titulo
-            ]);
+            $arquivo = $paciente->nome . '_' . $dataColeta . '_' . $dietanome . '.xls';
         }
 
-        $alimentos = Alimento::all();
-        $receitas = Receita::all();
-        $tipoDieta = $tipo;
-
-        $selecionados = $this->retornaSelecionados($id, $tipoId);
-
-        $alimentosReceitas = $alimentos->concat($receitas);
-
-        return view('dieta', [
-            'alimentosReceitas' => $alimentosReceitas,
-            'paciente' => $paciente,
-            'selecionados' => $selecionados,
-            'tipo' => $tipoDieta,
-            'titulo' => $titulo
-        ]);
-    }
-
-    public function inserir(Request $request)
-    {
-        $dados = $request->All();
-        $dados['data_coleta'] = Carbon::now();
-        $tipoDieta = $request['tipo_dieta'];
-
-        if ($request['id_alimento_receita'] > 1000) {
-            $dados['id_receita'] = $request['id_alimento_receita'];
-        }
-        else {
-            $dados['id_alimento'] = $request['id_alimento_receita'];
-        }
-
-        if ($tipoDieta == 'cafeDaManha')
-        {
-            $tipoId = 1;
-            $dados['id_dieta'] = 1;
-            $titulo = 'Café Da Manhã';
-        }
-        else if ($tipoDieta == 'lancheDaManha')
-        {
-            $tipoId = 2;
-            $dados['id_dieta'] = 2;
-            $titulo = 'Lanche Da Manhã';
-        }
-        else if ($tipoDieta == 'almoco')
-        {
-            $tipoId = 3;
-            $dados['id_dieta'] = 3;
-            $titulo = 'Almoco';
-        }
-        else if ($tipoDieta == 'lancheDaTarde')
-        {
-            $tipoId = 4;
-            $dados['id_dieta'] = 4;
-            $titulo = 'Lanche Da Tarde';
-        }
-        else if ($tipoDieta == 'jantar')
-        {
-            $tipoId = 5;
-            $dados['id_dieta'] = 5;
-            $titulo = 'Jantar';
-        }
-        else if ($tipoDieta == 'lancheDaNoite')
-        {
-            $tipoId = 6;
-            $dados['id_dieta'] = 6;
-            $titulo = 'Lanche Da Noite';
-        }
-
-        echo $request['id_dieta'];
-
-        $resposta = DietasPaciente::create($dados);
-        $alimentos = Alimento::all();
-        $receitas = Receita::all();
-        $paciente = Paciente::find($dados['id_paciente']);
-        $id = $dados['id_paciente'];
-
-        return $this->inserirDieta($tipoDieta, $id);
-    }
-
-    //Funcão para excluir um Alimento Selecionado
-    public function excluirAlimentoSelecionado()
-    {
-        $dietas_pacientes_id = $_POST['dietas_pacientes_id'];
-        $paciente_id = $_POST['paciente_id'];
-        $tipo_dieta = $_POST['tipo_dieta'];
-        DB::table('dietas_pacientes')->where('id', '=', $dietas_pacientes_id)->delete();
-        return $this->inserirDieta($tipo_dieta, $paciente_id);
-    }
-
-
-    public function inserirDieta($tipo, $id)
-    {
-        if ($tipo == 'cafeDaManha')
-        {
-            $tipoId = 1;
-            $request['id_dieta'] = 1;
-            $titulo = 'Café Da Manhã';
-        }
-        else if ($tipo == 'lancheDaManha')
-        {
-            $tipoId = 2;
-            $request['id_dieta'] = 2;
-            $titulo = 'Lanche da Manha';
-        }
-        else if ($tipo == 'almoco')
-        {
-            $tipoId = 3;
-            $request['id_dieta'] = 3;
-            $titulo = 'Almoco';
-        }
-        else if ($tipo == 'lancheDaTarde')
-        {
-            $tipoId = 4;
-            $request['id_dieta'] = 4;
-            $titulo = 'Lanche Da Tarde';
-        }
-        else if ($tipo == 'jantar')
-        {
-            $tipoId = 5;
-            $request['id_dieta'] = 5;
-            $titulo = 'Jantar';
-        }
-        else if ($tipo == 'lancheDaNoite')
-        {
-            $tipoId = 6;
-            $request['id_dieta'] = 6;
-            $titulo = 'Lanche Da Noite';
-        }
-
-
-        $paciente = Paciente::find($id);
-        $alimentos = Alimento::all();
-        $receitas = Receita::all();
-        $tipoDieta = $tipo;
-
-        $selecionados = $this->retornaSelecionados($id, $tipoId);
-        $receitasSelecionadas = $this->retornaReceitasSelecionadas($id, $tipoId);
-
-        $alimentosReceitas = $alimentos->concat($receitas);
-
-        return view('dieta', [
-            'alimentosReceitas'     => $alimentosReceitas,
-            'paciente'              => $paciente,
-            'selecionados'          => $selecionados,
-            'receitasSelecionadas'  => $receitasSelecionadas,
-            'tipo'                  => $tipoDieta,
-            'titulo'                => $titulo
-        ]);
-    }
-
-    public function recordatorio($id)
-    {
-        $paciente = DB::table('pacientes')
-                     ->select('pacientes.*')
-                     ->where('pacientes.id', '=', $id)
-                     ->get();
-
-        $registros = DB::table('dietas_pacientes')
-                     ->select('dietas_pacientes.data_coleta')
-                     ->where('dietas_pacientes.id_paciente', '=', $id)
-                     ->groupby('data_coleta')->distinct()->orderby('data_coleta', 'desc')
-                     ->get();
-
-        return view('pacienteRecordatorio', [
-            'paciente'  => $paciente,
-            'registros' => $registros
-        ]);
-    }
-
-    public function dietaIndividual()
-    {
-        $registros = Paciente::all();
-        $tipo = 'cafeDaManha';
-
-        return view('dietaIndividual', compact('registros', 'tipo'));
-    }
-
-    public function recordatorioUnico($id, $data)
-    {
-        $selecionados = $this->retornaAlimentosSelecionados($id, $data, 0);
-        $receitas = $this->retornaReceitas($id, $data, 0);
         $totais = $this->somaTotais($selecionados, $receitas);
 
-        $paciente = Paciente::find($id);
+        // Criamos uma tabela HTML com o formato da planilha
+        $html = '';
+        $html .= '<meta charset="UTF-8" />';
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Total</tr>';
+        $html .= '</tr>';
 
-        $dataColeta = $data;
+        $html .= '<tr>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Umidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '</tr>';
 
+            $html .= '<tr>';
+            $html .= '<td>'.'"'.$totais['quantidade'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['umidade'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['energiaKcal'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['energiaKj'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['proteina'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['lipideos'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['colesterol'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['carboidrato'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['fibraAlimentar'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['cinzas'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['calcio'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['magnesio'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['manganes'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['fosforo'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['ferro'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['sodio'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['potassio'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['cobre'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['zinco'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['retinol'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['re'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['rae'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['tiamina'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['riboflavina'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['piridoxina'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['niacina'].'"'.'</td>';
+            $html .= '<td>'.'"'.$totais['vitaminaC'].'"'.'</td>';
+            $html .= '</tr>';
 
-        $tela = 2; //tela de recordatorio 24 de pacientes por data
+        // Criamos uma tabela HTML com o formato da planilha
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Alimentos Selecionados</tr>';
+        $html .= '</tr>';
 
-        $dataColetaFormatada = Carbon::parse($data)->format('d/m/Y');
-        $botao = 'Voltar';
-        $url = "javascript:history.back()";
+        $html .= '<tr>';
+        $html .= '<td><b>Nome do Alimento<b></td>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Umidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '<td><b>Dieta Nome</b></td>';
+        $html .= '</tr>';
 
-        $titulo = 'Lista de Alimentos Selecionados';
+        $selecionados = $this->selecionadosQuantidade($selecionados);
 
-        $dieta = 0;
-
-        return view('lista_dieta', [
-            'dataColeta' => $dataColeta,
-            'dataColetaFormatada' => $dataColetaFormatada,
-            'titulo' => $titulo,
-            'tela' => $tela,
-            'paciente' => $paciente,
-            'selecionados' => $selecionados,
-            'receitas' => $receitas,
-            'totais' => $totais,
-            'dieta' => $dieta,
-            'botao' => $botao,
-            'url' => $url
-        ]);
-    }
-
-    public function escolherDieta($id, $data)
-    {
-        $paciente = Paciente::find($id);
-        $dataColeta = $data;
-        $url = "javascript:history.back()";
-        $botao = 'Voltar';
-
-        return view('escolherDieta', [
-            'paciente' => $paciente,
-            'data' => $data,
-            'botao' => $botao,
-            'url' => $url
-        ]);
-    }
-
-    public function dietaUnico($id, $data)
-    {
-        return view('escolhaDietaPacienteUnico', [
-            'id' => $id,
-            'data' => $data
-        ]);
-    }
-
-    public function dietaPacienteUnicoController($id, $data, $dieta)
-    {
-        $selecionados = $this->retornaAlimentosSelecionados($id, $data, $dieta);
-        $receitas = $this->retornaReceitas($id, $data, $dieta);
-        $totais = $this->somaTotais($selecionados, $receitas);
-
-        $paciente = Paciente::find($id);
-
-        $dataColeta = $data;
-        $dataColetaFormatada = Carbon::parse($data)->format('d/m/Y');
-        $botao = 'Voltar';
-        $url = "javascript:history.back()";
-
-        $tela = 3; //tela onde mostra a dieta do paciente de acordo com o tipo
-
-        $titulo = 'Lista de Alimentos Selecionados';
-
-        if (!$selecionados->isEmpty() or !$receitas->isEmpty()) {
-            $totais                = $this->somaTotais($selecionados, $receitas);
-
-            return view('lista_dieta', [
-                'dataColeta' => $dataColeta,
-                'dataColetaFormatada' => $dataColetaFormatada,
-                'tela' => $tela,
-                'titulo' => $titulo,
-                'paciente' => $paciente,
-                'selecionados' => $selecionados,
-                'receitas' => $receitas,
-                'totais' => $totais,
-                'dieta' => $dieta,
-                'botao' => $botao,
-                'url' => $url
-            ]);
+        foreach ($selecionados as $selecionados) {
+            # code...
+            $html .= '<tr>';
+            $html .= '<td>'.'"'.$selecionados->alimentos_nome.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->quantidade.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->umidade.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->energiaKcal.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->energiaKj.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->proteina.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->lipideos.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->colesterol.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->carboidrato.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->fibraAlimentar.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->cinzas.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->calcio.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->magnesio.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->manganes.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->fosforo.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->ferro.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->sodio.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->potassio.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->cobre.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->zinco.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->retinol.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->re.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->rae.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->tiamina.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->riboflavina.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->piridoxina.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->niacina.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->vitaminaC.'"'.'</td>';
+            $html .= '<td>'.'"'.$selecionados->dietas_nome.'"'.'</td>';
+            $html .= '</tr>';
+            ;
         }
-        else{
-            return view('error');
+
+        // Criamos uma tabela HTML com o formato da planilha
+        $html .= '<table border="1">';
+        $html .= '<tr>';
+        $html .= '<td colspan="5">Receitas Selecionadas</tr>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td><b>Nome da Receita<b></td>';
+        $html .= '<td><b>Quantidade</b></td>';
+        $html .= '<td><b>Umidade</b></td>';
+        $html .= '<td><b>Kcal</b></td>';
+        $html .= '<td><b>Kj</b></td>';
+        $html .= '<td><b>Proteina</b></td>';
+        $html .= '<td><b>Lipideos</b></td>';
+        $html .= '<td><b>Colesterol</b></td>';
+        $html .= '<td><b>Carboidrato</b></td>';
+        $html .= '<td><b>Fibra Alimentar</b></td>';
+        $html .= '<td><b>Cinzas</b></td>';
+        $html .= '<td><b>Calcio</b></td>';
+        $html .= '<td><b>Magnesio</b></td>';
+        $html .= '<td><b>Manganes</b></td>';
+        $html .= '<td><b>Fosforo</b></td>';
+        $html .= '<td><b>Ferro</b></td>';
+        $html .= '<td><b>Sodio</b></td>';
+        $html .= '<td><b>Potassio</b></td>';
+        $html .= '<td><b>Cobre</b></td>';
+        $html .= '<td><b>Zinco</b></td>';
+        $html .= '<td><b>Retinol</b></td>';
+        $html .= '<td><b>RE</b></td>';
+        $html .= '<td><b>RAE</b></td>';
+        $html .= '<td><b>Tiamina</b></td>';
+        $html .= '<td><b>Riboflavina</b></td>';
+        $html .= '<td><b>Piridoxina</b></td>';
+        $html .= '<td><b>Niacina</b></td>';
+        $html .= '<td><b>VitaminaC</b></td>';
+        $html .= '<td><b>Nome da Dieta</b></td>';
+        $html .= '</tr>';
+
+        $receitas = $this->receitasQuantidade($receitas);
+
+        foreach ($receitas as $receitas) {
+            # code...
+            $html .= '<tr>';
+            $html .= '<td>'.'"'.$receitas->receitas_nome.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->dietas_pacientes_quantidade.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->umidade.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->energiaKcal.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->energiaKj.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->proteina.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->lipideos.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->colesterol.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->carboidrato.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->fibraAlimentar.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->cinzas.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->calcio.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->magnesio.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->manganes.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->fosforo.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->ferro.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->sodio.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->potassio.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->cobre.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->zinco.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->retinol.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->re.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->rae.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->tiamina.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->riboflavina.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->piridoxina.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->niacina.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->vitaminaC.'"'.'</td>';
+            $html .= '<td>'.'"'.$receitas->nome.'"'.'</td>';
+            $html .= '</tr>';
+            ;
         }
+
+        // Configurações header para forçar o download
+        header("Content-type: text/html; charset=utf-8");
+        setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
+        header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+        header ("Cache-Control: no-cache, must-revalidate");
+        header ("Pragma: no-cache");
+        header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+        header ("Content-Description: PHP Generated Data" );
+        // Envia o conteúdo do arquivo
+        echo $html;
+        exit;
     }
 
     //Funções que retornam consultas ao banco de dados
@@ -443,39 +370,6 @@ class DietaController extends Controller
         return $receitas;
     }
 
-    //Função para retornar os alimentos selecionados de acordo com a dieta
-    public function retornaSelecionados($id, $tipoId)
-    {
-        $selecionados = DB::table('alimentos')
-                       ->join('dietas_pacientes', 'alimentos.id', '=', 'dietas_pacientes.id_alimento')
-                       ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                       ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                       ->select('alimentos.nome as alimentos_nome', 'alimentos.*' , 'dietas_pacientes.*',
-                       'dietas_pacientes.id as dietas_pacientes_id', 'pacientes.id', 'dietas.*')
-                       ->where('dietas_pacientes.id_paciente', '=', $id)
-                       ->where('dietas_pacientes.id_dieta', '=', $tipoId)
-                       ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                       ->get();
-
-        return $selecionados;
-    }
-
-    //Função para retornar as receitas selecionados de acordo com a dieta
-    public function retornaReceitasSelecionadas($id, $tipoId)
-    {
-        $receitasSelecionadas = DB::table('receitas')
-                               ->join('dietas_pacientes', 'receitas.id', '=', 'dietas_pacientes.id_receita')
-                               ->join('pacientes', 'dietas_pacientes.id_paciente', '=', 'pacientes.id')
-                               ->join('dietas', 'dietas.id', '=', 'dietas_pacientes.id_dieta')
-                               ->select('receitas.nome as receitas_nome', 'receitas.*' , 'dietas_pacientes.*',
-                               'dietas_pacientes.id as dietas_pacientes_id', 'pacientes.id', 'dietas.*')
-                               ->where('dietas_pacientes.id_paciente', '=', $id)
-                               ->where('dietas_pacientes.id_dieta', '=', $tipoId)
-                               ->whereDate('data_coleta', '=', Carbon::today()->toDateString())
-                               ->get();
-
-        return $receitasSelecionadas;
-    }
 
     public function somaTotais($selecionados, $receitas)
     {

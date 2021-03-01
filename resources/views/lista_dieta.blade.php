@@ -11,6 +11,40 @@
 @include('layouts.alerts')
 
 <div class="container-fluid">
+<<<<<<< HEAD
+    <div class="row justify-content-center">
+        <div class="col-4">    
+            <h3 align="center" >Valores Totais Consumidos nas Últimas 24h</h3>        
+            <table class="table table-striped table-dark"  id="myTable2">                
+                <thead align="center" >                    
+                    <tr ><th>Quantidade </th><td>{{$totais['quantidade']}}</td></tr>
+                    {{-- <tr><th>Umidade</th><td>{{$totais['umidade']}}</td></tr> --}}
+                    <tr><th>Energia (Kcal)</th><td>{{$totais['energiaKcal']}}</td></tr>
+                    <tr><th>Energia (KJ)</th><td>{{$totais['energiaKj']}}</td></tr>
+                    <tr><th>Proteina</th><td>{{$totais['proteina']}}</td></tr>
+                    <tr><th>Lipídeos</th><td>{{$totais['lipideos']}}</td></tr>
+                    <tr><th>Colesterol</th><td>{{$totais['colesterol']}}</td></tr>
+                    <tr><th>Carboidratos</th><td>{{$totais['carboidrato']}}</td></tr>
+                    <tr><th>Fibra Alimentar</th> <td>{{$totais['fibraAlimentar']}}</td></tr>
+                    <tr><th>Cinzas</th><td>{{$totais['cinzas']}}</td></tr>
+                    <tr><th>Cálcio</th><td>{{$totais['calcio']}}</td></tr>
+                    <tr><th>Magnésio</th><td>{{$totais['magnesio']}}</td></tr>
+                    <tr><th>Manganês</th><td>{{$totais['manganes']}}</td></tr>
+                    <tr><th>Fósforo</th><td>{{$totais['fosforo']}}</td></tr>
+                    <tr><th>Ferro</th><td>{{$totais['ferro']}}</td></tr>
+                    <tr><th>Sódio</th> <td>{{$totais['sodio']}}</td></tr>              
+                    <tr><th>Potássio</th> <td>{{$totais['potassio']}}</td></tr>              
+                    <tr><th>Cobre</th> <td>{{$totais['cobre']}}</td></tr>              
+                    <tr><th>Zinco</th> <td>{{$totais['zinco']}}</td></tr>              
+                    <tr><th>Retinol</th> <td>{{$totais['retinol']}}</td></tr>              
+                    <tr><th>RE</th> <td>{{$totais['re']}}</td></tr>              
+                    <tr><th>RAE</th> <td>{{$totais['rae']}}</td></tr>              
+                    <tr><th>Tiamina</th> <td>{{$totais['tiamina']}}</td></tr>              
+                    <tr><th>Riboflavina</th> <td>{{$totais['riboflavina']}}</td></tr>              
+                    <tr><th>Piridoxina</th> <td>{{$totais['piridoxina']}}</td></tr>              
+                    <tr><th>Niacina</th> <td>{{$totais['niacina']}}</td></tr>              
+                    <tr><th>VitaminaC</th> <td>{{$totais['vitaminaC']}}</td></tr>             
+=======
     <div class="row">
         <div class="col-lg-12">
             <h3 align="center">Valores Totais</h3>
@@ -19,6 +53,7 @@
                  align="center" style="background-color: #a5a3d4">
                     <tr>
                         <th>Quantidade</th>
+                        <th>Umidade</th>
                         <th>Kcal</th>
                         <th>KJ</th>
                         <th>Proteina</th>
@@ -32,54 +67,21 @@
                         <th>Manganês</th>
                         <th>Fósforo</th>
                         <th>Ferro</th>
-                        <th>Sódio</th>
+                        <th>sodio</th>
                     </tr>
+>>>>>>> a78b6f3a3267e8935c6776de4be0a7951d5894ec
                 </thead>
-                <tbody class="text-center">
-                    <tr>
-                        <td>{{$totais['quantidade']}}</td>
-                        <td>{{$totais['energiaKcal']}}</td>
-                        <td>{{$totais['energiaKj']}}</td>
-                        <td>{{$totais['proteina']}}</td>
-                        <td>{{$totais['lipideos']}}</td>
-                        <td>{{$totais['colesterol']}}</td>
-                        <td>{{$totais['carboidrato']}}</td>
-                        <td>{{$totais['fibraAlimentar']}}</td>
-                        <td>{{$totais['cinzas']}}</td>
-                        <td>{{$totais['calcio']}}</td>
-                        <td>{{$totais['magnesio']}}</td>
-                        <td>{{$totais['manganes']}}</td>
-                        <td>{{$totais['fosforo']}}</td>
-                        <td>{{$totais['ferro']}}</td>
-                        <td>{{$totais['sodio']}}</td>
-                    </tr>
-                </tbody>
             </table>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 align="center">Alimentos Selecionados</h3>
+
+        <div class="col-lg-6">
+            <h3 align="center">Alimentos Consumidos nas Ultimas 24h</h3>
             <table class="table table-bordered table-sm table-striped table-hover"  id="myTable2">
-                <thead class="table" align="center" style="background-color: #a5a3d4">
+                <thead class="table" align="center" style="background-color: #454d55; color:white">
                     <tr>
                         <th>Nome do Alimento</th>
-                        <th>Quantidade</th>
-                        <th>Kcal</th>
-                        <th>KJ</th>
-                        <th>Proteina</th>
-                        <th>Lipídeos</th>
-                        <th>Colesterol</th>
-                        <th>Carboidratos</th>
-                        <th>Fibra Alimentar</th>
-                        <th>Cinzas</th>
-                        <th>Cálcio</th>
-                        <th>Magnésio</th>
-                        <th>Manganês</th>
-                        <th>Fósforo</th>
-                        <th>Ferro</th>
-                        <th>Sódio</th>
-                        <th>Nome da Dieta</ht>
+                        <th>Quantidade</th>            
+                        <th>Nome da Dieta</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -88,20 +90,6 @@
                                 <tr>
                                     <td>{{$selecionados->alimentos_nome}}</td>
                                     <td>{{$selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->energiaKcal * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->energiaKj * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->proteina * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->lipideos * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->colesterol * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->carboidrato * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->fibraAlimentar * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->cinzas * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->calcio * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->magnesio * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->manganes * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->fosforo * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->ferro * $selecionados->quantidade}}</td>
-                                    <td>{{$selecionados->sodio * $selecionados->quantidade}}</td>
                                     <td>{{$selecionados->dietas_nome}}</td>
                                 </tr>
                             @endforeach
@@ -132,6 +120,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+       
     </div>
 </div><br><br>
 

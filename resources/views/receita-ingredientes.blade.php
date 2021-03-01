@@ -21,6 +21,7 @@
         <li class="list-group-item">Total de Energia (kj): {{$totalEnergiaKj}}</li>
         <li class="list-group-item">Total de Proteína: {{$totalProteina}}</li>
         <li class="list-group-item">Total de Lipídeos: {{$totalLipideos}}</li>
+        <li class="list-group-item">Total de Carboidrato: {{$totalCarboidrato}}</li>
         <li class="list-group-item">Total de Colesterol: {{$totalColesterol}}</li>
         <li class="list-group-item">Total de Fibra Alimentar: {{$totalFibraAlimentar}}</li>
         <li class="list-group-item">Total de Cinzas: {{$totalCinzas}}</li>
