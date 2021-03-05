@@ -340,6 +340,7 @@ class ExportarController extends Controller
                         'dietas_pacientes.quantidade as dietas_pacientes_quantidade',
                         'dietas_pacientes.*', 'pacientes.id', 'dietas.nome as dietas_nome', 'dietas.*',
                         'receita_ingredientes.*',
+                        DB::raw('sum(umidade) as umidade'),
                         DB::raw('sum(energiaKcal) as energiaKcal'),
                         DB::raw('sum(energiaKj) as energiaKj'),
                         DB::raw('sum(proteina) as proteina'),
@@ -353,7 +354,18 @@ class ExportarController extends Controller
                         DB::raw('sum(manganes) as manganes'),
                         DB::raw('sum(fosforo) as fosforo'),
                         DB::raw('sum(ferro) as ferro'),
-                        DB::raw('sum(sodio) as sodio'))
+                        DB::raw('sum(sodio) as sodio'),
+                        DB::raw('sum(potassio) as potassio'),
+                        DB::raw('sum(cobre) as cobre'),
+                        DB::raw('sum(zinco) as zinco'),
+                        DB::raw('sum(retinol) as retinol'),
+                        DB::raw('sum(re) as re'),
+                        DB::raw('sum(rae) as rae'),
+                        DB::raw('sum(tiamina) as tiamina'),
+                        DB::raw('sum(riboflavina) as riboflavina'),
+                        DB::raw('sum(piridoxina) as piridoxina'),
+                        DB::raw('sum(niacina) as niacina'),
+                        DB::raw('sum(vitaminaC) as vitaminaC'))
                        ->where('dietas_pacientes.id_paciente', '=', $id);
 
         if ($data != 0) {
