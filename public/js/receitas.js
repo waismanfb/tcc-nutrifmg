@@ -21,9 +21,19 @@ $(document).ready(function() {
                          "receita_id": receita_id
                       },
                 });
-                window.location.reload();
+              window.location.reload();
             }
         })
         return false;
+    });
+})
+
+$(document).ready(function() {
+    //Função para deletar alimento/receita Selecionado
+    $("#btn_questao").on("click", function() {
+      Swal.fire(
+        'Como cadastrar uma receita:',
+        'Primeiramente deve-se clicar no botão de inserir receita na parte superior da tela, onde será feito o redirecionamento para a pagína de cadastro de receitas. Após realizar o cadastro de receita, deve-se inserir os alimentos da receita clicando-se no botão de "inserir alimento" na tabela ao lado, então será carregada a tela contendo os alimentos da receita onde para inserir um novo alimento deve-se clicar no botão de "inserir alimento" na parte superior da tela e realizar o seu cadastro.'
+      )
     });
 })

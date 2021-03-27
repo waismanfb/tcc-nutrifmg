@@ -3,6 +3,8 @@
 
 <script type="text/javascript" src="{{ URL::asset('js/receitas.js') }}"></script>
 
+<link rel="stylesheet" href="<?php echo asset('css/botao_questao.css')?>" type="text/css">
+
 <div class="container">
 
   @include('layouts.alerts')
@@ -19,6 +21,7 @@
 			<div class="col col-md-2">
                 <a href="{{Route('receita.cadastrar')}}" class="btn btn-primary" id="b" >Inserir nova receita</a>
 			</div>
+
 		</div>
 	</form>
 </div>
@@ -66,6 +69,10 @@
 		{{ $registros->links() }}
 	</div>
 </div>
+
+<footer>
+    <a href="#" id="btn_questao" class="round-button">?</a>
+</footer>
 
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 

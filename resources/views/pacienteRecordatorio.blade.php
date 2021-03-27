@@ -18,8 +18,8 @@
         		<thead class="table" align="center" style="background-color: #a5a3d4">
         			<tr>
         				<th><h5>Data da Avaliação</h5></th>
-                        <th><h5>Ver Avaliação Completa</h5></th>
-                        <th><h5>Ver Avaliação Por Dieta</h5></th>
+                        <th><h5>Ver Avaliação Por Dia</h5></th>
+                        <th><h5>Ver Avaliação Por Refeição</h5></th>
         			</tr>
         		</thead>
         		<tbody>' ?>
